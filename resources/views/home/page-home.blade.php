@@ -198,18 +198,12 @@
 				</div>
 				<div class="col-lg-12">
 					<br/>
-					<p>Register now and start using Patho<span class="turquoise">&bull;</span>Log</p>
-					<div class="pulse-btnlink">
-						<div class="pulse"></div><a class="btnlink-solid-lg" href="#request">REGISTER for FREE</a>
-					</div>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<p>Already have an account?</p>
-					<div class="pulse-btnlink">
-						<div class="pulse"></div><a class="btnlink-outline-lg" href="#screenshots">LOG-IN</a>
-					</div>
+					<p>Register now for free or sign-in and start using Patho<span class="turquoise">&bull;</span>Log</p>
+					
+					<a class="btnlink-solid-lg" href="#request">
+						<div class="pulse"><div class="pulse-btnlink"></div></div>GET STARTED for FREE
+					</a>
+
 					<br/><br/><br/>
 				</div>
 			</div>

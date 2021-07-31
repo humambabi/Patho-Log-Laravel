@@ -2265,12 +2265,13 @@ a:hover.back-to-top {
 	display: flex;
 	justify-content: center;
    align-items: center;
-   width: fit-content;
    margin: auto;
 }
 
 .pulse {
 	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: #00bfd8;
@@ -2286,7 +2287,7 @@ a:hover.back-to-top {
 
 	70% {
 		opacity: 0;
-		transform: scaleX(1.17) scaleY(1.57);
+		transform: scaleX(1.25) scaleY(1.6);
 	}
 
 	100% {
@@ -2295,24 +2296,6 @@ a:hover.back-to-top {
 	}
 }
 
-.btnlink-outline-lg {
-	display: inline-block;
-	padding: 1.25rem 2.625rem 1.25rem 2.625rem;
-	font: 700 0.95rem/0 "Raleway", sans-serif;
-	text-decoration: none;
-	color: #00bfd8;
-	background-color: #fff;
-	border: 0.125rem solid #00bfd8;
-	border-radius: 2rem;
-	transition: all 0.2s;
-	z-index: 1;
-	animation: pulse-btn 1.5s infinite;
-}
-.btnlink-outline-lg:hover {
-	background-color: #00bfd8;
-	color: #fff;
-	text-decoration: none;
-}
 .btnlink-solid-lg {
 	display: inline-block;
 	padding: 1.25rem 2.5rem 1.25rem 2.5rem;
