@@ -14,7 +14,10 @@ use App\Http\Controllers\CtrlPages;
 |
 */
 
-#
-# Pages
-#
-Route::get('/', [CtrlPages::class, "Home"]);
+/*
+Pages
+*/
+
+# Home-related pages
+Route::get('/',								[CtrlPages::class, "Home"]);
+Route::get('/terms-conditions',			[CtrlPages::class, "TermsConditions"]);

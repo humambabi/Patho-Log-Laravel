@@ -1,2 +1,4 @@
+Sitemap: https://www.patho-log.com/sitemap.xml
+
 User-agent: *
-Disallow:
+Disallow: http://*
