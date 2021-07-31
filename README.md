@@ -11,16 +11,11 @@
 	</a>
 </p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+
 
 ## About Patho&bull;Log
 
-Patho&bull;Log is a web application that allows users to create stylish pathology reports, save and archive them, and share them with other doctors or even patients considering privacy and doctor-patient confidentiality. 
+Patho&bull;Log is a web application that allows users to create stylish pathology reports, save and archive them, and share them with other doctors or patients, while considering privacy and doctor-patient confidentiality. 
 <!--
 such as:
 
