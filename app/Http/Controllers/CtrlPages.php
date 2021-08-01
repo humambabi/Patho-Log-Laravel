@@ -40,4 +40,22 @@ class CtrlPages extends Controller
 		echo view('home.asset-footer');
 	}
 
+
+	/*
+	Portal-related pages
+	*/
+	public function LogIn() {
+
+		echo view('portal.page-login');
+		
+	}
+
+	public function Dashboard() {
+		$data['head_title'] = "Dashboard - Patho•Log";
+		$data['head_description'] = "Patho•Log's Dashboard";
+
+		echo view('portal.asset-header', $data);
+		echo view('portal.page-dashboard');
+		echo view('portal.asset-footer');
+	}
 }

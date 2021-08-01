@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 class CtrlRequests extends Controller
 {
-	#
+	# (This is brought from 'comingsoon' project)
 	# Saves the supplied user email to our database
 	#
 	public function AddEmail(Request $request) {

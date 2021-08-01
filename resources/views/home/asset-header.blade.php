@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	
 	<!-- SEO Meta Tags -->
@@ -31,10 +32,10 @@
 	<!-- Styles -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext&amp;display=swap" rel="stylesheet" />
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-	<link href="/vendor/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet" />
+	<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
 	<link href="/vendor/swiper-4.4.6/dist/css/swiper.min.css" rel="stylesheet" />
 	<link href="/vendor/magnific-popup-1.1.0/dist/magnific-popup.css" rel="stylesheet" />
-	<link href="/css/styles.css" rel="stylesheet" />
+	<link href="/css/home/styles.css" rel="stylesheet" />
 
 	<!-- CSRF protection -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">

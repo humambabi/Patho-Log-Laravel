@@ -21,3 +21,8 @@ Pages
 # Home-related pages
 Route::get('/',								[CtrlPages::class, "Home"]);
 Route::get('/terms-conditions',			[CtrlPages::class, "TermsConditions"]);
+
+# Portal-related pages
+Route::get('/login',                   [CtrlPages::class, "LogIn"]);
+
+Route::get('/dashboard',               [CtrlPages::class, "Dashboard"]);

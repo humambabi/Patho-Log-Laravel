@@ -73,6 +73,6 @@
 	<script src="/vendor/swiper-4.4.6/dist/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
 	<script src="/vendor/magnific-popup-1.1.0/dist/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js" integrity="sha512-tRBNdBCA7T90XrFn6MgPvUe7+HqU5Le7zfKIDaDJb8b2Cf5nbzJR2aTN6KIwPUpFLLx8kvOd7AkDnfDaqrLsmQ==" crossorigin="anonymous"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
-	<script src="/js/scripts.js"></script> <!-- Custom scripts -->
+	<script src="/js/home/scripts.js"></script> <!-- Custom scripts -->
 </body>
 </html>
