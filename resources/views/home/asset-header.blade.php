@@ -20,6 +20,7 @@
 
 	<!-- Website Title -->
 	<title>{{ $head_title }}</title>
+	<base href="{{ url('/') }}" />
 	
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /> <!-- IE -->
@@ -96,7 +97,7 @@
 					@if ($navbar_ishome)
 					<a class="btn-nav-md page-scroll" id="navbar-start" href="#start">GET STARTED</a>
 					@else
-					<a class="btn-nav-md" id="navbar-start" href="{{ config('app.url') }}/#start">GET STARTED</a>
+					<a class="btn-nav-md" id="navbar-start" href="{{ url('/') }}/dashboard">GET STARTED</a>
 					@endif
 				</li>
 			</ul>

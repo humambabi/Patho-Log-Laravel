@@ -1,0 +1,11 @@
+
+
+
+.bg-gradient-sidebar {
+   background-color: #0178fa;
+   background-image: linear-gradient(180deg, hsl(5, 78%, 57%) 10%, hsl(5, 78%, 42%) 100%);
+   /*background-image: linear-gradient(180deg, hsl(211, 99%, 57%) 10%, hsl(211, 99%, 42%) 100%);*/
+   background-size: cover;
+ }
+
+

@@ -200,7 +200,7 @@
 					<br/>
 					<p>Register now for free or sign-in and start using Patho<span class="turquoise">&bull;</span>Log</p>
 					
-					<a class="btnlink-solid-lg" href="#request">
+					<a class="btnlink-solid-lg" href="{{ url('/') }}/dashboard">
 						<div class="pulse"><div class="pulse-btnlink"></div></div>GET STARTED for FREE
 					</a>
 
