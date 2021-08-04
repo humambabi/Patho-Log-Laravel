@@ -53,9 +53,10 @@ class CtrlPages extends Controller
 	public function Dashboard() {
 		$data['head_title'] = "Dashboard - Patho•Log";
 		$data['head_description'] = "Patho•Log's Dashboard";
+		$data['page_name'] = "dashboard";
 
 		echo view('portal.asset-header', $data);
-		echo view('portal.page-dashboard');
+		echo view('portal.page-dashboard', $data);
 		echo view('portal.asset-footer');
 	}
 }

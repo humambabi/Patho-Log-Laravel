@@ -11,33 +11,43 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
-  --blue: #4e73df;
+  --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
-  --red: #e74a3b;
+  --red: #dc3545;
   --orange: #fd7e14;
-  --yellow: #f6c23e;
-  --green: #1cc88a;
-  --teal: #20c9a6;
-  --cyan: #36b9cc;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
   --white: #fff;
-  --gray: #858796;
-  --gray-dark: #5a5c69;
-  --primary: #4e73df;
-  --secondary: #858796;
-  --success: #1cc88a;
-  --info: #36b9cc;
-  --warning: #f6c23e;
-  --danger: #e74a3b;
-  --light: #f8f9fc;
-  --dark: #5a5c69;
+  --gray: #7e8299;
+  --gray-dark: #3f4254;
+
+  --primary: #3699ff;
+  --secondary: #e4e6ef;
+  --success: #1bc5Bd;
+  --info: #8950fc;
+  --warning: #ffa800;
+  --danger: #f64e60;
+  --light: #f3f6f9;
+  --dark: #181c32;
+
+  --palette-turquoise: #00bfd8;
+  --palette-blue: #0178fa;
+  --palette-purple: #bf60d8;
+
+  --palette-turquoise-transparent: rgb(0, 191, 216, .3);
+
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --breakpoint-xxl: 1400px;
+
+  --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -2348,8 +2358,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: var(--palette-turquoise); /*#4e73df;*/
+  border-color: var(--palette-turquoise); /*#4e73df;*/
 }
 
 .btn-primary:hover {
@@ -10645,7 +10655,8 @@ a:focus {
 }
 
 .sidebar-dark hr.sidebar-divider {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  /*border-top: 1px solid rgba(255, 255, 255, 0.15);*/
+  border-top: 1px solid rgba(255, 255, 255, 0.33);
 }
 
 .sidebar-dark .sidebar-heading {

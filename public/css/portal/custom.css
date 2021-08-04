@@ -1,11 +1,36 @@
+/*
+Custom styles
+*/
 
-
-
+/*
+Sidebar
+*/
 .bg-gradient-sidebar {
-   background-color: #0178fa;
-   background-image: linear-gradient(180deg, hsl(5, 78%, 57%) 10%, hsl(5, 78%, 42%) 100%);
-   /*background-image: linear-gradient(180deg, hsl(211, 99%, 57%) 10%, hsl(211, 99%, 42%) 100%);*/
-   background-size: cover;
- }
+	background-color: #3699ff;
+	background-image: linear-gradient(180deg, #fff 5%, var(--palette-turquoise) 45%, var(--palette-blue) 100%);
+	background-size: cover;
+}
 
+.sidebar-dark .nav-item.turquoise .nav-link {
+	color: var(--palette-turquoise);
+}
 
+.sidebar-dark .nav-item.turquoise .nav-link i {
+	color: var(--palette-turquoise-transparent);
+}
+
+.sidebar-dark .nav-item.active.turquoise .nav-link {
+	color: var(--palette-turquoise);
+}
+
+.sidebar-dark .nav-item.active.turquoise .nav-link i {
+	color: var(--palette-turquoise-transparent);
+}
+
+.sidebar-dark .nav-item.turquoise .nav-link:active, .sidebar-dark .nav-item.turquoise .nav-link:focus, .sidebar-dark .nav-item.turquoise .nav-link:hover {
+	color: #fff;
+}
+ 
+.sidebar-dark .nav-item.turquoise .nav-link:active i, .sidebar-dark .nav-item.turquoise .nav-link:focus i, .sidebar-dark .nav-item.turquoise .nav-link:hover i {
+	color: #fff;
+}
