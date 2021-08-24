@@ -1,332 +1,223 @@
-<body id="page-top">
-	<!-- Page Wrapper -->
-	<div id="wrapper">
-		<!-- Sidebar -->
-		<ul class="navbar-nav bg-gradient-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
-			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}/dashboard">
-				<div class="sidebar-brand-icon">
-					<img src="/img/logo/twopartslogo_icon.png" alt="Logo-Icon" height="37" />
-				</div>
-				<div class="sidebar-brand-text mx-3">
-					<img src="/img/logo/twopartslogo_text.png" alt="Logo-Text" height="37" />
-				</div>
-			</a>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+<!-- Site wrapper -->
+<div class="wrapper">
+   <!-- Navbar -->
+   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+         <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+         </li>
 
-			<!-- Divider -->
-			<!--<hr class="sidebar-divider mt-0 mb-0">-->
+         <!-- Topbar Search -->
+         <form class="d-none d-sm-inline-block form-inline mr-auto navbar-search">
+            <div class="input-group">
+               <input type="text" class="form-control bg-light small border border-topbarsearch" placeholder="Search for..."
+                     aria-label="Search" aria-describedby="basic-addon2" /> <!-- border-0 -->
+               <div class="input-group-append">
+                  <button class="btn btn-turquoise" type="button">
+                     <i class="fas fa-search fa-sm"></i>
+                  </button>
+               </div>
+            </div>
+         </form>
+      </ul>
 
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item{{ ($page_name == 'dashboard') ? ' active' : '' }} mt-3 turquoise">
-				<a class="nav-link" href="{{ url('/') }}/dashboard">
-					<i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span>
-				</a>
-			</li>
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+         <!-- User icon and menu-->
+         <li class="nav-item dropdown">
+            <a class="nav-link d-flex align-items-center" href="#" data-toggle="dropdown">
+               <div class="d-none d-md-inline">Alexander Pierce</div>
+               <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" width="37" height="37" style="margin-left: .5rem;">
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+               <span class="dropdown-item dropdown-header">15 Notifications</span>
+               <div class="dropdown-divider"></div>
+               <a href="#" class="dropdown-item">
+                  <i class="fas fa-envelope mr-2"></i> 4 new messages
+                  <span class="float-right text-muted text-sm">3 mins</span>
+               </a>
+               <div class="dropdown-divider"></div>
+               <a href="#" class="dropdown-item">
+                  <i class="fas fa-file mr-2"></i> 3 new reports
+                  <span class="float-right text-muted text-sm">2 days</span>
+               </a>
+               <div class="dropdown-divider"></div>
+               <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+         </li>
+      </ul>
+   </nav><!-- /.navbar -->
 
-			<!-- Divider -->
-			<hr class="sidebar-divider" />
+
+   <!-- Main Sidebar Container -->
+   <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a class="brand-link d-flex align-items-center justify-content-center" href="{{ url('/') }}/dashboard">
+         <div class="sidebar-brand-icon">
+            <img src="/img/logo/twopartslogo_icon.png" alt="Logo-Icon" width="37" height="37" class="img-circle elevation-3" />
+         </div>
+         <div class="sidebar-brand-text">
+            <img src="/img/logo/twopartslogo_text.png" alt="Logo-Text" width="109" height="37" />
+         </div>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+         <!-- Sidebar Menu -->
+         <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+               <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+
+               <li class="nav-item">
+                  <a href="{{ url('/') }}/dashboard" class="nav-link{{ ($page_name == 'dashboard') ? ' active' : '' }}">
+                     <i class="nav-icon fas fa-tachometer-alt"></i>
+                     <p>
+                        Dashboard
+                     </p>
+                  </a>
+               </li>
+
+               <li class="nav-item">
+                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                     <i class="nav-icon fas fa-edit"></i>
+                     <p>
+                        New Report
+                     </p>
+                  </a>
+               </li>
+
+               <li class="nav-header">My Database</li>
+
+               <li class="nav-item">
+                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                     <i class="nav-icon fas fa-th-list"></i>
+                     <p>
+                        Saved Reports
+                     </p>
+                  </a>
+               </li>
+               
+               <li class="nav-item">
+                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                     <i class="nav-icon fas fa-search"></i>
+                     <p>
+                        Find Reports
+                     </p>
+                  </a>
+               </li>
+
+               <li class="nav-item">
+                  <a href="#" class="nav-link">
+                     <i class="nav-icon fas fa-database"></i>
+                     <p>
+                        Maintainance
+                        <i class="right fas fa-angle-left"></i>
+                     </p>
+                  </a>
+
+                  <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                        <a href="pages/charts/chartjs.html" class="nav-link">
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Backup</p>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="pages/charts/flot.html" class="nav-link">
+                           <i class="far fa-circle nav-icon"></i>
+                           <p>Restore</p>
+                        </a>
+                     </li>
+                  </ul>
+               </li>
+
+               <li class="nav-header">Tools</li>
+
+               <li class="nav-item">
+                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                     <i class="nav-icon fas fa-copy"></i>
+                     <p>
+                        Templates
+                     </p>
+                  </a>
+               </li>
 
 
 
 
 
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Blank Page</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Blank Page</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
+    <!-- Main content -->
+    <section class="content">
 
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Title</h3>
 
-				
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          Start creating your amazing application!
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          Footer
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
 
-				<!-- Heading -->
-				<div class="sidebar-heading">
-					 Interface
-				</div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-				<!-- Nav Item - Pages Collapse Menu -->
-				<li class="nav-item">
-					 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-						  aria-expanded="true" aria-controls="collapseTwo">
-						  <i class="fas fa-fw fa-cog"></i>
-						  <span>Components</span>
-					 </a>
-					 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-						  <div class="bg-white py-2 collapse-inner rounded">
-								<h6 class="collapse-header">Custom Components:</h6>
-								<a class="collapse-item" href="buttons.html">Buttons</a>
-								<a class="collapse-item" href="cards.html">Cards</a>
-						  </div>
-					 </div>
-				</li>
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0
+    </div>
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>
 
-				<!-- Nav Item - Utilities Collapse Menu -->
-				<li class="nav-item">
-					 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-						  aria-expanded="true" aria-controls="collapseUtilities">
-						  <i class="fas fa-fw fa-wrench"></i>
-						  <span>Utilities</span>
-					 </a>
-					 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-						  data-parent="#accordionSidebar">
-						  <div class="bg-white py-2 collapse-inner rounded">
-								<h6 class="collapse-header">Custom Utilities:</h6>
-								<a class="collapse-item" href="utilities-color.html">Colors</a>
-								<a class="collapse-item" href="utilities-border.html">Borders</a>
-								<a class="collapse-item" href="utilities-animation.html">Animations</a>
-								<a class="collapse-item" href="utilities-other.html">Other</a>
-						  </div>
-					 </div>
-				</li>
-
-				<!-- Divider -->
-				<hr class="sidebar-divider">
-
-				<!-- Heading -->
-				<div class="sidebar-heading">
-					 Addons
-				</div>
-
-				<!-- Nav Item - Pages Collapse Menu -->
-				<li class="nav-item"> <!-- addclass: active -->
-					 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false"
-						  aria-controls="collapsePages"> <!--class="nav-link" aria-expanded="true" -->
-						  <i class="fas fa-fw fa-folder"></i>
-						  <span>Pages</span>
-					 </a>
-					 <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-						  data-parent="#accordionSidebar"> <!-- class="collapse show" -->
-						  <div class="bg-white py-2 collapse-inner rounded">
-								<h6 class="collapse-header">Login Screens:</h6>
-								<a class="collapse-item" href="login.html">Login</a>
-								<a class="collapse-item" href="register.html">Register</a>
-								<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-								<div class="collapse-divider"></div>
-								<h6 class="collapse-header">Other Pages:</h6>
-								<a class="collapse-item" href="404.html">404 Page</a>
-								<a class="collapse-item active" href="blank.html">Blank Page</a>
-						  </div>
-					 </div>
-				</li>
-
-				<!-- Nav Item - Charts -->
-				<li class="nav-item">
-					 <a class="nav-link" href="charts.html">
-						  <i class="fas fa-fw fa-chart-area"></i>
-						  <span>Charts</span></a>
-				</li>
-
-				<!-- Nav Item - Tables -->
-				<li class="nav-item">
-					 <a class="nav-link" href="tables.html">
-						  <i class="fas fa-fw fa-table"></i>
-						  <span>Tables</span></a>
-				</li>
-
-				<!-- Divider -->
-				<hr class="sidebar-divider d-none d-md-block">
-
-				<!-- Sidebar Toggler (Sidebar) -->
-				<div class="text-center d-none d-md-inline">
-					 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-				</div>
-
-		  </ul>
-		  <!-- End of Sidebar -->
-
-		  <!-- Content Wrapper -->
-		  <div id="content-wrapper" class="d-flex flex-column">
-
-				<!-- Main Content -->
-				<div id="content">
-
-					 <!-- Topbar -->
-					 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-						  <!-- Sidebar Toggle (Topbar) -->
-						  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-								<i class="fa fa-bars"></i>
-						  </button>
-
-						  <!-- Topbar Search -->
-						  <form
-								class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-								<div class="input-group">
-									 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-										  aria-label="Search" aria-describedby="basic-addon2">
-									 <div class="input-group-append">
-										  <button class="btn btn-primary" type="button">
-												<i class="fas fa-search fa-sm"></i>
-										  </button>
-									 </div>
-								</div>
-						  </form>
-
-						  <!-- Topbar Navbar -->
-						  <ul class="navbar-nav ml-auto">
-
-								<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-								<li class="nav-item dropdown no-arrow d-sm-none">
-									 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-										  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										  <i class="fas fa-search fa-fw"></i>
-									 </a>
-									 <!-- Dropdown - Messages -->
-									 <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-										  aria-labelledby="searchDropdown">
-										  <form class="form-inline mr-auto w-100 navbar-search">
-												<div class="input-group">
-													 <input type="text" class="form-control bg-light border-0 small"
-														  placeholder="Search for..." aria-label="Search"
-														  aria-describedby="basic-addon2">
-													 <div class="input-group-append">
-														  <button class="btn btn-primary" type="button">
-																<i class="fas fa-search fa-sm"></i>
-														  </button>
-													 </div>
-												</div>
-										  </form>
-									 </div>
-								</li>
-
-								<!-- Nav Item - Alerts -->
-								<li class="nav-item dropdown no-arrow mx-1">
-									 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-										  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										  <i class="fas fa-bell fa-fw"></i>
-										  <!-- Counter - Alerts -->
-										  <span class="badge badge-danger badge-counter">3+</span>
-									 </a>
-									 <!-- Dropdown - Alerts -->
-									 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-										  aria-labelledby="alertsDropdown">
-										  <h6 class="dropdown-header">
-												Alerts Center
-										  </h6>
-										  <a class="dropdown-item d-flex align-items-center" href="#">
-												<div class="mr-3">
-													 <div class="icon-circle bg-primary">
-														  <i class="fas fa-file-alt text-white"></i>
-													 </div>
-												</div>
-												<div>
-													 <div class="small text-gray-500">December 12, 2019</div>
-													 <span class="font-weight-bold">A new monthly report is ready to download!</span>
-												</div>
-										  </a>
-										  <a class="dropdown-item d-flex align-items-center" href="#">
-												<div class="mr-3">
-													 <div class="icon-circle bg-success">
-														  <i class="fas fa-donate text-white"></i>
-													 </div>
-												</div>
-												<div>
-													 <div class="small text-gray-500">December 7, 2019</div>
-													 $290.29 has been deposited into your account!
-												</div>
-										  </a>
-										  <a class="dropdown-item d-flex align-items-center" href="#">
-												<div class="mr-3">
-													 <div class="icon-circle bg-warning">
-														  <i class="fas fa-exclamation-triangle text-white"></i>
-													 </div>
-												</div>
-												<div>
-													 <div class="small text-gray-500">December 2, 2019</div>
-													 Spending Alert: We've noticed unusually high spending for your account.
-												</div>
-										  </a>
-										  <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-									 </div>
-								</li>
-
-								<div class="topbar-divider d-none d-sm-block"></div>
-
-								<!-- Nav Item - User Information -->
-								<li class="nav-item dropdown no-arrow">
-									 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-										  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										  <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-										  <img class="img-profile rounded-circle"
-												src="img/undraw_profile.svg">
-									 </a>
-									 <!-- Dropdown - User Information -->
-									 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-										  aria-labelledby="userDropdown">
-										  <a class="dropdown-item" href="#">
-												<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-												Profile
-										  </a>
-										  <a class="dropdown-item" href="#">
-												<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-												Settings
-										  </a>
-										  <a class="dropdown-item" href="#">
-												<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-												Activity Log
-										  </a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-												<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-												Logout
-										  </a>
-									 </div>
-								</li>
-
-						  </ul>
-
-					 </nav>
-					 <!-- End of Topbar -->
-
-					 <!-- Begin Page Content -->
-					 <div class="container-fluid">
-
-						  <!-- Page Heading -->
-						  <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
-					 </div>
-					 <!-- /.container-fluid -->
-
-				</div>
-				<!-- End of Main Content -->
-
-				<!-- Footer -->
-				<footer class="sticky-footer bg-white">
-					 <div class="container my-auto">
-						  <div class="copyright text-center my-auto">
-								<span>
-									Copyright &copy; <a href="{{ url('/') }}">Patho<span class="turquoise">&bull;</span>Log</a> {{ date('Y') }}
-								</span>
-						  </div>
-					 </div>
-				</footer>
-				<!-- End of Footer -->
-
-		  </div>
-		  <!-- End of Content Wrapper -->
-
-	 </div>
-	 <!-- End of Page Wrapper -->
-
-	 <!-- Scroll to Top Button-->
-	 <a class="scroll-to-top rounded" href="#page-top">
-		  <i class="fas fa-angle-up"></i>
-	 </a>
-
-	 <!-- Logout Modal-->
-	 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		  aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-				<div class="modal-content">
-					 <div class="modal-header">
-						  <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-						  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">×</span>
-						  </button>
-					 </div>
-					 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-					 <div class="modal-footer">
-						  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						  <a class="btn btn-primary" href="login.html">Logout</a>
-					 </div>
-				</div>
-		  </div>
-	 </div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div><!-- ./wrapper -->
 <!-- body is closed in footer -->

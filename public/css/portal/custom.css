@@ -2,35 +2,45 @@
 Custom styles
 */
 
-/*
-Sidebar
-*/
-.bg-gradient-sidebar {
-	background-color: #3699ff;
-	background-image: linear-gradient(180deg, #fff 5%, var(--palette-turquoise) 45%, var(--palette-blue) 100%);
-	background-size: cover;
+.brand-link {
+	padding: .594rem 1rem;
 }
 
-.sidebar-dark .nav-item.turquoise .nav-link {
-	color: var(--palette-turquoise);
+[class*="sidebar-dark-"] .nav-header {
+	color: var(--palette-purple-light);
 }
 
-.sidebar-dark .nav-item.turquoise .nav-link i {
-	color: var(--palette-turquoise-transparent);
+.sidebar-brand-icon img {
+	opacity: .8;
+	margin-right: .5rem;
 }
 
-.sidebar-dark .nav-item.active.turquoise .nav-link {
-	color: var(--palette-turquoise);
+.sidebar-collapse .sidebar-brand-text {
+	display: none;
+}
+.sidebar-collapse .sidebar-brand-icon img {
+	margin-right: 0;
 }
 
-.sidebar-dark .nav-item.active.turquoise .nav-link i {
-	color: var(--palette-turquoise-transparent);
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: var(--palette-turquoise-transparent);
+  color: #fff;
 }
 
-.sidebar-dark .nav-item.turquoise .nav-link:active, .sidebar-dark .nav-item.turquoise .nav-link:focus, .sidebar-dark .nav-item.turquoise .nav-link:hover {
+.btn-turquoise {
 	color: #fff;
+	background-color: var(--palette-turquoise);
+	border-color: var(--palette-turquoise);
+	box-shadow: none;
 }
- 
-.sidebar-dark .nav-item.turquoise .nav-link:active i, .sidebar-dark .nav-item.turquoise .nav-link:focus i, .sidebar-dark .nav-item.turquoise .nav-link:hover i {
-	color: #fff;
+
+.navbar-search { width: 17rem; }
+@media (min-width: 992px) {
+	.navbar-search { width: 23rem; }
+}
+
+.border-topbarsearch {
+	border-color: #e4e6ef !important;
 }
