@@ -1,7 +1,12 @@
 /*
 Custom styles
+Patho-Log project
+humam_babi@yahoo.com, 2021-08-24
 */
 
+/*
+Left-side navbar
+*/
 .brand-link {
 	padding: .594rem 1rem;
 }
@@ -22,13 +27,15 @@ Custom styles
 	margin-right: 0;
 }
 
-
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
   background-color: var(--palette-turquoise-transparent);
   color: #fff;
 }
 
+/*
+Upper-side navbar
+*/
 .btn-turquoise {
 	color: #fff;
 	background-color: var(--palette-turquoise);
@@ -43,4 +50,53 @@ Custom styles
 
 .border-topbarsearch {
 	border-color: #e4e6ef !important;
+}
+
+/*
+Footer
+*/
+.main-footer {
+	text-align: center;
+	font-size: .8rem;
+}
+
+
+/*
+User menu
+*/
+.navbar-nav > .user-menu > .dropdown-menu {
+	width: 13rem;
+	border-radius: 4px;
+	background-color: #343a40; /* Same as the sidebar-dark- */
+}
+
+.navbar-nav > .user-menu > .dropdown-menu.show {
+	display: flex;
+}
+
+.dropdown-menu .user-header img {
+	z-index: 5;
+	height: 96px;
+	width: 96px;
+	border: 3px solid;
+	border-color: transparent;
+	border-color: rgba(255,255,255,.2);
+}
+
+.dropdown-menu .user-header p {
+	color: whitesmoke;
+	margin: .4rem 0;
+	font-weight: bold;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > .dropdown-item {
+	border-color: #6c757d !important;
+	color: #c2c7d0;
+	padding: .5rem 1rem;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > .dropdown-item:focus,
+.navbar-nav > .user-menu > .dropdown-menu > .dropdown-item:hover {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+	color: var(--palette-turquoise);
 }

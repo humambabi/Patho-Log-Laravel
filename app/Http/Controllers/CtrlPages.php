@@ -56,7 +56,8 @@ class CtrlPages extends Controller
 		$data['page_name'] = "dashboard";
 
 		echo view('portal.asset-header', $data);
-		echo view('portal.page-dashboard', $data);
+		echo view('portal.asset-pagenavs', $data);
+		echo view('portal.page-dashboard');
 		echo view('portal.asset-footer');
 	}
 }
