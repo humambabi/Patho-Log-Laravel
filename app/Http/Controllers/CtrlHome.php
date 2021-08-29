@@ -1,15 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\User;
 
-class CtrlPages extends Controller
+class CtrlHome extends Controller
 {
-	/*
-	Home-related pages
-	*/
 	public function Home() {
 		$data['head_title'] = "Patho•Log - Create, archive, and share stylish pathology reports for free!";
 		$data['head_description'] = "Free service to create stylish pathology reports, archive them, and share them with your patients and other doctors.";
@@ -38,26 +33,5 @@ class CtrlPages extends Controller
 		echo view('home.asset-header', $data);
 		echo view('home.page-termsconds');
 		echo view('home.asset-footer');
-	}
-
-
-	/*
-	Portal-related pages
-	*/
-	public function LogIn() {
-
-		echo view('portal.page-login');
-		
-	}
-
-	public function Dashboard() {
-		$data['head_title'] = "Dashboard - Patho•Log";
-		$data['head_description'] = "Patho•Log's Dashboard";
-		$data['page_name'] = "dashboard";
-
-		echo view('portal.asset-header', $data);
-		echo view('portal.asset-pagenavs', $data);
-		echo view('portal.page-dashboard');
-		echo view('portal.asset-footer');
 	}
 }

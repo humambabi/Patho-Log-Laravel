@@ -1,0 +1,62 @@
+/*
+Custom styles (for extra-portal pages: login, register, ...etc)
+Patho-Log project
+humam_babi@yahoo.com, 2021-08-24
+*/
+
+/* iCheck-bootstrap styles */
+.icheck-primary > input:first-child:not(:checked):not(:disabled):hover + label::before,
+.icheck-primary > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+   border-color: var(--palette-turquoise);
+}
+
+.icheck-primary > input:first-child:not(:checked):not(:disabled):focus + label::before,
+.icheck-primary > input:first-child:not(:checked):not(:disabled):focus + input[type="hidden"] + label::before {
+   border-color: var(--palette-turquoise);
+}
+
+.icheck-primary > input:first-child:checked + label::before,
+.icheck-primary > input:first-child:checked + input[type="hidden"] + label::before {
+   background-color: var(--palette-turquoise);
+   border-color: var(--palette-turquoise);
+}
+
+/* input boxes */
+.form-control:focus {
+   border-color: var(--palette-turquoise);
+}
+
+.input-group-text {
+   border-top-right-radius: .25rem !important;
+   border-bottom-right-radius: .25rem !important;
+}
+
+.login-card-body .input-group .form-control:focus ~ .input-group-prepend .input-group-text, .login-card-body .input-group .form-control:focus ~ .input-group-append .input-group-text, .register-card-body .input-group .form-control:focus ~ .input-group-prepend .input-group-text, .register-card-body .input-group .form-control:focus ~ .input-group-append .input-group-text {
+   border-color: var(--palette-turquoise);
+}
+.login-card-body .input-group .form-control.is-invalid~.input-group-append .input-group-text, .register-card-body .input-group .form-control.is-invalid~.input-group-append .input-group-text {
+   border-color: #dc3545;
+}
+
+/* buttons */
+.btn-turquoise {
+   color: #fff;
+   background-color: var(--palette-turquoise);
+   border-color: var(--palette-turquoise);
+   box-shadow: none;
+}
+.btn-turquoise:not(:disabled):not(.disabled):active, .btn-turquoise:not(:disabled):not(.disabled).active, .show > .btn-turquoise.dropdown-toggle {
+   color: #fff;
+   background-color: var(--palette-turquoise-depressed);
+   border-color: var(--palette-turquoise-depressed);
+}
+.btn-turquoise:focus, .btn-turquoise.focus {
+   color: #fff;
+   background-color: var(--palette-turquoise-depressed);
+   border-color: var(--palette-turquoise-depressed);
+   box-shadow: 0 0 0 0 rgb(38 143 255 / 50%);
+}.btn-turquoise:hover {
+   color: #fff;
+   background-color: var(--palette-turquoise-depressed);
+   border-color: var(--palette-turquoise-depressed);
+}

@@ -8,7 +8,7 @@
 						<div class="text-container">
 							<h1><span class="turquoise">Authoring Pathology Reports</span> has never been faster and easier!</h1>
 							<p class="p-large">Patho<span class="turquoise">&bull;</span>Log provides the fastest, easiest, and most secure way to author, customize, share, and archive your pathology reports.</p>
-							<a class="btn-solid-lg page-scroll" href="{{ url('/') }}#features">LEARN MORE</a>
+							<a class="btn-solid-lg page-scroll" href="#features">LEARN MORE</a>
 						</div> <!-- end of text-container -->
 					</div> <!-- end of col -->
 					<div class="col-lg-6">

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -9,5 +8,15 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+   use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
+
+#
+# Session variables
+# -----------------
+#
+# - name -              - type -          - default -
+# bLoggedIn             (bool)            false
+# bAdmin                (bool)            false
+# bActive               (bool)            false
+#

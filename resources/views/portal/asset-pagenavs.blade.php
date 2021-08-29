@@ -10,8 +10,8 @@
          </li>
 
          <!-- Topbar Search -->
-         <form class="d-none d-sm-inline-block form-inline mr-auto navbar-search">
-            <div class="input-group">
+         <form class="d-none d-sm-flex flex-row align-items-center form-inline mr-auto navbar-search">
+            <div class="input-group w-100">
                <input type="text" class="form-control bg-light small border border-topbarsearch" placeholder="Search for..."
                      aria-label="Search" aria-describedby="basic-addon2" /> <!-- border-0 -->
                <div class="input-group-append">
@@ -106,7 +106,7 @@
                <li class="nav-header">My Database</li>
 
                <li class="nav-item">
-                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-th-list"></i>
                      <p>
                         Saved Reports
@@ -115,7 +115,7 @@
                </li>
                
                <li class="nav-item">
-                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-search"></i>
                      <p>
                         Find Reports
@@ -152,7 +152,7 @@
                <li class="nav-header">Tools</li>
 
                <li class="nav-item">
-                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-copy"></i>
                      <p>
                         Templates
@@ -164,7 +164,7 @@
                <li class="nav-header">Help</li>
 
                <li class="nav-item">
-                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-question-circle"></i>
                      <p>
                         How to...
@@ -173,7 +173,7 @@
                </li>
 
                <li class="nav-item">
-                  <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-envelope-open-text"></i>
                      <p>
                         Contact us

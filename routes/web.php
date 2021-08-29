@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CtrlPages;
+use App\Http\Controllers\CtrlHome;
+use App\Http\Controllers\CtrlPortal;
+use App\Http\Controllers\CtrlRequests;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +17,30 @@ use App\Http\Controllers\CtrlPages;
 */
 
 /*
-Pages
+Web Pages
 */
 
 # Home-related pages
-Route::get('/',								[CtrlPages::class, "Home"]);
-Route::get('/terms-conditions',			[CtrlPages::class, "TermsConditions"]);
+Route::get('/',                        [CtrlHome::class, "Home"]);
+Route::get('/terms-conditions',        [CtrlHome::class, "TermsConditions"]);
 
 # Portal-related pages
-Route::get('/login',                   [CtrlPages::class, "LogIn"]);
+Route::get('/login',                   [CtrlPortal::class, "LogIn"]);
+Route::get('/dashboard',               [CtrlPortal::class, "Dashboard"]);
+Route::get('/newreport',               [CtrlPortal::class, "NewReport"]);
+Route::get('/savedreports',            [CtrlPortal::class, "SavedReports"]);
+Route::get('/findreports',             [CtrlPortal::class, "FindReports"]);
+Route::get('/backup',                  [CtrlPortal::class, "Backup"]);
+Route::get('/restore',                 [CtrlPortal::class, "Restore"]);
+Route::get('/templates',               [CtrlPortal::class, "Templates"]);
+Route::get('/howto',                   [CtrlPortal::class, "HowTo"]);
+Route::get('/contactus',               [CtrlPortal::class, "ContactUs"]);
+Route::get('/myaccount',               [CtrlPortal::class, "MyAccount"]);
 
-Route::get('/dashboard',               [CtrlPages::class, "Dashboard"]);
+
+/*
+Http requests
+*/
+
+# Extra-portal requests
+Route::post('reqLogIn',                [CtrlRequests::class, "reqSignIn"]);

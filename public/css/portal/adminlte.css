@@ -35,10 +35,12 @@
   --dark: #181c32;
   
   --palette-turquoise: #00bfd8;
-  --palette-blue: #0178fa;
-  --palette-purple: #bf60d8;
-  
   --palette-turquoise-transparent: rgba(0, 191, 216, .75);
+  --palette-turquoise-depressed: #00a7bd;
+
+  --palette-blue: #0178fa;
+
+  --palette-purple: #bf60d8;
   --palette-purple-light: #ce84e1;
 
   --breakpoint-xs: 0;
