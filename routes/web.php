@@ -26,6 +26,8 @@ Route::get('/terms-conditions',        [CtrlHome::class, "TermsConditions"]);
 
 # Portal-related pages
 Route::get('/login',                   [CtrlPortal::class, "LogIn"]);
+Route::get('/register',                [CtrlPortal::class, "Register"]);
+
 Route::get('/dashboard',               [CtrlPortal::class, "Dashboard"]);
 Route::get('/newreport',               [CtrlPortal::class, "NewReport"]);
 Route::get('/savedreports',            [CtrlPortal::class, "SavedReports"]);

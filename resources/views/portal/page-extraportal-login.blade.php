@@ -6,7 +6,7 @@
       </a>
    </div><!-- /.login-logo -->
 
-   <div class="card">
+   <div class="card elevation-3">
       <div class="card-body login-card-body">
          <p class="login-box-msg">Sign in to start your session</p>
 
@@ -19,6 +19,7 @@
                   </div>
                </div>
             </div>
+
             <div class="input-group mb-3">
                <input type="password" name="password" class="form-control" placeholder="Password" maxlength="{{ config('constants.PASSWORD_MAXLENGTH') }}" />
                <div class="input-group-append">
@@ -27,6 +28,7 @@
                   </div>
                </div>
             </div>
+
             <div class="row">
                <div class="col-8 d-flex flex-row align-items-center">
                   <div class="icheck-primary">
@@ -37,7 +39,7 @@
                <div class="col-4">
                   <button type="submit" class="btn btn-turquoise btn-block">Sign In</button>
                </div><!-- /.col -->
-            </div>
+            </div><!-- /.row -->
          </form>
 
          <div class="social-auth-links text-center mb-3">
@@ -54,7 +56,7 @@
             <a href="forgot-password.html">I forgot my password</a>
          </p>
          <p class="mb-0 text-center">
-            <a href="register.html">Register a new account</a>
+            <a href="{{ url('/') }}/register">Register a new account</a>
          </p>
       </div><!-- /.login-card-body -->
    </div><!-- /.card -->

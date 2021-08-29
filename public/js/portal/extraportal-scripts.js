@@ -60,12 +60,13 @@ $(function () {
                   //swal("Thank you!", response.retdata, "success");
                } // Received response
             }); // JQ.Ajax()
-
-
          } // form#form-login
+
+         
       } // submitHandler
    }); // validator.setDefaults
 
+   // Login form
    $('#form_login').validate({
       rules: {
          email: {
@@ -108,4 +109,7 @@ $(function () {
          $(element).removeClass('is-invalid');
       }
    });
+
+
+   // Register form
 });

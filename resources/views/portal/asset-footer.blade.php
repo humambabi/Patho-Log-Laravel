@@ -1,4 +1,5 @@
-@if ($page_name != "login") {{-- Check header and 2 positions below too --}}
+@if (in_array($page_name, ["login", "register"])) {{-- Check 2 places below, and 2 places in header too --}}
+@else
    <footer class="main-footer">
       <div class="row">
          <div class="col-12 text-center mb-1 col-md-6 text-md-left mb-md-0">
@@ -21,14 +22,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-@if ($page_name != "login") {{-- Check header, up and below too --}}
-<script type="text/javascript" src="/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"></script>
-@else
+@if (in_array($page_name, ["login", "register"])) {{-- Check up, below, and 2 places in header too --}}
    @if (config('app.debug') == false)
    <script src="/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js"></script>
    @else
    <script src="/vendor/jquery-validation-1.19.3/dist/jquery.validate.js"></script>
    @endif
+@else
+<script type="text/javascript" src="/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"></script>
 @endif
 
 @if (config('app.debug') == false)
@@ -37,10 +38,10 @@
 <script src="/js/portal/adminlte.js"></script>
 @endif
 
-@if ($page_name != "login") {{-- Check header and 2 positions up too --}}
-<script src="/js/portal/demo.js"></script>
-@else
+@if (in_array($page_name, ["login", "register"])) {{-- Check 2 places up, and 2 places in header too --}}
 <script src="/js/portal/extraportal-scripts.js"></script> <!-- Custom scripts -->
+@else
+<script src="/js/portal/demo.js"></script>
 @endif
 </body>
 </html>
