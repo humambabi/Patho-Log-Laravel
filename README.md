@@ -32,4 +32,4 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## License
 
-Patho&bull;Log is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Patho&bull;Log is licensed under the [MIT license](https://opensource.org/licenses/MIT).
