@@ -31,9 +31,11 @@
 
             <div class="row">
                <div class="col-8 d-flex flex-row align-items-center">
-                  <div class="icheck-primary">
-                     <input type="checkbox" id="remember" />
-                     <label for="remember">Remember Me</label>
+                  <div class="input-group mb-0">
+                     <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="remember" class="custom-control-input" id="remember" />
+                        <label class="custom-control-label" for="remember"><div class="custom-checkbox-label">Remember Me</div></label>
+                     </div>
                   </div>
                </div><!-- /.col -->
                <div class="col-4">

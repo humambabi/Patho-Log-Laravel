@@ -24,6 +24,7 @@ class CtrlPortal extends Controller
 
 
    public function Register() {
+      // also if already logged in
       $data['head_title'] = "Register - Patho•Log";
       $data['head_description'] = "Patho•Log - Register";
       $data['page_name'] = "register";

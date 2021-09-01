@@ -12,7 +12,7 @@
 
          <form id="form_register">
             <div class="input-group mb-3">
-               <input type="text" name="name" class="form-control" placeholder="Name" maxlength="{{ config('constants.USERNAME_MAXLENGTH') }}" />
+               <input type="text" name="username" class="form-control" placeholder="Name" maxlength="{{ config('constants.USERNAME_MAXLENGTH') }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-user"></span>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="input-group mb-3">
-               <input type="password" name="retype-password" class="form-control" placeholder="Retype password" maxlength="{{ config('constants.PASSWORD_MAXLENGTH') }}" />
+               <input type="password" name="confirm_password" class="form-control" placeholder="Retype password" maxlength="{{ config('constants.PASSWORD_MAXLENGTH') }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-lock"></span>
@@ -47,16 +47,21 @@
                </div>
             </div>
 
-            <div class="row d-flex flex-row align-items-center">
-               <div class="col-8 d-flex flex-row">
-                  <div class="icheck-primary d-flex flex-row">
-                     <input type="checkbox" id="agree_terms" name="terms" />
-                     <label for="agree_terms" class="d-flex flex-row align-items-center">
-                        <div id="register_agree_terms">I agree to the <a href="#">terms and conditions</a>, and the <a href="#">privacy policy</a>.</div>
-                     </label>
+            <div class="row">
+               <div class="col-8">
+                  <div class="input-group mb-0">
+                     <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="terms" class="custom-control-input" id="terms" required />
+                        <label class="custom-control-label" for="terms">
+                           <div class="custom-checkbox-label">
+                              I agree to the <a href="#">terms and conditions</a>, and the <a href="#">privacy policy</a>.
+                           </div>
+                        </label>
+                     </div>
                   </div>
                </div><!-- /.col -->
-               <div class="col-4">
+
+               <div class="col-4" style="margin-top: 6px;">
                   <button type="submit" class="btn btn-turquoise btn-block">Register</button>
                </div><!-- /.col -->
             </div><!-- /.row -->

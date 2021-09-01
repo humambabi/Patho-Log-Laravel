@@ -56,7 +56,7 @@ return [
 
     # Keep the end of the url *without* a '/'
     //'url' => env('APP_URL', 'https://patho-log.com'),
-    'url' => env('APP_URL', 'http://localhost:8000'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 

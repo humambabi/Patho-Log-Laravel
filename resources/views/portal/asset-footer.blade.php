@@ -39,6 +39,8 @@
 @endif
 
 @if (in_array($page_name, ["login", "register"])) {{-- Check 2 places up, and 2 places in header too --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Ld_EDgcAAAAANjtDs7tfuIeAPiRqJR3WmjvEZEF"></script>
 <script src="/js/portal/extraportal-scripts.js"></script> <!-- Custom scripts -->
 @else
 <script src="/js/portal/demo.js"></script>

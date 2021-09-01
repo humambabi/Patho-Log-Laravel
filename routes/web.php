@@ -46,3 +46,4 @@ Http requests
 
 # Extra-portal requests
 Route::post('reqLogIn',                [CtrlRequests::class, "reqSignIn"]);
+Route::post('reqRegister',             [CtrlRequests::class, "reqRegister"]);

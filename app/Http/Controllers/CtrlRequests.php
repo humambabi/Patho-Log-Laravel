@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
 class CtrlRequests extends Controller
 {
-   # (This is brought from 'comingsoon' project)
-   # Saves the supplied user email to our database
-   #
    public function reqSignIn(Request $request) {
       $validated = $request->validate([
          'email'     => ['bail', 'required', 'email', 'max:' . config('constants.EMAIL_MAXLENGTH')],
@@ -34,5 +32,28 @@ class CtrlRequests extends Controller
 
       #
       return ['retcode' => 1, 'retdata' => "You have been subscribed to our newsletter."];
+   }
+
+
+   public function reqRegister(Request $request) {
+      $validated = $request->validate([
+         'username'  => ['bail', 'required', 'between:' . config('constants.USERNAME_MINLENGTH') . ',' . config('constants.USERNAME_MAXLENGTH')],
+         'email'     => ['bail', 'required', 'email', 'max:' . config('constants.EMAIL_MAXLENGTH')],
+         'password'  => ['bail', 'required', 'between:' . config('constants.PASSWORD_MINLENGTH') . ',' . config('constants.PASSWORD_MAXLENGTH')],
+         'terms'     => ['bail', 'accepted'],
+         'gr_token'  => ['bail', 'required']
+      ]);
+      
+      if (reCAPTCHAv3Check($validated('gr_token'), config("constants.GR_ACTION_ACCOUNTREGISTER"), $request) != FALSE) {
+         return "Google reCAPTCHA verificaiton failed!";
+      }
+
+      # Done verifying. Save the user record in the databse
+      $result = DB::insert("INSERT INTO `users`(`name`, `email`, `password`) VALUES(:eml, :dtm, :ipa);",
+			['eml' => $param_email, 'dtm' => gmdate('Y-m-d H:i:s'), 'ipa' => $request->ip()]);
+		if (empty($result)) return ['retcode' => 0, 'retdata' => "Could not save the email!"];
+
+
+      return "ok";
    }
 }

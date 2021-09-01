@@ -30,11 +30,6 @@
    <link rel="stylesheet" href="/css/portal/adminlte.css" />
    @endif
    @if (in_array($page_name, ["login", "register"])) {{-- Check below, and 3 places in footer too --}}
-      @if (config('app.debug') == false)
-      <link rel="stylesheet" href="/vendor/icheck-bootstrap/icheck-bootstrap.min.css" />
-      @else
-      <link rel="stylesheet" href="/vendor/icheck-bootstrap/icheck-bootstrap.css" />
-      @endif
       <link rel="stylesheet" href="/css/portal/extraportal-custom.css" />
    @else
    <link rel="stylesheet" type="text/css" href="/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css" />
@@ -47,10 +42,12 @@
    <!-- Back to front -->
    @if (in_array($page_name, ["login", "register"])) {{-- Check up, and 3 places in footer too --}}
    <script type="text/javascript">
+      const USERNAME_MINLENGTH = {{ config('constants.USERNAME_MINLENGTH') }};
       const USERNAME_MAXLENGTH = {{ config('constants.USERNAME_MAXLENGTH') }};
       const EMAIL_MAXLENGTH = {{ config('constants.EMAIL_MAXLENGTH') }};
       const PASSWORD_MINLENGTH = {{ config('constants.PASSWORD_MINLENGTH') }};
       const PASSWORD_MAXLENGTH = {{ config('constants.PASSWORD_MAXLENGTH') }};
+      const GR_ACTION_ACCOUNTREGISTER = "{{ config('constants.GR_ACTION_ACCOUNTREGISTER') }}";
    </script>
    @endif
 
