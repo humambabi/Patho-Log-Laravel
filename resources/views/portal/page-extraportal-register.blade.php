@@ -9,10 +9,9 @@
    <div class="card elevation-3 mb-4">
       <div class="card-body register-card-body">
          <p class="login-box-msg">Register a new account</p>
-
          <form id="form_register">
             <div class="input-group mb-3">
-               <input type="text" name="username" class="form-control" placeholder="Name" maxlength="{{ config('constants.USERNAME_MAXLENGTH') }}" />
+               <input type="text" name="username" class="form-control" placeholder="Name" maxlength="{{ config('consts.USERNAME_MAXLENGTH') }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-user"></span>
@@ -21,7 +20,7 @@
             </div>
 
             <div class="input-group mb-3">
-               <input type="email" name="email" class="form-control" placeholder="Email" maxlength="{{ config('constants.EMAIL_MAXLENGTH') }}" />
+               <input type="email" name="email" class="form-control" placeholder="Email" maxlength="{{ config('consts.EMAIL_MAXLENGTH') }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-envelope"></span>
@@ -30,7 +29,7 @@
             </div>
 
             <div class="input-group mb-3">
-               <input type="password" name="password" class="form-control" placeholder="Password" maxlength="{{ config('constants.PASSWORD_MAXLENGTH') }}" />
+               <input type="password" name="password" class="form-control" placeholder="Password" maxlength="{{ config('consts.PASSWORD_MAXLENGTH') }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-lock"></span>
@@ -39,7 +38,7 @@
             </div>
 
             <div class="input-group mb-3">
-               <input type="password" name="confirm_password" class="form-control" placeholder="Retype password" maxlength="{{ config('constants.PASSWORD_MAXLENGTH') }}" />
+               <input type="password" name="confirm_password" class="form-control" placeholder="Retype password" maxlength="{{ config('consts.PASSWORD_MAXLENGTH') }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-lock"></span>

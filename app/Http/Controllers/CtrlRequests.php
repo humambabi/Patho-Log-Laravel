@@ -1,34 +1,28 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 
 class CtrlRequests extends Controller
 {
    public function reqSignIn(Request $request) {
       $validated = $request->validate([
-         'email'     => ['bail', 'required', 'email', 'max:' . config('constants.EMAIL_MAXLENGTH')],
-         'password'  => ['bail', 'required', 'between:' . config('constants.PASSWORD_MINLENGTH') . ',' . config('constants.PASSWORD_MAXLENGTH')],
+         'email'     => ['bail', 'required', 'email', 'max:' . config('consts.EMAIL_MAXLENGTH')],
+         'password'  => ['bail', 'required', 'between:' . config('consts.PASSWORD_MINLENGTH') . ',' . config('consts.PASSWORD_MAXLENGTH')],
          'remember'  => ['bail', 'required']
       ]);
 
       return $validated;
 
       /*
-            $dbrows = DB::select("SELECT * FROM `saved_emails` WHERE `email`=:eml;", ['eml' => $param_email]);
-            if (!empty($dbrows)) return ['retcode' => -1, 'retdata' => "Your email is already saved!"];
-      
-            # Email is good, and new. Insert it
-            $result = DB::insert("INSERT INTO `saved_emails`(`email`, `added_on`, `IP`) VALUES(:eml, :dtm, :ipa);",
-               ['eml' => $param_email, 'dtm' => gmdate('Y-m-d H:i:s'), 'ipa' => $request->ip()]);
-            if (empty($result)) return ['retcode' => 0, 'retdata' => "Could not save the email!"];
-      
             # Send a welcome email
             $result = Mail::to($param_email)->send(new Welcome());
       */
-
 
       #
       return ['retcode' => 1, 'retdata' => "You have been subscribed to our newsletter."];
@@ -36,24 +30,66 @@ class CtrlRequests extends Controller
 
 
    public function reqRegister(Request $request) {
-      $validated = $request->validate([
-         'username'  => ['bail', 'required', 'between:' . config('constants.USERNAME_MINLENGTH') . ',' . config('constants.USERNAME_MAXLENGTH')],
-         'email'     => ['bail', 'required', 'email', 'max:' . config('constants.EMAIL_MAXLENGTH')],
-         'password'  => ['bail', 'required', 'between:' . config('constants.PASSWORD_MINLENGTH') . ',' . config('constants.PASSWORD_MAXLENGTH')],
+      # Create a manual validator to prevent returning 422 html error
+      $Validator = Validator::make($request->all(), [
+         'username'  => ['bail', 'required', 'between:' . config('consts.USERNAME_MINLENGTH') . ',' . config('consts.USERNAME_MAXLENGTH')],
+         'email'     => ['bail', 'required', 'email', 'max:' . config('consts.EMAIL_MAXLENGTH'), 'unique:users,email'],
+         'password'  => ['bail', 'required', 'min:' . config('consts.PASSWORD_MINLENGTH'), 'max:' . config('consts.PASSWORD_MAXLENGTH')],
          'terms'     => ['bail', 'accepted'],
          'gr_token'  => ['bail', 'required']
       ]);
-      
-      if (reCAPTCHAv3Check($validated('gr_token'), config("constants.GR_ACTION_ACCOUNTREGISTER"), $request) != FALSE) {
-         return "Google reCAPTCHA verificaiton failed!";
+
+      # Return error message gracefully
+      if ($Validator->fails()) {
+         $errors = $Validator->errors();
+
+         if (!empty($errors->first('username'))) {
+            return response()->json(['retcode' => config('consts.ERR_WITHMSG_USERNAME'), 'errmsg' => $errors->first('username')]);
+         }
+         if (!empty($errors->first('email'))) {
+            return response()->json(['retcode' => config('consts.ERR_WITHMSG_EMAIL'), 'errmsg' => $errors->first('email')]);
+         }
+         if (!empty($errors->first('password'))) {
+            return response()->json(['retcode' => config('consts.ERR_WITHMSG_PASSWORD'), 'errmsg' => $errors->first('password')]);
+         }
+         if (!empty($errors->first('terms'))) {
+            return response()->json(['retcode' => config('consts.ERR_WITHMSG_TERMS'), 'errmsg' => $errors->first('terms')]);
+         }
+         if (!empty($errors->first('gr_token'))) {
+            return response()->json(['retcode' => config('consts.ERR_WITHMSG'), 'errmsg' => $errors->first('gr_token')]);
+         }
       }
 
-      # Done verifying. Save the user record in the databse
-      $result = DB::insert("INSERT INTO `users`(`name`, `email`, `password`) VALUES(:eml, :dtm, :ipa);",
-			['eml' => $param_email, 'dtm' => gmdate('Y-m-d H:i:s'), 'ipa' => $request->ip()]);
-		if (empty($result)) return ['retcode' => 0, 'retdata' => "Could not save the email!"];
+      # Retrieve the validated input
+      $Validated = $Validator->validated();
+
+      # Check Google reCAPTCHA v3
+      if (reCAPTCHAv3Check($Validated['gr_token'], config("consts.GR_ACTION_ACCOUNTREGISTER"), $request) != FALSE) {
+         return response()->json(['retcode' => config('consts.ERR_WITHMSG'), 'errmsg' => config('consts.MSG_RECAPTCHA_FAILED')]);
+      }
+
+      # Done verifying. Save the user record in the database
+      $result = DB::insert("INSERT INTO `users`(`name`, `email`, `pw_hash`, `reg_datetime`, `verification_code`, `ipaddrs_obj`, `is_admin`) " .
+         "VALUES(:nam, :eml, :pwh, :rdt, :vfc, :ipo, :adm);", [
+            'nam' => $Validated['username'],
+            'eml' => $Validated['email'],
+            'pwh' => hash_password($Validated['password']),
+            'rdt' => gmdate(config('consts.DB_DATETIME_FMT')),
+            'vfc' => Str::random(25),
+            'ipo' => json_encode([$request->ip() => ["count" => 1, "lastlogin" => gmdate(config('consts.DB_DATETIME_FMT'))]]),
+            'adm' => 0
+         ]
+      );
+      if (empty($result)) return response()->json(['retcode' => config('consts.ERR_UNEXPECTED')]);
+
+      # Send verification email
 
 
-      return "ok";
+
+
+
+
+
+      return response()->json(['retcode' => config('consts.ERR_NOERROR'), 'msg' => "Record is successfully added"]);
    }
 }

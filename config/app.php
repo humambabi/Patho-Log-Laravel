@@ -26,7 +26,9 @@ return [
     |
     */
 
-    //'env' => env('APP_ENV', 'production'),
+    # [local]               'env' => env('APP_ENV', 'local'),
+    # [online.dev]          'env' => env('APP_ENV', 'local'),
+    # [online.production]   'env' => env('APP_ENV', 'production'),
     'env' => env('APP_ENV', 'debug'),
 
     /*
@@ -40,7 +42,9 @@ return [
     |
     */
 
-    //'debug' => (bool) env('APP_DEBUG', false),
+    # [local]               'debug' => (bool)env('APP_DEBUG', true),
+    # [online.dev]          'debug' => (bool)env('APP_DEBUG', true),
+    # [online.production]   'debug' => (bool)env('APP_DEBUG', false),
     'debug' => (bool)env('APP_DEBUG', true),
 
     /*
@@ -54,9 +58,14 @@ return [
     |
     */
 
-    # Keep the end of the url *without* a '/'
-    //'url' => env('APP_URL', 'https://patho-log.com'),
-    'url' => env('APP_URL', 'http://localhost'),
+    /*
+    Keep the end of the url *WITHOUT* a '/'
+    */
+    
+    # [local]               'url' => env('APP_URL', 'https://local.patho-log.com'),
+    # [online.dev]          'url' => env('APP_URL', 'https://dev.patho-log.com'),
+    # [online.production]   'url' => env('APP_URL', 'https://www.patho-log.com'),
+    'url' => env('APP_URL', 'https://local.patho-log.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -71,7 +80,9 @@ return [
     |
     */
 
-    //'timezone' => 'UTC',
+    # [local]               'timezone' => 'Europe/Istanbul',
+    # [online.dev]          'timezone' => 'UTC',
+    # [online.production]   'timezone' => 'UTC',
     'timezone' => 'Europe/Istanbul',
 
     /*

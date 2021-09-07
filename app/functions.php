@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Log;
 if (!function_exists('reCAPTCHAv3Check')) {
    function reCAPTCHAv3Check($recaptchaToken, $action, Request $request) {
       # Note: $recaptchaToken MUST be sanitized before passing to this function
-      
+
       # Send request to Google
       $url = "https://www.google.com/recaptcha/api/siteverify";
-      $data = array("secret" => config('constants.GR_PATHOLOG_SECRETKEY'), "response" => $recaptchaToken, "remoteip" => $request->ip());
+      $data = array("secret" => config('consts.GR_PATHOLOG_SECRETKEY'), "response" => $recaptchaToken, "remoteip" => $request->ip());
       $options = array(
          "http" => [
             "header"	=> "Content-type: application/x-www-form-urlencoded\r\n",
@@ -60,3 +60,10 @@ if (!function_exists('reCAPTCHAv3Check')) {
    }
 }
 
+# Returns a DB hashed password ####################################################################
+if (!function_exists('hash_password')) {
+   function hash_password($password) {
+      // sha1 is significantly more secure but slower than md5. crc32 is fast
+      return hash('sha1', $password) . hash('crc32', $password);
+   }
+}

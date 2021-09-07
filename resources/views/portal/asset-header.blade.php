@@ -42,12 +42,30 @@
    <!-- Back to front -->
    @if (in_array($page_name, ["login", "register"])) {{-- Check up, and 3 places in footer too --}}
    <script type="text/javascript">
-      const USERNAME_MINLENGTH = {{ config('constants.USERNAME_MINLENGTH') }};
-      const USERNAME_MAXLENGTH = {{ config('constants.USERNAME_MAXLENGTH') }};
-      const EMAIL_MAXLENGTH = {{ config('constants.EMAIL_MAXLENGTH') }};
-      const PASSWORD_MINLENGTH = {{ config('constants.PASSWORD_MINLENGTH') }};
-      const PASSWORD_MAXLENGTH = {{ config('constants.PASSWORD_MAXLENGTH') }};
-      const GR_ACTION_ACCOUNTREGISTER = "{{ config('constants.GR_ACTION_ACCOUNTREGISTER') }}";
+      const USERNAME_MINLENGTH = {{ config('consts.USERNAME_MINLENGTH') }};
+      const USERNAME_MAXLENGTH = {{ config('consts.USERNAME_MAXLENGTH') }};
+      const EMAIL_MAXLENGTH = {{ config('consts.EMAIL_MAXLENGTH') }};
+      const PASSWORD_MINLENGTH = {{ config('consts.PASSWORD_MINLENGTH') }};
+      const PASSWORD_MAXLENGTH = {{ config('consts.PASSWORD_MAXLENGTH') }};
+      const GR_ACTION_ACCOUNTREGISTER = "{{ config('consts.GR_ACTION_ACCOUNTREGISTER') }}";
+      const ERR_NOERROR = {{ config('consts.ERR_NOERROR') }};
+      const ERR_UNEXPECTED = {{ config('consts.ERR_UNEXPECTED') }};
+      const ERR_WITHMSG = {{ config('consts.ERR_WITHMSG') }};
+      const ERR_WITHMSG_USERNAME = {{ config('consts.ERR_WITHMSG_USERNAME') }};
+      const ERR_WITHMSG_EMAIL = {{ config('consts.ERR_WITHMSG_EMAIL') }};
+      const ERR_WITHMSG_PASSWORD = {{ config('consts.ERR_WITHMSG_PASSWORD') }};
+      const ERR_WITHMSG_TERMS = {{ config('consts.ERR_WITHMSG_TERMS') }};
+      const MSG_USERNAME_REQUIRED = "{{ config('consts.MSG_USERNAME_REQUIRED') }}";
+      const MSG_USERNAME_BETWEEN = @php echo "\"" . sprintf(config('consts.MSG_USERNAME_BETWEEN_FMT'), config('consts.USERNAME_MINLENGTH'), config('consts.USERNAME_MAXLENGTH')) . "\""; @endphp;
+      const MSG_EMAIL_REQUIRED = "{{ config('consts.MSG_EMAIL_REQUIRED') }}";
+      const MSG_EMAIL_VALIDEMAILADDR = "{{ config('consts.MSG_EMAIL_VALIDEMAILADDR') }}";
+      const MSG_EMAIL_MAXLEN = @php echo "\"" . sprintf(config('consts.MSG_EMAIL_MAXLEN_FMT'), config('consts.EMAIL_MAXLENGTH')) . "\""; @endphp;
+      const MSG_PASSWORD_REQUIRED = "{{ config('consts.MSG_PASSWORD_REQUIRED') }}";
+      const MSG_PASSWORD_MINLEN = @php echo "\"" . sprintf(config('consts.MSG_PASSWORD_MINLEN_FMT'), config('consts.PASSWORD_MINLENGTH')) . "\""; @endphp;
+      const MSG_PASSWORD_MAXLEN = @php echo "\"" . sprintf(config('consts.MSG_PASSWORD_MAXLEN_FMT'), config('consts.PASSWORD_MAXLENGTH')) . "\""; @endphp;
+      const MSG_PASSWORDCONFIRM_REQUIRED = "{{ config('consts.MSG_PASSWORDCONFIRM_REQUIRED') }}";
+      const MSG_PASSWORDCONFIRM_EQUAL = "{{ config('consts.MSG_PASSWORDCONFIRM_EQUAL') }}";
+      const MSG_TERMSPRIVACY_ACCEPT = "{{ config('consts.MSG_TERMSPRIVACY_ACCEPT') }}";
    </script>
    @endif
 

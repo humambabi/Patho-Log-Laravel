@@ -134,9 +134,27 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'username' => [
+            'required'  => config('consts.MSG_USERNAME_REQUIRED'),
+            'between'   => sprintf(config('consts.MSG_USERNAME_BETWEEN_FMT'), config('consts.USERNAME_MINLENGTH'), config('consts.USERNAME_MAXLENGTH'))
         ],
+        'email' => [
+            'required'  => config('consts.MSG_EMAIL_REQUIRED'),
+            'email'     => config('consts.MSG_EMAIL_VALIDEMAILADDR'),
+            'max'       => sprintf(config('consts.MSG_EMAIL_MAXLEN_FMT'), config('consts.EMAIL_MAXLENGTH')),
+            'unique'    => config('consts.MSG_EMAIL_UNIQUE'),
+        ],
+        'password' => [
+            'required'  => config('consts.MSG_PASSWORD_REQUIRED'),
+            'min'       => sprintf(config('consts.MSG_PASSWORD_MINLEN_FMT'), config('consts.PASSWORD_MINLENGTH')),
+            'max'       => sprintf(config('consts.MSG_PASSWORD_MAXLEN_FMT'), config('consts.PASSWORD_MAXLENGTH'))
+        ],
+        'terms' => [
+            'accepted'  => config('consts.MSG_TERMSPRIVACY_ACCEPT')
+        ],
+        'gr_token' => [
+            'required'  => config('consts.MSG_RECAPTCHA_FAILED')
+        ]
     ],
 
     /*
