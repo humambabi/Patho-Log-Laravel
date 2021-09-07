@@ -136,12 +136,12 @@ $(function() {
                   if (response.retcode == ERR_NOERROR) {
                      Swal.fire({title: "Tamam!", html: "<p>" + response.msg + "</p>", icon: "success"});
                   }
-               });
-            });
-         });
-      }
-   });
-});
+               }); // ajax.done
+            }); // grecaptcha.execute
+         }); // grecaptcha.ready
+      } // submitHandler
+   }); // validatorRegister
+}); // jQ's document.ready
 
 
 
