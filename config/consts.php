@@ -7,6 +7,7 @@
 return [
    # Main Support email address
    'PATHOLOG_EMAIL_SUPPORT'               => "support@patho-log.com",
+   'PATHOLOG_EMAIL_SENDERNAME'            => "Patho•Log",
 
    # General app's tools
    'DB_DATETIME_FMT'                      => "Y-m-d H:i:s",

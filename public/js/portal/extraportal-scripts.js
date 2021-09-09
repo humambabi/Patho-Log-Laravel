@@ -11,18 +11,25 @@ $.ajaxSetup({
    },
    type: 'POST',
    datatype: 'JSON',
-   timeout: 5000,
+   /*timeout: 5000,*/
    error: function(jqXHR, textStatus, errorThrown) {
       var msgHtml = "<p>Sorry!</p><p>An unknown error occurred!</p>";
+      var errHtml = "<p><small>Error: " + jqXHR.status + ((errorThrown && errorThrown.length) ? " (" + errorThrown + ")" : "") + "</small></p>";
+      
       if (jqXHR.status == 0) { // Cannot reach server
          msgHtml = "<p>Cannot communicate with the server right now!</p><p>Please, try again later.</p>";
       }
+      if (jqXHR.status == 419) { // CSRF token mismatch
+         msgHtml = "<p>Sorry, your session has expired!</p><p>The page will be refreshed now.</p>";
+         errHtml = "";
+      }
 
-      var errHtml = "<p><small>Error: " + jqXHR.status;
-      if (errorThrown && errorThrown.length) errHtml += " (" + errorThrown + ")";
-      errHtml += "</small></p>";
-
-      Swal.fire({title: "Alert!", html: msgHtml + errHtml, icon: "warning"});
+      Swal.fire(
+         {title: "Alert!", html: msgHtml + errHtml, icon: "warning"}
+      )
+      .then(function() {
+         if (jqXHR.status == 419) location.reload(true); // Reload from server. (false => may be from cache)
+      });
    }
 });
 
@@ -87,6 +94,7 @@ $(function() {
                $.ajax({
                   url: "/reqRegister",
                   data: {
+                     _token: $('meta[name="csrf-token"]').attr('content'), // Laravel's CSRF Setup
                      username: username,
                      email: email,
                      password: password,
@@ -106,7 +114,7 @@ $(function() {
                   }
 
                   // It's a JSON
-                  console.log(response);
+                  //console.log(response);
 
                   if (response.retcode == ERR_WITHMSG_USERNAME) {
                      validator.showErrors({username: response.errmsg});
@@ -134,7 +142,12 @@ $(function() {
                   }
 
                   if (response.retcode == ERR_NOERROR) {
-                     Swal.fire({title: "Tamam!", html: "<p>" + response.msg + "</p>", icon: "success"});
+                     Swal.fire(
+                        {title: response.msgTitle, html: response.msgHtml, icon: response.msgIcon}
+                     )
+                     .then(function() {
+                        location.href = "/login";
+                     });
                   }
                }); // ajax.done
             }); // grecaptcha.execute

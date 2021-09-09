@@ -84,8 +84,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@patho-log.com'),
+        'name' => env('MAIL_FROM_NAME', 'Patho•Log'),
     ],
 
     /*
@@ -107,4 +107,17 @@ return [
         ],
     ],
 
+    
+    #
+    # This is an additional directive to overcome SSL issues
+    #
+    /*
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ]
+    ]
+    */
 ];

@@ -24,7 +24,7 @@ if (!function_exists('reCAPTCHAv3Check')) {
       $responseKeys = json_decode($response, true);
       
       # Check the response: hostname
-      if (in_array($responseKeys["hostname"], ["localhost", "patho-log.com", "78.188.71.116"]) == FALSE) {
+      if (in_array($responseKeys["hostname"], ["local.patho-log.com", "localhost", "dev.patho-log.com", "patho-log.com", "78.188.71.116"]) == FALSE) {
          $str = "functions.php: reCAPTCHAv3Check(): reCAPTCHA verification response hostname = ";
          $str .= "\"" . $responseKeys["hostname"] . "\"" . ", php.hostname = \"" . $_SERVER["HTTP_HOST"] . "\".";
          Log::warning($str);
@@ -66,4 +66,36 @@ if (!function_exists('hash_password')) {
       // sha1 is significantly more secure but slower than md5. crc32 is fast
       return hash('sha1', $password) . hash('crc32', $password);
    }
+}
+
+# Start a Laravel queue worker (and gracefully stop other workers) ################################
+function laravel_queueworker() {
+   # In Windows, the background process shows a window, and this is good because we can see php's debug
+   # info there (also warning or errors). In Linux server, write output to log instead.
+   # Note that in Windows, you need to have php.exe in your system environment settings.
+
+   # Start a new queue worker
+   if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+      $command = 'start "" php ' . __DIR__ . '\..\artisan queue:work --daemon'; # 1st quoted param is the window title
+   } else {
+      // 1st try: 'php -f /www/wwwroot/convengine/worker.php /dev/null &';
+      // 2nd try: 'php -f /www/wwwroot/convengine/worker.php 1>/www/wwwroot/convengine/worker_sysout.log 2>/www/wwwroot/convengine/worker_syserr.log &';
+      $command = 'php ' . __DIR__ . '/../artisan queue:work --daemon &>' . __DIR__ . '/../storage/logs/laravel_queueworker.log &';
+   }
+
+   $handle = popen($command, 'r'); # Run command asynchronously
+   if ($handle !== false) pclose($handle);
+
+
+   # Send a stop signal to all currently running workers (to stop after finishing their jobs)
+   if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+      $command = 'start "" php ' . __DIR__ . '\..\artisan queue:restart'; # 1st quoted param is the window title
+   } else {
+      // 1st try: 'php -f /www/wwwroot/convengine/worker.php /dev/null &';
+      // 2nd try: 'php -f /www/wwwroot/convengine/worker.php 1>/www/wwwroot/convengine/worker_sysout.log 2>/www/wwwroot/convengine/worker_syserr.log &';
+      $command = 'php ' . __DIR__ . '/../artisan queue:restart &>' . __DIR__ . '/../storage/logs/laravel_queueworker.log &';
+   }
+
+   $handle = popen($command, 'r'); # Run command asynchronously
+   if ($handle !== false) pclose($handle);
 }

@@ -2,31 +2,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-//use App\User;
 
 
-class CtrlPortal extends Controller
+class CtrlExtLinks extends Controller
 {
-   /*
-   Extra-portal pages
-   */
-   public function LogIn() {
-      // if user is already logged in:
-      //    if there is a (old url) defined, goto it, else goto dashboard
-      // endif
-      $data['head_title'] = "Login - Patho•Log";
-      $data['head_description'] = "Patho•Log - Login";
-      $data['page_name'] = "login";
-
-      echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-login');
-      echo view('portal.asset-footer', $data);
-   }
-
-
-   # (Extra-portal) Registration ##################################################################
-   public function Register() {
+   # Email verification ###########################################################################
+   public function EmailVerification($email, $code) {
       // also if already logged in
+      /*
       $data['head_title'] = "Register - Patho•Log";
       $data['head_description'] = "Patho•Log - Register";
       $data['page_name'] = "register";
@@ -34,6 +17,12 @@ class CtrlPortal extends Controller
       echo view('portal.asset-header', $data);
       echo view('portal.page-extraportal-register');
       echo view('portal.asset-footer', $data);
+      */
+
+
+
+      echo "Email: $email" . PHP_EOL;
+      echo "Code: $code";
    }
 
 

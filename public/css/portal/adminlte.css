@@ -37,11 +37,14 @@
   --palette-turquoise: #00bfd8;
   --palette-turquoise-transparent: rgba(0, 191, 216, .75);
   --palette-turquoise-depressed: #00a7bd;
-
-  --palette-blue: #0178fa;
+  --palette-turquoise-white: #b3d7ff; /* See extraportal-custom.css */
 
   --palette-purple: #bf60d8;
   --palette-purple-light: #ce84e1;
+  --palette-purple-white: #f4e2f8; /* See extraportal-custom.css */
+
+  --palette-blue: #0178fa;
+  --palette-blue-white: #bdf7ff; /* See extraportal-custom.css */
 
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
