@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 
-class EmailVerify extends Mailable implements ShouldQueue
+class PasswordReset extends Mailable implements ShouldQueue
 {
    use Queueable, SerializesModels;
 
@@ -16,22 +16,20 @@ class EmailVerify extends Mailable implements ShouldQueue
    # (To be available in email view automatically)
    #
    public $username; # This is the name of the user as it is in the database
-   public $is_newreg; # If this email is the first email-verification, or false if this user has requested to resend it
    public $email; # The user's email address
-   public $ver_code; # The verification code
+   public $pwr_code; # The verification code
 
    #
    # Create a new message instance.
    #
    # @return void
    #
-   public function __construct($username, $is_newreg, $email, $ver_code)
+   public function __construct($username, $email, $pwr_code)
    {
       # Save member variables
       $this->username = $username;
-      $this->is_newreg = $is_newreg;
-      $this->email = $email; # Don't encode anything, address may contain characters that may be broken (like '+')
-      $this->ver_code = $ver_code;
+      $this->email = $email; # Don't encode it in the url, email addresses may contain characters that may be broken if url encoded (like '+')
+      $this->pwr_code = $pwr_code;
    }
 
    #
@@ -42,8 +40,8 @@ class EmailVerify extends Mailable implements ShouldQueue
    public function build()
    {
       return $this->from(config('consts.PATHOLOG_EMAIL_SUPPORT'), config('consts.PATHOLOG_EMAIL_SENDERNAME'))
-                  ->subject("📧 Verify your email address")
-                  ->view('emails.emailverify')
-                  ->text('emails.emailverify_plain');
+                  ->subject("✳ Request to reset your password")
+                  ->view('emails.passwordreset')
+                  ->text('emails.passwordreset_plain');
    }
 }

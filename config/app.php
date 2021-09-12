@@ -29,7 +29,7 @@ return [
     # [local]               'env' => env('APP_ENV', 'local'),
     # [online.dev]          'env' => env('APP_ENV', 'local'),
     # [online.production]   'env' => env('APP_ENV', 'production'),
-    'env' => env('APP_ENV', 'debug'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-//use App\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class CtrlPortal extends Controller
@@ -10,26 +10,18 @@ class CtrlPortal extends Controller
    /*
    Extra-portal pages
    */
-   public function LogIn() {
-      // if user is already logged in:
-      //    if there is a (old url) defined, goto it, else goto dashboard
-      // endif
-      $data['head_title'] = "Login - Patho•Log";
-      $data['head_description'] = "Patho•Log - Login";
-      $data['page_name'] = "login";
-
-      echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-login');
-      echo view('portal.asset-footer', $data);
-   }
-
 
    # (Extra-portal) Registration ##################################################################
    public function Register() {
-      // also if already logged in
+      # Make sure user is *NOT* authenticated, otherwise, redirect to the dashboard
+      # (if user got here while they are authenticated, they must have typed the url manually!)
+      if (Auth::check()) return redirect()->route('dashboard');
+
+      # Only if user is not authenticated
       $data['head_title'] = "Register - Patho•Log";
       $data['head_description'] = "Patho•Log - Register";
       $data['page_name'] = "register";
+      $data['page_type'] = "extraportal";
 
       echo view('portal.asset-header', $data);
       echo view('portal.page-extraportal-register');
@@ -37,19 +29,52 @@ class CtrlPortal extends Controller
    }
 
 
+   # (Extra-portal) Log-in ########################################################################
+   public function LogIn() {
+      # Make sure user is *NOT* authenticated, otherwise, redirect to the dashboard
+      # (if user got here while they are authenticated, they must have typed the url manually!)
+      if (Auth::check()) return redirect()->route('dashboard');
+
+      # Only if user is not authenticated
+      $data['head_title'] = "Login - Patho•Log";
+      $data['head_description'] = "Patho•Log - Login";
+      $data['page_name'] = "login";
+      $data['page_type'] = "extraportal";
+
+      echo view('portal.asset-header', $data);
+      echo view('portal.page-extraportal-login');
+      echo view('portal.asset-footer', $data);
+   }
+
+
+   # (Extra-portal) Forgot password ###############################################################
+   public function ForgotPW() {
+      $data['head_title'] = "Password Reset - Patho•Log";
+      $data['head_description'] = "Patho•Log - Password Reset";
+      $data['page_name'] = "forgotpw";
+      $data['page_type'] = "extraportal";
+      $data['currently_signed_in'] = Auth::check();
+
+      echo view('portal.asset-header', $data);
+      echo view('portal.page-extraportal-forgotpw', $data);
+      echo view('portal.asset-footer', $data);
+   }
+
+
    /*
    Actual portal pages
    */
-   public function Dashboard() {
-      # Make sure user is logged-in
-      if (session('bLoggedIn', false) != true) {
-         return redirect('/login');
-      }
 
-      # Define page properties
+   # Dashboard ####################################################################################
+   public function Dashboard() {
+      # Make sure user is authenticated (Should not be needed as the 'dashboard' route is auth-protected)
+      if (empty(Auth::check())) return redirect()->route('login');
+
+      # Only if user is authenticated
       $data['head_title'] = "Dashboard - Patho•Log";
       $data['head_description'] = "Patho•Log - Main dashboard";
       $data['page_name'] = "dashboard";
+      $data['page_type'] = "portal";
 
       echo view('portal.asset-header', $data);
       echo view('portal.asset-pagenavs', $data);
@@ -58,10 +83,16 @@ class CtrlPortal extends Controller
    }
 
 
+   # New Report ###################################################################################
    public function NewReport() {
+      # Make sure user is authenticated (Should not be needed as the 'dashboard' route is auth-protected)
+      if (empty(Auth::check())) return redirect()->route('login');
+
+      # Only if user is authenticated
       $data['head_title'] = "New Report - Patho•Log";
       $data['head_description'] = "Patho•Log - Create a new report";
       $data['page_name'] = "newreport";
+      $data['page_type'] = "portal";
 
       echo view('portal.asset-header', $data);
       echo view('portal.asset-pagenavs', $data);

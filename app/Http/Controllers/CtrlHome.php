@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 class CtrlHome extends Controller
 {
+	# Home #########################################################################################
 	public function Home() {
 		$data['head_title'] = "Patho•Log - Create, archive, and share stylish pathology reports for free!";
 		$data['head_description'] = "Free service to create stylish pathology reports, archive them, and share them with your patients and other doctors.";
@@ -20,6 +21,8 @@ class CtrlHome extends Controller
 		echo view('home.asset-footer');
 	}
 
+
+	# Terms & Conditions ###########################################################################
 	public function TermsConditions() {
 		$data['head_title'] = "Terms & Conditions - Patho•Log";
 		$data['head_description'] = "Patho•Log's Terms and Conditions";

@@ -46,7 +46,7 @@
                </div>
 
                <a href="#" class="dropdown-item text-center border-top">My Account</a>
-               <a href="#" class="dropdown-item text-center border-top rounded-bottom">Sign Out</a>
+               <button type="button" id="btnSignOut" class="dropdown-item text-center border-top rounded-bottom">Sign Out</button>
             </div>
 
          </li>

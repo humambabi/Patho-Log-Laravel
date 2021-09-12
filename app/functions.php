@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 
+#
 # Google's reCAPTCHA v3 check #####################################################################
+#
 if (!function_exists('reCAPTCHAv3Check')) {
-   function reCAPTCHAv3Check($recaptchaToken, $action, Request $request) {
+   function reCAPTCHAv3Check($recaptchaToken, $action, $ip) {
       # Note: $recaptchaToken MUST be sanitized before passing to this function
 
       # Send request to Google
       $url = "https://www.google.com/recaptcha/api/siteverify";
-      $data = array("secret" => config('consts.GR_PATHOLOG_SECRETKEY'), "response" => $recaptchaToken, "remoteip" => $request->ip());
+      $data = array("secret" => config('consts.GR_PATHOLOG_SECRETKEY'), "response" => $recaptchaToken, "remoteip" => $ip);
       $options = array(
          "http" => [
             "header"	=> "Content-type: application/x-www-form-urlencoded\r\n",
@@ -60,42 +61,67 @@ if (!function_exists('reCAPTCHAv3Check')) {
    }
 }
 
-# Returns a DB hashed password ####################################################################
-if (!function_exists('hash_password')) {
-   function hash_password($password) {
-      // sha1 is significantly more secure but slower than md5. crc32 is fast
-      return hash('sha1', $password) . hash('crc32', $password);
+
+#
+# Start a Laravel queue worker (and gracefully stop other workers) ################################
+#
+if (!function_exists('laravel_queueworker')) {
+   function laravel_queueworker() {
+      # In Windows, the background process shows a window, and this is good because we can see php's debug
+      # info there (also warning or errors). In Linux server, write output to log instead.
+      # Note that in Windows, you need to have php.exe in your system environment settings.
+
+      # Start a new queue worker
+      if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+         $command = 'start "" php ' . __DIR__ . '\..\artisan queue:work --daemon'; # 1st quoted param is the window title
+      } else {
+         // 1st try: 'php -f /www/wwwroot/convengine/worker.php /dev/null &';
+         // 2nd try: 'php -f /www/wwwroot/convengine/worker.php 1>/www/wwwroot/convengine/worker_sysout.log 2>/www/wwwroot/convengine/worker_syserr.log &';
+         $command = 'php ' . __DIR__ . '/../artisan queue:work --daemon &>' . __DIR__ . '/../storage/logs/laravel_queueworker.log &';
+      }
+
+      $handle = popen($command, 'r'); # Run command asynchronously
+      if ($handle !== false) pclose($handle);
+
+
+      # Send a stop signal to all currently running workers (to stop after finishing their jobs)
+      if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+         $command = 'start "" php ' . __DIR__ . '\..\artisan queue:restart'; # 1st quoted param is the window title
+      } else {
+         // 1st try: 'php -f /www/wwwroot/convengine/worker.php /dev/null &';
+         // 2nd try: 'php -f /www/wwwroot/convengine/worker.php 1>/www/wwwroot/convengine/worker_sysout.log 2>/www/wwwroot/convengine/worker_syserr.log &';
+         $command = 'php ' . __DIR__ . '/../artisan queue:restart &>' . __DIR__ . '/../storage/logs/laravel_queueworker.log &';
+      }
+
+      $handle = popen($command, 'r'); # Run command asynchronously
+      if ($handle !== false) pclose($handle);
    }
 }
 
-# Start a Laravel queue worker (and gracefully stop other workers) ################################
-function laravel_queueworker() {
-   # In Windows, the background process shows a window, and this is good because we can see php's debug
-   # info there (also warning or errors). In Linux server, write output to log instead.
-   # Note that in Windows, you need to have php.exe in your system environment settings.
 
-   # Start a new queue worker
-   if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
-      $command = 'start "" php ' . __DIR__ . '\..\artisan queue:work --daemon'; # 1st quoted param is the window title
-   } else {
-      // 1st try: 'php -f /www/wwwroot/convengine/worker.php /dev/null &';
-      // 2nd try: 'php -f /www/wwwroot/convengine/worker.php 1>/www/wwwroot/convengine/worker_sysout.log 2>/www/wwwroot/convengine/worker_syserr.log &';
-      $command = 'php ' . __DIR__ . '/../artisan queue:work --daemon &>' . __DIR__ . '/../storage/logs/laravel_queueworker.log &';
+#
+# Include a css with timestamp to handle (cache vs update) issues. ################################
+#
+if (!function_exists('include_css')) {
+   function include_css($href_rel2public) {
+      $realpath = __DIR__ . '/../public' . $href_rel2public;
+      $timestamp = 0;
+      if (file_exists($realpath)) $timestamp = filemtime($realpath);
+      
+      echo "<link rel='stylesheet' type='text/css' href='$href_rel2public?t=$timestamp' />";
    }
-
-   $handle = popen($command, 'r'); # Run command asynchronously
-   if ($handle !== false) pclose($handle);
+}
 
 
-   # Send a stop signal to all currently running workers (to stop after finishing their jobs)
-   if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
-      $command = 'start "" php ' . __DIR__ . '\..\artisan queue:restart'; # 1st quoted param is the window title
-   } else {
-      // 1st try: 'php -f /www/wwwroot/convengine/worker.php /dev/null &';
-      // 2nd try: 'php -f /www/wwwroot/convengine/worker.php 1>/www/wwwroot/convengine/worker_sysout.log 2>/www/wwwroot/convengine/worker_syserr.log &';
-      $command = 'php ' . __DIR__ . '/../artisan queue:restart &>' . __DIR__ . '/../storage/logs/laravel_queueworker.log &';
+#
+# Include a js with timestamp to handle (cache vs update) issues. #################################
+#
+if (!function_exists('include_jscript')) {
+   function include_jscript($href_rel2public) {
+      $realpath = __DIR__ . '/../public' . $href_rel2public;
+      $timestamp = 0;
+      if (file_exists($realpath)) $timestamp = filemtime($realpath);
+      
+      echo "<script type='text/javascript' src='$href_rel2public?t=$timestamp'></script>";
    }
-
-   $handle = popen($command, 'r'); # Run command asynchronously
-   if ($handle !== false) pclose($handle);
 }

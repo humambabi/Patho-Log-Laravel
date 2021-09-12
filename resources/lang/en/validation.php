@@ -168,6 +168,7 @@ return [
     |
     */
 
-    'attributes' => [],
-
+    'attributes' => [
+        'remember'  => "\"Remember Me\""
+    ]
 ];

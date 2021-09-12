@@ -1,7 +1,7 @@
 <body class="hold-transition register-page">
 <div class="register-box mt-5">
    <div class="register-logo">
-      <a href="{{ url('/') }}/dashboard">
+      <a href="/dashboard">
          <img alt="Patho&bull;Log" src="/img/logo/pl-logo.png" width="200" height="53" class="mb-3" />
       </a>
    </div><!-- /.register-logo -->
@@ -77,8 +77,9 @@
          </div><!-- /.social-auth-links -->
 
          <p class="text-center mb-0">
-            <a href="{{ url('/') }}/login" class="text-center">I already have an account</a>
+            <a href="/login" class="text-center">I already have an account</a>
          </p>
       </div><!-- /.register-card-body -->
    </div><!-- /.card -->
 </div><!-- /.register-box -->
+<!-- </body> is in the footer -->

@@ -10,13 +10,3 @@ class Controller extends BaseController
 {
    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
-
-#
-# Session variables
-# -----------------
-#
-# - name -              - type -          - default -
-# bLoggedIn             (bool)            false
-# bAdmin                (bool)            false
-# bActive               (bool)            false
-#

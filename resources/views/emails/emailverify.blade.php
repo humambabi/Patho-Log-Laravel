@@ -29,6 +29,10 @@
          </a><br/>
          <br/><br/>
       </td></tr>
+      <tr><td style="text-align: center;">
+         <small><strong>(This link is valid only for a limited period of time)</strong></small>
+         <br/><br/>
+      </td></tr>
       <tr><td style="padding: 0 21px;">
          <p>
             If you have any difficulties activating your account or signing in, don't hesitate to&nbsp;
@@ -41,7 +45,7 @@
 
    <table width="85%" cellpadding="0" cellspacing="0" style="border: 0; margin: auto;">
       <tr><td style="text-align: center;">
-         <div style="width: 33%; height: 1px; border-top: 1px solid #ddd; margin: 25px auto 15px auto;"></div>
+         <div style="width: 45%; height: 1px; border-top: 1px solid #ddd; margin: 25px auto 15px auto;"></div>
       </td></tr>
       <tr><td style="text-align: center;">
          <div style="font-size: 11px;">

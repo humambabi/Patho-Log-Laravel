@@ -1,5 +1,4 @@
-@if (in_array($page_name, ["login", "register"])) {{-- Check 2 places below, and 2 places in header too --}}
-@else
+@if ($page_type == "portal")
    <footer class="main-footer">
       <div class="row">
          <div class="col-12 text-center mb-1 col-md-6 text-md-left mb-md-0">
@@ -14,36 +13,21 @@
 @endif
 
 <!-- Scripts -->
-@if (config('app.debug') == false)
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-@else
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-@endif
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-@if (in_array($page_name, ["login", "register"])) {{-- Check up, below, and 2 places in header too --}}
-   @if (config('app.debug') == false)
-   <script src="/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js"></script>
-   @else
-   <script src="/vendor/jquery-validation-1.19.3/dist/jquery.validate.js"></script>
-   @endif
-@else
-<script type="text/javascript" src="/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+{{ include_jscript("/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js") }}
+@if ($page_type == "portal")
+   {{ include_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js") }}
 @endif
-
-@if (config('app.debug') == false)
-<script src="/js/portal/adminlte.min.js"></script>
-@else
-<script src="/js/portal/adminlte.js"></script>
-@endif
-
-@if (in_array($page_name, ["login", "register"])) {{-- Check 2 places up, and 2 places in header too --}}
+{{ include_jscript("/js/portal/adminlte.js") }}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6Ld_EDgcAAAAANjtDs7tfuIeAPiRqJR3WmjvEZEF"></script>
-<script src="/js/portal/extraportal-scripts.js"></script> <!-- Custom scripts -->
-@else
-<script src="/js/portal/demo.js"></script>
+@if (in_array($page_name, ["register", "forgotpw"]))
+   <script src="https://www.google.com/recaptcha/api.js?render={{ config('consts.GR_PATHOLOG_SITEKEY') }}"></script>
+@endif
+@if ($page_type == "extraportal")
+   {{ include_jscript("/js/portal/extraportal-scripts.js") }}
+@endif
+@if ($page_type == "portal")
+   {{ include_jscript("/js/portal/portal-main.js") }}
 @endif
 </body>
 </html>

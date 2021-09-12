@@ -23,31 +23,32 @@
 
    <!-- Styles -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap" />
-   <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css" />
-   @if (config('app.debug') == false)
-   <link rel="stylesheet" href="/css/portal/adminlte.min.css" />
-   @else
-   <link rel="stylesheet" href="/css/portal/adminlte.css" />
+   {{ include_css("/vendor/fontawesome-free/css/all.min.css") }}
+   {{ include_css("/css/portal/adminlte.css") }}
+   @if ($page_type == "extraportal")
+      {{ include_css("/css/portal/extraportal-custom.css") }}
    @endif
-   @if (in_array($page_name, ["login", "register"])) {{-- Check below, and 3 places in footer too --}}
-      <link rel="stylesheet" href="/css/portal/extraportal-custom.css" />
-   @else
-   <link rel="stylesheet" type="text/css" href="/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css" />
-   <link rel="stylesheet" href="/css/portal/custom.css" />
+   @if ($page_type == "portal")
+      {{ include_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css") }}
+      {{ include_css("/css/portal/custom.css") }}
    @endif
 
    <!-- CSRF protection -->
    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+   <!-- Only one important script -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
    <!-- Back to front -->
-   @if (in_array($page_name, ["login", "register"])) {{-- Check up, and 3 places in footer too --}}
    <script type="text/javascript">
       const USERNAME_MINLENGTH = {{ config('consts.USERNAME_MINLENGTH') }};
       const USERNAME_MAXLENGTH = {{ config('consts.USERNAME_MAXLENGTH') }};
       const EMAIL_MAXLENGTH = {{ config('consts.EMAIL_MAXLENGTH') }};
       const PASSWORD_MINLENGTH = {{ config('consts.PASSWORD_MINLENGTH') }};
       const PASSWORD_MAXLENGTH = {{ config('consts.PASSWORD_MAXLENGTH') }};
+      const GR_PATHOLOG_SITEKEY = "{{ config('consts.GR_PATHOLOG_SITEKEY') }}";
       const GR_ACTION_ACCOUNTREGISTER = "{{ config('consts.GR_ACTION_ACCOUNTREGISTER') }}";
+      const GR_ACTION_RESETPASSWORD = "{{ config('consts.GR_ACTION_RESETPASSWORD') }}";
       const ERR_NOERROR = {{ config('consts.ERR_NOERROR') }};
       const ERR_UNEXPECTED = {{ config('consts.ERR_UNEXPECTED') }};
       const ERR_WITHMSG = {{ config('consts.ERR_WITHMSG') }};
@@ -67,7 +68,6 @@
       const MSG_PASSWORDCONFIRM_EQUAL = "{{ config('consts.MSG_PASSWORDCONFIRM_EQUAL') }}";
       const MSG_TERMSPRIVACY_ACCEPT = "{{ config('consts.MSG_TERMSPRIVACY_ACCEPT') }}";
    </script>
-   @endif
 
    <!-- gtag/g.analytics - same as the comingsoon page -->
    <!-- -->

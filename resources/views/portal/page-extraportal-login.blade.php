@@ -1,7 +1,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
    <div class="login-logo">
-      <a href="{{ url('/') }}/dashboard">
+      <a href="/dashboard">
          <img alt="Patho&bull;Log" src="/img/logo/pl-logo.png" width="200" height="53" class="mb-3" />
       </a>
    </div><!-- /.login-logo -->
@@ -55,12 +55,12 @@
          </div><!-- /.social-auth-links -->
 
          <p class="mb-1 text-center">
-            <a href="forgot-password.html">I forgot my password</a>
+            <a href="/forgotpw">I forgot my password</a>
          </p>
          <p class="mb-0 text-center">
-            <a href="{{ url('/') }}/register">Register a new account</a>
+            <a href="/register">Register a new account</a>
          </p>
       </div><!-- /.login-card-body -->
    </div><!-- /.card -->
 </div><!-- /.login-box -->
-<!-- </body> is in the footer
+<!-- </body> is in the footer -->
