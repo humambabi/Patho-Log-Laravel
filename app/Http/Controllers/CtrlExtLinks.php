@@ -100,7 +100,7 @@ class CtrlExtLinks extends Controller
       # - Parameters ok (show 'create a new password' form)
 
       $data['case'] = "error";
-      $data['autoredirect'] = false;
+      # No 'autoredirect' here!
 
       do {
          # (1a) Missing parameters "wrong"

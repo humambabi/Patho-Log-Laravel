@@ -125,3 +125,32 @@ if (!function_exists('include_jscript')) {
       echo "<script type='text/javascript' src='$href_rel2public?t=$timestamp'></script>";
    }
 }
+
+
+#
+# Adds a user IP to the list of saved IPs, and returns a JSON-encoded string ######################
+#
+if (!function_exists('add_userlogin_record')) {
+   function add_userlogin_record($strIPaddrs, $user_ip) {
+      # Convert the DB string into an associative array
+      $objIPAddr = [];
+      if (!empty($strIPaddrs)) $objIPAddr = json_decode($strIPaddrs, true);
+
+      if (array_key_exists($user_ip, $objIPAddr)) {
+         # A login with an already-saved IP
+         $objIPAddr["$user_ip"]['count']++;
+         $objIPAddr["$user_ip"]['lastlogin'] = gmdate(config('consts.DB_DATETIME_FMT'));
+      } else {
+         # A login from a new IP
+         $newData = [
+            'count'     => 0, # Still hasn't login yet!
+            'lastlogin' => gmdate(config('consts.DB_DATETIME_FMT'))
+         ];
+
+         $objIPAddr["$user_ip"] = $newData;
+      }
+
+      # Re-convert the array to string
+      return json_encode($objIPAddr);
+   }
+}

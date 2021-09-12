@@ -70,8 +70,8 @@
             <p class="text-center">
                Please <a href="/login">log-in</a>, go to your profile page, and click on the &quot;re-send activation email&quot; button.
             </p>
-            <p class="mb-1">Make sure that you:</p>
-            <ol>
+            <p class="mb-1 text-sm">Make sure that you:</p>
+            <ol class="text-sm">
                <li>Click on the link in your email <strong>within the valid period</strong>, and</li>
                <li>Open the <strong>new</strong> email rather than the <strong>old</strong> one.</li>
             </ol>

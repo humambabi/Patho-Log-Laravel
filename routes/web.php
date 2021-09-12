@@ -52,7 +52,7 @@ Route::post('reqRegister',                            [CtrlRequests::class, "req
 Route::post('reqLogIn',                               [CtrlRequests::class, "reqSignIn"]);
 Route::post('reqSignOut',                             [CtrlRequests::class, "reqSignOut"]);
 Route::post('reqForgotPW',                            [CtrlRequests::class, "reqForgotPW"]);
-Route::post('reqCreatePW',                            [CtrlRequests::class, "reqCreatePW"]);
+Route::post('reqNewPW',                               [CtrlRequests::class, "reqNewPW"]);
 
 
 /*

@@ -9,7 +9,7 @@ return [
    'PATHOLOG_EMAIL_SUPPORT'                        => "support@patho-log.com",
    'PATHOLOG_EMAIL_SENDERNAME'                     => "Patho•Log",
 
-   # General app's tools
+   # General app tools
    'DB_DATETIME_FMT'                               => "Y-m-d H:i:s",
    
    # User account
@@ -18,6 +18,7 @@ return [
    'EMAIL_MAXLENGTH'                               => 150,
    'PASSWORD_MINLENGTH'                            => 5,
    'PASSWORD_MAXLENGTH'                            => 255,
+   'VERIFICATIONCODE_LENGTH'                       => 33,
    'EMAILVERIFICATIONCODE_VALIDITY_MINUTES'        => 60 * 24 * 3,
    'PASSWORDRESETCODE_VALIDITY_MINUTES'            => 60 * 24 * 1,
 

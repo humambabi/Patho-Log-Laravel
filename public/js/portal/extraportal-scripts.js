@@ -320,99 +320,84 @@ $(function() {
 
    // "Create new password" form /////////////////////////////////////////////////////////////////////////////
    var validatorNewPW = $("#form_createpw").validate({
-         rules: {
-            password: { required: true, minlength: PASSWORD_MINLENGTH, maxlength: PASSWORD_MAXLENGTH },
-            confirm_password: { required: true, equalTo: "input[name=password]"}
-         },
-         messages: {
-            password: {required: MSG_PASSWORD_REQUIRED, minlength: MSG_PASSWORD_MINLEN, maxlength: MSG_PASSWORD_MAXLEN},
-            confirm_password: {required: MSG_PASSWORDCONFIRM_REQUIRED, equalTo: MSG_PASSWORDCONFIRM_EQUAL}
-         },
-         errorElement: 'em',
-         errorPlacement: function (error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.input-group').append(error);
-         },
-         highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-         },
-         unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-         },
-         submitHandler: function (form) {
-            var password = $(form).find("input[name='password']").val();
-            var conf_password = $(form).find("input[name=confirm_password]").val();
-   
-            //console.log(password); console.log(conf_password);
-   
-            if (conf_password != password) {
-               Swal.fire({title: 'Alert!', text: 'Double check your passwords, they mismatch!', icon: 'warning'});
+      rules: {
+         password: { required: true, minlength: PASSWORD_MINLENGTH, maxlength: PASSWORD_MAXLENGTH },
+         confirm_password: { required: true, equalTo: "input[name=password]"}
+      },
+      messages: {
+         password: {required: MSG_PASSWORD_REQUIRED, minlength: MSG_PASSWORD_MINLEN, maxlength: MSG_PASSWORD_MAXLEN},
+         confirm_password: {required: MSG_PASSWORDCONFIRM_REQUIRED, equalTo: MSG_PASSWORDCONFIRM_EQUAL}
+      },
+      errorElement: 'em',
+      errorPlacement: function (error, element) {
+         error.addClass('invalid-feedback');
+         element.closest('.input-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+         $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+         $(element).removeClass('is-invalid');
+      },
+      submitHandler: function (form) {
+         var urlparts, email, code;
+         var password = $(form).find("input[name='password']").val();
+         var conf_password = $(form).find("input[name=confirm_password]").val();
+
+
+         urlparts = location.href.split('/');
+         email = urlparts[urlparts.length - 2];
+         code = urlparts[urlparts.length - 1];
+
+         //console.log(email); console.log(password); console.log(conf_password); console.log(code);
+
+         if (conf_password != password) {
+            Swal.fire({title: 'Alert!', text: 'Double check your passwords, they mismatch!', icon: 'warning'});
+            return;
+         }
+
+         // Submit the user input to the server (No need for Google reCAPTCHA here)
+         $.ajax({
+            url: "/reqNewPW",
+            data: {
+               _token: $('meta[name="csrf-token"]').attr('content'), // Laravel's CSRF Setup
+                  email: email,
+                  code: code,
+                  password: password
+               }
+         })
+         .done(function (response) {
+            if (!(typeof(response) === "object")) {
+               console.log(response);
+               Swal.fire({
+                  title: "Error!",
+                  html: "<p>Sorry!</p><p>An unknown server error occurred!</p><p>Please, try again later.</p>",
+                  icon: "error"
+               });
                return;
             }
-/*
-            // Submit the user input to the server (No need for Google reCAPTCHA here)
-            $.ajax({
-               url: "/reqRegister",
-                     data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'), // Laravel's CSRF Setup
-                        username: username,
-                        email: email,
-                        password: password,
-                        terms: terms,
-                        gr_token: token
-                     }
-                  })
-                  .done(function (response) {
-                     if (!(typeof(response) === "object")) {
-                        console.log(response);
-                        Swal.fire({
-                           title: "Error!",
-                           html: "<p>Sorry!</p><p>An unknown server error occurred!</p><p>Please, try again later.</p>",
-                           icon: "error"
-                        });
-                        return;
-                     }
-   
-                     // It's a JSON
-                     //console.log(response);
-   
-                     if (response.retcode == ERR_WITHMSG_USERNAME) {
-                        validatorRegister.showErrors({username: response.errmsg});
-                        return;
-                     }
-                     if (response.retcode == ERR_WITHMSG_EMAIL) {
-                        validatorRegister.showErrors({email: response.errmsg});
-                        return;
-                     }
-                     if (response.retcode == ERR_WITHMSG_PASSWORD) {
-                        validatorRegister.showErrors({password: response.errmsg});
-                        return;
-                     }
-                     if (response.retcode == ERR_WITHMSG_TERMS) {
-                        validatorRegister.showErrors({terms: response.errmsg});
-                        return;
-                     }
-                     if (response.retcode == ERR_WITHMSG) { // General & reCAPTCHA
-                        Swal.fire({title: "Alert!", html: "<p>" + response.errmsg + "</p>", icon: "warning"});
-                        return;
-                     }
-                     if (response.retcode == ERR_UNEXPECTED) {
-                        Swal.fire({title: "Alert!", html: "<p>Sorry! Unexpected error ocurred!</p><p>Try again later.</p>", icon: "warning"});
-                        return;
-                     }
-   
-                     if (response.retcode == ERR_NOERROR) {
-                        Swal.fire(
-                           {title: response.msgTitle, html: response.msgHtml, icon: response.msgIcon}
-                        )
-                        .then(function() {
-                           location.href = "/login";
-                        });
-                     }
-                  }); // ajax.done
-               }); // grecaptcha.execute
-            }); // grecaptcha.ready
-*/
-         } // submitHandler
-      }); // validatorRegister
+
+            // It's a JSON
+            //console.log(response);
+
+            if (response.retcode == ERR_WITHMSG_PASSWORD) {
+               validatorNewPW.showErrors({password: response.errmsg});
+               return;
+            }
+            if (response.retcode == ERR_WITHMSG) { // General & bad email or code
+               Swal.fire({title: "Alert!", html: "<p>" + response.errmsg + "</p>", icon: "warning"});
+               return;
+            }
+
+            if (response.retcode == ERR_NOERROR) {
+               Swal.fire(
+                  {title: response.msgTitle, html: response.msgHtml, icon: response.msgIcon, allowOutsideClick: false}
+               )
+               .then(function() {
+                  location.href = "/login";
+               });
+            }
+         }); // ajax.done
+      } // submitHandler
+   }); // validatorNewPW
 }); // jQ's document.ready
