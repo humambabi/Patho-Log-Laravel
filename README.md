@@ -1,13 +1,13 @@
 <p align="center">
-	<a href="https://patho-log.com" target="_blank">
-		<img src="/public/img/logo/pl-logo.png" width="555" />
+	<a href="https://www.patho-log.com" target="_blank">
+		<img src="/public/img/logo/pl-logo.png" width="333" />
 	</a>
 </p>
 
 <p align="center">Built with</p>
 <p align="center">
 	<a href="https://laravel.com" target="_blank">
-		<img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="333">
+		<img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="185">
 	</a>
 </p>
 
