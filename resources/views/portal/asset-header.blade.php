@@ -81,14 +81,14 @@
    #
    $authenticated = false; $cookieexpired = true;
 
-   Log::warning("--------------------------------------------------");
+   if (env('APP_ENV', 'production') != 'production') Log::warning("--------------------------------------------------");
    if (Auth::check()) $authenticated = true;
    if (!empty($_COOKIE[config('consts.COOKIE_AUTOLOGIN')])) $cookieexpired = false;
 
-   Log::warning("DetectAutoLogin: \$auth:" . ($authenticated ? "yes" : "no") . ", \$expired:" . ($cookieexpired ? "yes" : "no"));
+   if (env('APP_ENV', 'production') != 'production') Log::warning("DetectAutoLogin: \$auth:" . ($authenticated ? "yes" : "no") . ", \$expired:" . ($cookieexpired ? "yes" : "no"));
 
    if ($authenticated && $cookieexpired) {
-      Log::warning("Setting 'auto_login' cookie, and DB->IPStats...");
+      if (env('APP_ENV', 'production') != 'production') Log::warning("Setting 'auto_login' cookie, and DB->IPStats...");
       setcookie(config('consts.COOKIE_AUTOLOGIN'), "1"); # Don't set an expiry time (0) in order to make cookie expire when browser is closed.
 
       # Add login statistics in the DB
