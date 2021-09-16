@@ -72,3 +72,40 @@
    <!-- gtag/g.analytics - same as the comingsoon page -->
    <!-- -->
 </head>
+@php
+   #
+   # This code is here because it's common for all pages of the portal section of the app.
+   # So, if you changed this behavior, consider updating this code here.
+   # Middleware didn't work, because you cannot check Auth before passing the request to its controller,
+   # and if you pass it, then you cannot use setcookie().
+   #
+   $authenticated = false; $cookieexpired = true;
+
+   Log::warning("--------------------------------------------------");
+   if (Auth::check()) $authenticated = true;
+   if (!empty($_COOKIE[config('consts.COOKIE_AUTOLOGIN')])) $cookieexpired = false;
+
+   Log::warning("DetectAutoLogin: \$auth:" . ($authenticated ? "yes" : "no") . ", \$expired:" . ($cookieexpired ? "yes" : "no"));
+
+   if ($authenticated && $cookieexpired) {
+      Log::warning("Setting 'auto_login' cookie, and DB->IPStats...");
+      setcookie(config('consts.COOKIE_AUTOLOGIN'), "1"); # Don't set an expiry time (0) in order to make cookie expire when browser is closed.
+
+      # Add login statistics in the DB
+      $modUser = \App\Models\User::where('email', Auth::user()['email'])->first();
+      if (!empty($modUser)) {
+         $strJSON = add_userlogin_record($modUser->ipaddrs_obj, request()->ip());
+         $modUser->update(['ipaddrs_obj' => $strJSON]);
+      }
+   }
+
+   #
+   # When to update IP counter (in the db):
+   # 1. Here with 'setcookie'
+   # 2. When login (no need),
+   #  Note that user will be logged out in two case:
+   #  a. If not using 'remembed me' -> when the browser is closed.
+   #  b. if using 'remember me' -> when they manually select 'sign out' from the user menu.
+   #  on both cases, 'setcookie' here will be triggered.
+   #
+@endphp

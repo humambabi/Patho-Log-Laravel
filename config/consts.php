@@ -22,6 +22,9 @@ return [
    'EMAILVERIFICATIONCODE_VALIDITY_MINUTES'        => 60 * 24 * 3,
    'PASSWORDRESETCODE_VALIDITY_MINUTES'            => 60 * 24 * 1,
 
+   # Cookies
+   'COOKIE_AUTOLOGIN'                              => "auto_login",
+
    # Google reCAPTCHA v3
    'GR_PATHOLOG_SITEKEY'                           => "6Ld_EDgcAAAAANjtDs7tfuIeAPiRqJR3WmjvEZEF",
    'GR_PATHOLOG_SECRETKEY'                         => "6Ld_EDgcAAAAAMSU6x-hd5UQqBknkE64S_wjSIFA",

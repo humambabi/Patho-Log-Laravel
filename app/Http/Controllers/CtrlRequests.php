@@ -119,12 +119,8 @@ class CtrlRequests extends Controller
          # Authenticated
          $request->session()->regenerate();
 
-         # Add login statistics in the DB
-         $modUser = User::where('email', Auth::user()['email'])->first();
-         if (!empty($modUser)) {
-            $strJSON = add_userlogin_record($modUser->ipaddrs_obj, $request->ip());
-            $modUser->update(['ipaddrs_obj' => $strJSON]);
-         }
+         # Don't save user IP statistics here.
+         #  It's done in the asset-header view (see notes there)
 
          # Done
          return response()->json(['retcode' => config('consts.ERR_NOERROR')]);
@@ -142,9 +138,10 @@ class CtrlRequests extends Controller
       Auth::logout();
       $request->session()->invalidate();
       $request->session()->regenerateToken();
-
-      # No need to return anything, but just in case it's needed for debugging.
-      return response()->json(['retcode' => config('consts.ERR_NOERROR')]);
+      
+      # Remove any cookies that was set (which are related to the user)
+      return response()->json(['retcode' => config('consts.ERR_NOERROR')])
+                       ->withoutCookie(config('consts.COOKIE_AUTOLOGIN'));
    }
 
 

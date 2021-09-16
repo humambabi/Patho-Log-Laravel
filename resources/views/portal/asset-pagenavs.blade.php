@@ -35,14 +35,14 @@
          <!-- User icon and menu-->
          <li class="nav-item dropdown user-menu">
             <a class="nav-link d-flex align-items-center" href="#" data-toggle="dropdown">
-               <div class="d-none d-md-inline">Alexander Pierce</div>
+               <div class="d-none d-md-inline">{{ Auth::user()['name'] }}</div>
                <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" width="37" height="37" style="margin-left: .5rem;">
             </a>
 
             <div class="dropdown-menu dropdown-menu-right flex-column align-items-center">
                <div class="user-header d-flex flex-column align-items-center justify-content-center mt-3 mb-1">
                   <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" />
-                  <p>Alexander Pierce</p>
+                  <p>{{ Auth::user()['name'] }}</p>
                </div>
 
                <a href="#" class="dropdown-item text-center border-top">My Account</a>
