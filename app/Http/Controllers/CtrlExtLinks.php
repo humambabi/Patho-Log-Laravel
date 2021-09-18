@@ -3,7 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 
 
 class CtrlExtLinks extends Controller
@@ -79,6 +82,26 @@ class CtrlExtLinks extends Controller
 
       # (Should not happen unless there is a bug in code)
       if ($data['case'] == "error") Log::warning("CtrlExtLinks | EmailVerification() | \$data['case'] == \"error\"");
+
+      # If user A finished working without signing out (still authenticated, maybe with 'remember me' too), and user B comes
+      # and verifies their email. After successful verifying, the page will redirect the user to the dashboard, where user A
+      # is still logged in!
+      # And always logging-out users is just annoying.
+      # So, we are checking the currently verifiying email against the logged-in email, and logging out if necessary.
+      $data['signedout'] = false;
+      if ($data['case'] == "already" || $data['case'] == "expired" || $data['case'] == "verified") {
+         if (Auth::check() && Auth::user()['email'] != $email) { # (Both variables should have come from the db)
+            # Sign the current user out
+            Auth::logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+            Cookie::expire(config('consts.COOKIE_AUTOLOGIN')); # Needs test!
+            # Even if removing cookie doesn't work here, we are signing the user out, and when they sign in again
+            # the db.ip will be updated and a new cookie will be set.
+
+            $data['signedout'] = true;
+         }
+      }
 
       # View the page
       $data['head_title'] = "Email Verification - Patho•Log";

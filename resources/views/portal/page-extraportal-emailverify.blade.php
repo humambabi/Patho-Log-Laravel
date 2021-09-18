@@ -53,6 +53,19 @@
             <p class="text-center">
                You can <a href="/login">log-in</a> using your email and password.
             </p>
+
+            @if ($signedout)
+            <div class="alert alert-default-primary" role="alert">
+               <h5>
+                  <i class="fas fa-info-circle bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"></i>
+                  &nbsp;You need to log-in to continue
+               </h5>
+               <small>
+                  Because an already logged-in account was found, but it's different than the account which is currently verifiying email!
+               </small>
+            </div>
+            @endif
+
             <p class="text-center">
                You will be redirected shortly.<br/>
                Thank you!
@@ -79,6 +92,19 @@
                If you need help, please, leave us an email at:&nbsp;
                <a href="mailto:{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}">{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}</a>.
             </p>
+
+            @if ($signedout)
+            <div class="alert alert-default-primary" role="alert">
+               <h5>
+                  <i class="fas fa-info-circle bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"></i>
+                  &nbsp;You need to log-in to continue
+               </h5>
+               <small>
+                  Because an already logged-in account was found, but it's different than the account which is currently verifiying email!
+               </small>
+            </div>
+            @endif
+
             <p class="text-center mb-0">
                <a href="/dashboard">Return to Patho&bull;Log</a>
             </p>
@@ -95,6 +121,19 @@
             <p class="text-center">
                You can <a href="/login">log-in</a> using your email and password.
             </p>
+
+            @if ($signedout)
+            <div class="alert alert-default-primary" role="alert">
+               <h5>
+                  <i class="fas fa-info-circle bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"></i>
+                  &nbsp;You need to log-in to continue
+               </h5>
+               <small>
+                  Because an already logged-in account was found, but it's different than the account which is currently verifiying email!
+               </small>
+            </div>
+            @endif
+            
             <p class="text-center">
                You will be redirected shortly.<br/>
             </p>

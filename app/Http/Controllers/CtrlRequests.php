@@ -119,8 +119,19 @@ class CtrlRequests extends Controller
          # Authenticated
          $request->session()->regenerate();
 
-         # Don't save user IP statistics here.
-         #  It's done in the asset-header view (see notes there)
+         # Add login statistics in the DB
+         # this will not conflict with the code in asset-header view, as long as we also set the cookie
+         # (the code in asset-header view will not update the db.ip as long as the cookie is correct)
+         $modUser = User::where('email', Auth::user()['email'])->first();
+         if (!empty($modUser)) {
+            $strJSON = add_userlogin_record($modUser->ipaddrs_obj, $request->ip());
+            $modUser->update(['ipaddrs_obj' => $strJSON]);
+         }
+         # Updating db.ip here in login is important, it serves user authentication conflict.
+         # See notes in CtrlExtLinks | EmailVerification()
+
+         # Don't set an expiry time (0) -> cookie expire when browser is closed.
+         setcookie(config('consts.COOKIE_AUTOLOGIN'), "1");
 
          # Done
          return response()->json(['retcode' => config('consts.ERR_NOERROR')]);
@@ -195,14 +206,14 @@ class CtrlRequests extends Controller
       # Always sign-out the user (a related message was already shown to the user)
       Auth::logout();
       $request->session()->invalidate();
-      # No need here to regenerate the CSRF token
+      $request->session()->regenerateToken();
 
       return response()->json([
          'retcode'   => config('consts.ERR_NOERROR'),
          'msgTitle'  => "Your request was submitted",
          'msgHtml'   => "<p>Check the inbox (of the email address you entered) for instructions on the next step to reset your password.</p>",
          'msgIcon'   => "success"
-      ]);
+      ])->withoutCookie(config('consts.COOKIE_AUTOLOGIN')); # Remove cookies (see reqSignOut)
    }
 
 
@@ -245,7 +256,7 @@ class CtrlRequests extends Controller
       # Always sign-out the user (password was changed)
       Auth::logout();
       $request->session()->invalidate();
-      # No need here to regenerate the CSRF token
+      $request->session()->regenerateToken();
 
       # Done
       return response()->json([
@@ -253,6 +264,6 @@ class CtrlRequests extends Controller
          'msgTitle'  => "Success",
          'msgHtml'   => "<p>Your password was updated!</p><p>Now you can use the new password to login.</p>",
          'msgIcon'   => "success"
-      ]);
+      ])->withoutCookie(config('consts.COOKIE_AUTOLOGIN')); # Remove cookies (see reqSignOut)
    }
 }

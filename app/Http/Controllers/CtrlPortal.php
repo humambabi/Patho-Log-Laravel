@@ -53,10 +53,9 @@ class CtrlPortal extends Controller
       $data['head_description'] = "Patho•Log - Password Reset";
       $data['page_name'] = "forgotpw";
       $data['page_type'] = "extraportal";
-      $data['currently_signed_in'] = Auth::check();
 
       echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-forgotpw', $data);
+      echo view('portal.page-extraportal-forgotpw');
       echo view('portal.asset-footer', $data);
    }
 

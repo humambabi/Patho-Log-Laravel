@@ -63,7 +63,6 @@ External links **********************************
 Route::get('/emailverification/{email}/{code}',       [CtrlExtLinks::class, "EmailVerification"]);
 
 # Password reset
-Route::get('/emailverification/{email}/{code}',       [CtrlExtLinks::class, "EmailVerification"]);
 Route::get('/passwordreset/{email}/{code}',           [CtrlExtLinks::class, "CreatePassword"]);
 
 

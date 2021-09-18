@@ -89,13 +89,15 @@
 
    if ($authenticated && $cookieexpired) {
       if (env('APP_ENV', 'production') != 'production') Log::warning("Setting 'auto_login' cookie, and DB->IPStats...");
-      setcookie(config('consts.COOKIE_AUTOLOGIN'), "1"); # Don't set an expiry time (0) in order to make cookie expire when browser is closed.
 
-      # Add login statistics in the DB
       $modUser = \App\Models\User::where('email', Auth::user()['email'])->first();
       if (!empty($modUser)) {
+         # Add login statistics in the DB
          $strJSON = add_userlogin_record($modUser->ipaddrs_obj, request()->ip());
          $modUser->update(['ipaddrs_obj' => $strJSON]);
+
+         # Don't set an expiry time (0) -> cookie expire when browser is closed.
+         setcookie(config('consts.COOKIE_AUTOLOGIN'), "1");
       }
    }
 

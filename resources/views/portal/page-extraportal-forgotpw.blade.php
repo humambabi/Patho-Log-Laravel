@@ -41,7 +41,7 @@
    </div><!-- /.card -->
 </div><!-- /.login-box -->
 
-@if ($currently_signed_in)
+@auth
 <script type='text/javascript'>
    $(function() {
       setTimeout(function() {
@@ -66,5 +66,5 @@
       }, 150);
    });
 </script>
-@endif
+@endauth
 <!-- </body> is in the footer -->

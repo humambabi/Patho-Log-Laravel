@@ -23,7 +23,7 @@ return [
    'PASSWORDRESETCODE_VALIDITY_MINUTES'            => 60 * 24 * 1,
 
    # Cookies
-   'COOKIE_AUTOLOGIN'                              => "auto_login",
+   'COOKIE_AUTOLOGIN'                              => "login_signature",
 
    # Google reCAPTCHA v3
    'GR_PATHOLOG_SITEKEY'                           => "6Ld_EDgcAAAAANjtDs7tfuIeAPiRqJR3WmjvEZEF",
