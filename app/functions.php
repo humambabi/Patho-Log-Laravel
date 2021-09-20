@@ -134,7 +134,11 @@ if (!function_exists('add_userlogin_record')) {
    function add_userlogin_record($strIPaddrs, $user_ip) {
       # Convert the DB string into an associative array
       $objIPAddr = [];
-      if (!empty($strIPaddrs)) $objIPAddr = json_decode($strIPaddrs, true);
+      $firstCount = 0;
+      if (!empty($strIPaddrs)) {
+         $objIPAddr = json_decode($strIPaddrs, true);
+         $firstCount = 1;
+      }
 
       if (array_key_exists($user_ip, $objIPAddr)) {
          # A login with an already-saved IP
@@ -143,7 +147,7 @@ if (!function_exists('add_userlogin_record')) {
       } else {
          # A login from a new IP
          $newData = [
-            'count'     => 0, # Still hasn't login yet!
+            'count'     => $firstCount, # New registration user still hasn't login yet (0), or logged in previously but this is a new ip (1)
             'lastlogin' => gmdate(config('consts.DB_DATETIME_FMT'))
          ];
 
