@@ -37,6 +37,6 @@ $.ajaxSetup({
 (function ($) {
   // User menu: Sign Out
   $('#btnSignOut').click(function() {
-    $.ajax({url: "/reqSignOut"}).done(function () { location.reload(true); /* Reload from server */ });
+    $.ajax({url: "/reqSignOut"}).done(function () { location.href = "/login"; });
   });
 })(jQuery);

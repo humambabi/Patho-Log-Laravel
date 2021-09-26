@@ -53,5 +53,8 @@ return [
    'MSG_PASSWORDCONFIRM_REQUIRED'                  => "Please re-type your password!",
    'MSG_PASSWORDCONFIRM_EQUAL'                     => "Passwords do not match!",
    'MSG_TERMSPRIVACY_ACCEPT'                       => "Please accept the terms to continue",
-   'MSG_RECAPTCHA_FAILED'                          => "Google reCAPTCHA verificaiton failed!"
+   'MSG_RECAPTCHA_FAILED'                          => "Google reCAPTCHA verificaiton failed!",
+
+   # Guest account
+   'GUEST_USERNAME'                                => "Dr. Guest"
 ];

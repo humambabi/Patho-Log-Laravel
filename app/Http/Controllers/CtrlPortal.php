@@ -66,12 +66,9 @@ class CtrlPortal extends Controller
 
    # Dashboard ####################################################################################
    public function Dashboard() {
-      # Make sure user is authenticated (Should not be needed as the 'dashboard' route is auth-protected)
-      if (empty(Auth::check())) return redirect()->route('login');
-
-      # Only if user is authenticated
-      $data['head_title'] = "Dashboard - Patho•Log";
-      $data['head_description'] = "Patho•Log - Main dashboard";
+      # Can be loaded even if the user is not logged-in
+      $data['head_title'] = "Dashboard - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - Main dashboard";
       $data['page_name'] = "dashboard";
       $data['page_type'] = "portal";
 
@@ -84,12 +81,9 @@ class CtrlPortal extends Controller
 
    # New Report ###################################################################################
    public function NewReport() {
-      # Make sure user is authenticated (Should not be needed as the 'dashboard' route is auth-protected)
-      if (empty(Auth::check())) return redirect()->route('login');
-
-      # Only if user is authenticated
-      $data['head_title'] = "New Report - Patho•Log";
-      $data['head_description'] = "Patho•Log - Create a new report";
+      # Can be loaded even if the user is not logged-in
+      $data['head_title'] = "New Report - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - Create a new report";
       $data['page_name'] = "newreport";
       $data['page_type'] = "portal";
 
@@ -98,4 +92,9 @@ class CtrlPortal extends Controller
       echo view('portal.page-newreport');
       echo view('portal.asset-footer', $data);
    }
+
+
+
+   # Make sure user is authenticated (Should not be needed as the 'dashboard' route is auth-protected)
+   #if (empty(Auth::check())) return redirect()->route('login');
 }

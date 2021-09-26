@@ -31,8 +31,8 @@ Route::get('/login',                                  [CtrlPortal::class, "LogIn
 Route::get('/register',                               [CtrlPortal::class, "Register"]);
 Route::get('/forgotpw',                               [CtrlPortal::class, "ForgotPW"]);
 
-Route::get('/dashboard',                              [CtrlPortal::class, "Dashboard"])         ->name("dashboard")     ->middleware('auth');
-Route::get('/newreport',                              [CtrlPortal::class, "NewReport"])                                 ->middleware('auth');
+Route::get('/dashboard',                              [CtrlPortal::class, "Dashboard"])         ->name("dashboard");
+Route::get('/newreport',                              [CtrlPortal::class, "NewReport"]);
 Route::get('/savedreports',                           [CtrlPortal::class, "SavedReports"]);
 Route::get('/findreports',                            [CtrlPortal::class, "FindReports"]);
 Route::get('/backup',                                 [CtrlPortal::class, "Backup"]);

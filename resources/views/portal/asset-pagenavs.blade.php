@@ -15,7 +15,7 @@
                <input type="text" class="form-control bg-light small border border-topbarsearch" placeholder="Search for..."
                      aria-label="Search" aria-describedby="basic-addon2" /> <!-- border-0 -->
                <div class="input-group-append">
-                  <button class="btn btn-turquoise" type="button">
+                  <button class="btn btn-turquoise btn-nav-turquoise" type="button">
                      <i class="fas fa-search fa-sm"></i>
                   </button>
                </div>
@@ -24,7 +24,7 @@
       </ul>
 
       <!-- Topbar Logo -->
-      <ul class="navbar-nav d-sm-none d-flex align-items-center justify-content-center ml-3" style="width: 100%;">
+      <ul class="navbar-nav d-sm-none d-flex align-items-center justify-content-center" style="width: 100%; padding-left: .35rem; margin-left: 1.3rem;">
          <a href="{{ url('/') }}/dashboard">
             <img src="/img/logo/twopartslogo_text_black.png" alt="Logo-Text" width="109" height="37" />
          </a>
@@ -32,24 +32,29 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-         <!-- User icon and menu-->
-         <li class="nav-item dropdown user-menu">
-            <a class="nav-link d-flex align-items-center" href="#" data-toggle="dropdown">
-               <div class="d-none d-md-inline">{{ Auth::user()['name'] }}</div>
-               <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" width="37" height="37" style="margin-left: .5rem;">
-            </a>
+         @auth
+            <!-- User icon and menu-->
+            <li class="nav-item dropdown user-menu">
+               <a class="nav-link d-flex align-items-center pr-1" href="#" data-toggle="dropdown">
+                  <div class="d-none d-md-inline">{{ Auth::user()['name'] }}</div>
+                  <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" width="37" height="37" style="margin-left: .5rem;">
+               </a>
 
-            <div class="dropdown-menu dropdown-menu-right flex-column align-items-center">
-               <div class="user-header d-flex flex-column align-items-center justify-content-center mt-3 mb-1">
-                  <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" />
-                  <p>{{ Auth::user()['name'] }}</p>
+               <div class="dropdown-menu dropdown-menu-right flex-column align-items-center">
+                  <div class="user-header d-flex flex-column align-items-center justify-content-center mt-3 mb-1">
+                     <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" />
+                     <p>{{ Auth::user()['name'] }}</p>
+                  </div>
+
+                  <a href="#" class="dropdown-item text-center border-top">My Account</a>
+                  <button type="button" id="btnSignOut" class="dropdown-item text-center border-top rounded-bottom">Sign Out</button>
                </div>
-
-               <a href="#" class="dropdown-item text-center border-top">My Account</a>
-               <button type="button" id="btnSignOut" class="dropdown-item text-center border-top rounded-bottom">Sign Out</button>
-            </div>
-
-         </li>
+            </li>
+         @else
+            <li class="nav-item dropdown user-menu mr-1">
+               <a class="nav-link btn btn-turquoise px-2 py-1 text-white font-weight-bold btn-nav-turquoise" href="{{ url('/') }}/login">Sign-in</a>
+            </li>
+         @endif
       </ul>
    </nav><!-- /.navbar -->
 
@@ -103,7 +108,7 @@
                </li>
 
                <hr class="my-2" />
-               <li class="nav-header">My Database</li>
+               <li class="nav-header">My Archive</li>
 
                <li class="nav-item">
                   <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
