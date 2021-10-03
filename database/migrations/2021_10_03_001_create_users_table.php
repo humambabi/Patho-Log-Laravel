@@ -23,13 +23,15 @@ class CreateUsersTable extends Migration
          $table->tinyText('email')->nullable(false);
          $table->string('password');
          $table->dateTime('reg_datetime')->nullable(false);
+         $table->string('google_id')->nullable(true)->default(null);
          $table->tinyText('verification_code')->nullable(false);
-         $table->dateTime('vercode_datetime')->nullable(true)->default(null);
+         $table->dateTime('vercode_datetime')->nullable(false);
          $table->boolean('is_emailverified')->nullable(false)->default(0);
          $table->tinyText('resetpw_code')->nullable(true)->default(null);
          $table->dateTime('rpwcode_datetime')->nullable(true)->default(null);
          $table->text('ipaddrs_obj')->nullable(false);
          $table->rememberToken();
+         $table->string('picture')->nullable(false);
          $table->boolean('is_admin')->nullable(false)->default(0);
       });
    }

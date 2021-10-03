@@ -55,6 +55,10 @@ class CtrlRequests extends Controller
          return response()->json(['retcode' => config('consts.ERR_WITHMSG'), 'errmsg' => config('consts.MSG_RECAPTCHA_FAILED')]);
       }
 
+      #
+      # On any change to the way of user authentication, change reqSocialRegisterOrSignIn too.
+      #
+
       # Done verifying. Save the user record in the database
       $verification_code = Str::random(config('consts.VERIFICATIONCODE_LENGTH'));
 
@@ -65,7 +69,8 @@ class CtrlRequests extends Controller
          'reg_datetime'       => gmdate(config('consts.DB_DATETIME_FMT')),
          'verification_code'  => $verification_code,
          'vercode_datetime'   => gmdate(config('consts.DB_DATETIME_FMT')),
-         'ipaddrs_obj'        => add_userlogin_record("", $request->ip())
+         'ipaddrs_obj'        => add_userlogin_record("", $request->ip()),
+         'picture'            => create_random_userpicurl()
       ]);
       if (empty($modUser)) return response()->json(['retcode' => config('consts.ERR_UNEXPECTED')]);
 
@@ -114,6 +119,10 @@ class CtrlRequests extends Controller
 
       # Retrieve the validated input
       $Validated = $Validator->validated();
+
+      #
+      # On any change to the way of user authentication, change reqSocialRegisterOrSignIn too.
+      #
 
       if (Auth::attempt(['email' => $Validated['email'], 'password' => $Validated['password']], $Validated['remember'])) {
          # Authenticated
@@ -265,5 +274,94 @@ class CtrlRequests extends Controller
          'msgHtml'   => "<p>Your password was updated!</p><p>Now you can use the new password to login.</p>",
          'msgIcon'   => "success"
       ])->withoutCookie(config('consts.COOKIE_AUTOLOGIN')); # Remove cookies (see reqSignOut)
+   }
+
+   ################################################################################################
+   public function reqSocialRegisterOrSignIn(Request $request) {
+      # Expected parameters by the Ajax request:
+      # socialType           (string):["google", ]
+      # socialResponse       (special data, depends on socialType)
+
+      # This procedure uses the same way of user authentication as reqRegister and reqLogin do.
+      # Always refer to them on any change!
+
+      do {
+         if ($request->input('socialType') == "google") {
+            # socialResponse: (JWK- or PEM- encoded object) {clientId, credential, select_by}
+
+            # Specify the CLIENT_ID of the app that accesses the backend
+            $ggl_client = new \Google_Client(['client_id' => env('SOCIALLOGIN_GOOGLE_CLIENT_ID')]);
+            if (empty($ggl_client)) break; # To return an error message
+
+            $ggl_payload = $ggl_client->verifyIdToken($request->input('socialResponse.credential'));
+            if (empty($ggl_payload)) break; # To return an error message
+
+            # Client info has been verified (aud, iss, exp), and the data in $ggl_payload is valid
+            // fields that matters:
+            // email: "homam1984@gmail.com"
+            // email_verified: true
+            // name: "Humam Babi"
+            // picture: "https://lh3.googleusercontent.com/a-/AOh14GjYZK68lc63xgBj_8Kxfnwehh-WDYF-b1XitDE=s96-c"
+            // sub: "108786054780036589311" ($userid = $payload['sub'];)
+
+            $existingUser = User::where('email', $ggl_payload['email'])->first();
+            if (empty($existingUser)) {
+               # Add this user (register), AND login after that
+               $newUser = new User;
+               $newUser->name = $ggl_payload['name'];
+               $newUser->email = $ggl_payload['email'];
+               $newUser->password = ''; # Empty password, pay attention!
+               $newUser->reg_datetime = gmdate(config('consts.DB_DATETIME_FMT'));
+               $newUser->google_id = $ggl_payload['sub'];
+               $newUser->verification_code = ''; # No verification code, attention!
+               $newUser->vercode_datetime = gmdate(config('consts.DB_DATETIME_FMT')); # Not needed, but it must be in a valid format
+               $newUser->is_emailverified = $ggl_payload['email_verified'] ? true : false; # Not sure if this is important or its impact!
+               $newUser->ipaddrs_obj = add_userlogin_record("", $request->ip());
+               $newUser->picture = $ggl_payload['picture']; # A Google-provided URL
+               $newUser->save();
+
+               # Sign-in (always remember the user)
+               Auth::loginUsingId($newUser->id, $remember = true);
+               $request->session()->regenerate();
+
+               # Add login statistics in the DB
+               # this will not conflict with the code in asset-header view, as long as we also set the cookie
+               # (the code in asset-header view will not update the db.ip as long as the cookie is correct)
+               $strJSON = add_userlogin_record($newUser->ipaddrs_obj, $request->ip());
+               $newUser->update(['ipaddrs_obj' => $strJSON]);
+               
+               # Updating db.ip here in login is important, it serves user authentication conflict.
+               # See notes in CtrlExtLinks | EmailVerification()
+
+               # Don't set an expiry time (0) -> cookie expire when browser is closed.
+               setcookie(config('consts.COOKIE_AUTOLOGIN'), "1");
+
+               # Done
+               return response()->json(['retcode' => config('consts.ERR_NOERROR')]);
+            } else {
+               # User exists. Just login
+               Auth::loginUsingId($existingUser->id, $remember = true);
+               $request->session()->regenerate();
+
+               # Add login statistics in the DB
+               # this will not conflict with the code in asset-header view, as long as we also set the cookie
+               # (the code in asset-header view will not update the db.ip as long as the cookie is correct)
+               $strJSON = add_userlogin_record($existingUser->ipaddrs_obj, $request->ip());
+               $existingUser->update(['ipaddrs_obj' => $strJSON]);
+               
+               # Updating db.ip here in login is important, it serves user authentication conflict.
+               # See notes in CtrlExtLinks | EmailVerification()
+
+               # Don't set an expiry time (0) -> cookie expire when browser is closed.
+               setcookie(config('consts.COOKIE_AUTOLOGIN'), "1");
+
+               # Done
+               return response()->json(['retcode' => config('consts.ERR_NOERROR')]);
+            }
+         } # 'socialType' == "google"
+      } while (FALSE);
+
+      # Not a valid social type has been passed, or any other error happened
+      return response()->json(['retcode' => config('consts.ERR_WITHMSG'), 'errmsg' => "Invalid data received!"]);
    }
 }

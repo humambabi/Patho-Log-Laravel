@@ -54,6 +54,9 @@ Route::post('reqSignOut',                             [CtrlRequests::class, "req
 Route::post('reqForgotPW',                            [CtrlRequests::class, "reqForgotPW"]);
 Route::post('reqNewPW',                               [CtrlRequests::class, "reqNewPW"]);
 
+# Social requests (could be portal or extra-portal)
+Route::post('reqSocialRegLogIn',                      [CtrlRequests::class, "reqSocialRegisterOrSignIn"]);
+
 
 /*
 External links **********************************

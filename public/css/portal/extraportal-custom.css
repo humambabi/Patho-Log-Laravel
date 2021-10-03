@@ -84,3 +84,10 @@ humam_babi@yahoo.com, 2021-08-24
    background-color: var(--palette-turquoise-depressed);
    border-color: var(--palette-turquoise-depressed);
 }
+
+/* Social buttons */
+div#loginGoogle div {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}

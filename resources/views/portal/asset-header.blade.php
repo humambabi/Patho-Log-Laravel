@@ -41,12 +41,14 @@
    
    <!-- Back to front -->
    <script type="text/javascript">
+      const PAGE_TYPE = @php echo "\"" . $page_type . "\""; @endphp;
+      const PAGE_NAME = @php echo "\"" . $page_name . "\""; @endphp;
       const USERNAME_MINLENGTH = {{ config('consts.USERNAME_MINLENGTH') }};
       const USERNAME_MAXLENGTH = {{ config('consts.USERNAME_MAXLENGTH') }};
       const EMAIL_MAXLENGTH = {{ config('consts.EMAIL_MAXLENGTH') }};
       const PASSWORD_MINLENGTH = {{ config('consts.PASSWORD_MINLENGTH') }};
       const PASSWORD_MAXLENGTH = {{ config('consts.PASSWORD_MAXLENGTH') }};
-      const GR_PATHOLOG_SITEKEY = "{{ config('consts.GR_PATHOLOG_SITEKEY') }}";
+      const GOOGLERECAPTCHA3_SITEKEY = "{{ env('GOOGLERECAPTCHA3_SITEKEY') }}";
       const GR_ACTION_ACCOUNTREGISTER = "{{ config('consts.GR_ACTION_ACCOUNTREGISTER') }}";
       const GR_ACTION_RESETPASSWORD = "{{ config('consts.GR_ACTION_RESETPASSWORD') }}";
       const ERR_NOERROR = {{ config('consts.ERR_NOERROR') }};
@@ -67,6 +69,7 @@
       const MSG_PASSWORDCONFIRM_REQUIRED = "{{ config('consts.MSG_PASSWORDCONFIRM_REQUIRED') }}";
       const MSG_PASSWORDCONFIRM_EQUAL = "{{ config('consts.MSG_PASSWORDCONFIRM_EQUAL') }}";
       const MSG_TERMSPRIVACY_ACCEPT = "{{ config('consts.MSG_TERMSPRIVACY_ACCEPT') }}";
+      const SOCIALLOGIN_GOOGLE_CLIENT_ID = "{{ env('SOCIALLOGIN_GOOGLE_CLIENT_ID') }}";
    </script>
 
    <!-- gtag/g.analytics - same as the comingsoon page -->

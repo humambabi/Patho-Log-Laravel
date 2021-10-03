@@ -37,12 +37,12 @@
             <li class="nav-item dropdown user-menu">
                <a class="nav-link d-flex align-items-center pr-1" href="#" data-toggle="dropdown">
                   <div class="d-none d-md-inline">{{ Auth::user()['name'] }}</div>
-                  <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" width="37" height="37" style="margin-left: .5rem;">
+                  <img src="{{ Auth::user()['picture'] }}" class="img-circle elevation-2" alt="User Image" width="37" height="37" style="margin-left: .5rem;">
                </a>
 
                <div class="dropdown-menu dropdown-menu-right flex-column align-items-center">
                   <div class="user-header d-flex flex-column align-items-center justify-content-center mt-3 mb-1">
-                     <img src="/img/portal/usericon.jpg" class="img-circle elevation-2" alt="User Image" />
+                     <img src="{{ Auth::user()['picture'] }}" class="img-circle elevation-2" alt="User Image" />
                      <p>{{ Auth::user()['name'] }}</p>
                   </div>
 

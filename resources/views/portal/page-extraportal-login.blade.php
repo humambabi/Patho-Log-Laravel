@@ -49,9 +49,13 @@
             <a href="#" class="btn btn-block btn-primary">
                <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
             </a>
-            <a href="#" class="btn btn-block btn-danger">
+
+            <div id="loginGoogle" class="mt-1"></div>
+            <!--
+            <a href="#" class="btn btn-block btn-danger" id="">
                <i class="fab fa-google mr-2"></i> Sign in using Google
             </a>
+            -->
          </div><!-- /.social-auth-links -->
 
          <p class="mb-1 text-center">

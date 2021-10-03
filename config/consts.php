@@ -26,8 +26,6 @@ return [
    'COOKIE_AUTOLOGIN'                              => "login_signature",
 
    # Google reCAPTCHA v3
-   'GR_PATHOLOG_SITEKEY'                           => "6Ld_EDgcAAAAANjtDs7tfuIeAPiRqJR3WmjvEZEF",
-   'GR_PATHOLOG_SECRETKEY'                         => "6Ld_EDgcAAAAAMSU6x-hd5UQqBknkE64S_wjSIFA",
    'GR_ACTION_ACCOUNTREGISTER'                     => "AccountRegister",
    'GR_ACTION_RESETPASSWORD'                       => "ResetPassword",
 
@@ -54,6 +52,10 @@ return [
    'MSG_PASSWORDCONFIRM_EQUAL'                     => "Passwords do not match!",
    'MSG_TERMSPRIVACY_ACCEPT'                       => "Please accept the terms to continue",
    'MSG_RECAPTCHA_FAILED'                          => "Google reCAPTCHA verificaiton failed!",
+
+   # Paths (these are embedded into code and hard to find if were not here)
+   'PATH_USER_PREDEFINEDPICTURES'                  => "img/portal/user_pics", # No "/" at the biginning or end
+
 
    # Guest account
    'GUEST_USERNAME'                                => "Dr. Guest"

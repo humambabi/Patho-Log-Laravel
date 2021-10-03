@@ -90,7 +90,7 @@ $(function() {
          
          // Execute reCAPTCHA v3 directly before sending data to the server (2 mins validity)
          grecaptcha.ready(function() {
-            grecaptcha.execute(GR_PATHOLOG_SITEKEY, {action: GR_ACTION_ACCOUNTREGISTER}).then(function(token) {
+            grecaptcha.execute(GOOGLERECAPTCHA3_SITEKEY, {action: GR_ACTION_ACCOUNTREGISTER}).then(function(token) {
                // Submit the user input to the server
                $.ajax({
                   url: "/reqRegister",
@@ -266,7 +266,7 @@ $(function() {
 
          // Execute reCAPTCHA v3 directly before sending data to the server (2 mins validity)
          grecaptcha.ready(function() {
-            grecaptcha.execute(GR_PATHOLOG_SITEKEY, {action: GR_ACTION_RESETPASSWORD}).then(function(token) {
+            grecaptcha.execute(GOOGLERECAPTCHA3_SITEKEY, {action: GR_ACTION_RESETPASSWORD}).then(function(token) {
                // Submit the user input to the server
                $.ajax({
                   url: "/reqForgotPW",

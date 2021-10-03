@@ -12,7 +12,7 @@ if (!function_exists('reCAPTCHAv3Check')) {
 
       # Send request to Google
       $url = "https://www.google.com/recaptcha/api/siteverify";
-      $data = array("secret" => config('consts.GR_PATHOLOG_SECRETKEY'), "response" => $recaptchaToken, "remoteip" => $ip);
+      $data = array("secret" => env('GOOGLERECAPTCHA3_SECRETKEY'), "response" => $recaptchaToken, "remoteip" => $ip);
       $options = array(
          "http" => [
             "header"	=> "Content-type: application/x-www-form-urlencoded\r\n",
@@ -156,5 +156,29 @@ if (!function_exists('add_userlogin_record')) {
 
       # Re-convert the array to string
       return json_encode($objIPAddr);
+   }
+
+
+   #
+   # Generates a url for a random user picture (to be used in the database) #######################
+   #
+   if (!function_exists('create_random_userpicurl')) {
+      function create_random_userpicurl() {
+         $picfolder = public_path(config('consts.PATH_USER_PREDEFINEDPICTURES')); # No "/" at the end
+         $fileListTemp = scandir($picfolder);
+         $fileList = array();
+
+         if (count($fileListTemp) < 1) return "";
+         for ($iC = 0; $iC < count($fileListTemp); $iC++) {
+            if (strtoupper(substr($fileListTemp[$iC], 0, 7)) == "USERPIC") {
+               if (is_dir($picfolder . "/" . $fileListTemp[$iC]) == false) array_push($fileList, $fileListTemp[$iC]);
+            }
+         }
+
+         if (count($fileList) < 1) return "";
+         
+         # It MUST be a url usable DIRECTLY by <img src="">
+         return '/' . config('consts.PATH_USER_PREDEFINEDPICTURES') . '/' . $fileList[random_int(0, count($fileList) - 1)];
+      }
    }
 }
