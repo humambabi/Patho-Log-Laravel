@@ -64,6 +64,19 @@ class CtrlPortal extends Controller
    Actual portal pages
    */
 
+   # Default (according to user auth) #############################################################
+   public function Default() {
+      # Decide on showing 'dashboard' or 'new report', according to whether the user is logged-in or they are a guest user
+      if (empty(Auth::check())) {
+         # Guest
+         return redirect()->route('newreport');
+      } else {
+         # Logged-in user
+         return redirect()->route('dashboard');
+      }
+   }
+
+      
    # Dashboard ####################################################################################
    public function Dashboard() {
       # Can be loaded even if the user is not logged-in
@@ -92,9 +105,4 @@ class CtrlPortal extends Controller
       echo view('portal.page-newreport');
       echo view('portal.asset-footer', $data);
    }
-
-
-
-   # Make sure user is authenticated (Should not be needed as the 'dashboard' route is auth-protected)
-   #if (empty(Auth::check())) return redirect()->route('login');
 }
