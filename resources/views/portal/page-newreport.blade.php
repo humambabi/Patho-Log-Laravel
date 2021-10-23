@@ -3,9 +3,9 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
          <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row mb-2 mt-3">
                <div class="col-sm-12">
-                  <h1 class="m-0 text-center">Create a new report</h1>
+                  <h1 class="m-0 text-center">Creating a new report</h1>
                </div><!-- /.col -->
             </div><!-- /.row -->
          </div><!-- /.container-fluid -->
@@ -16,20 +16,42 @@
          <div class="container-fluid">
             <div class="row">
                <div class="col-lg-12">
-
-                  <!-- Default box -->
                   <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">Title</h3>
-                        <div class="card-tools">
-                           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                              <i class="fas fa-minus"></i>
-                           </button>
-                           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                              <i class="fas fa-times"></i>
-                           </button>
-                        </div>
-                     </div>
+                     <div class="card-header d-flex flex-row justify-content-center">
+                        <div id="stepper-container" class="d-none d-md-flex">
+                           <div class="step">
+                              <i class="far fa-circle"></i><span>Template</span>
+                           </div>
+                           <i class="fas fa-angle-right nextsteparrow"></i>
+                           <div class="step">
+                              <i class="far fa-circle"></i><span>Patient</span>
+                           </div>
+                           <i class="fas fa-angle-right nextsteparrow"></i>
+                           <div class="step">
+                              <i class="far fa-circle"></i><span>Specimen</span>
+                           </div>
+                           <i class="fas fa-angle-right nextsteparrow"></i>
+                           <div class="step">
+                              <i class="far fa-circle"></i><span>Microscope</span>
+                           </div>
+                           <i class="fas fa-angle-right nextsteparrow"></i>
+                           <div class="step">
+                              <i class="far fa-circle"></i><span>Diagnosis</span>
+                           </div>
+                           <i class="fas fa-angle-right nextsteparrow"></i>
+                           <div class="step">
+                              <i class="far fa-circle"></i><span>Additional</span>
+                           </div>
+                           <i class="fas fa-angle-right nextsteparrow"></i>
+                           <div class="step">
+                              <i class="far fa-circle"></i><span>Finish</span>
+                           </div>
+                        </div><!-- /#stepper-container -->
+                        <div id="stepper-onestep" class="d-flex d-md-none">
+                           <div style="display: flex;">s</div>
+                        </div><!-- /#stepper-onestep -->
+                     </div><!-- /.card-header -->
+
                      <div class="card-body">
                         Start creating your amazing application!
                      </div><!-- /.card-body -->

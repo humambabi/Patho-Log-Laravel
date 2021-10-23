@@ -100,10 +100,10 @@ if (!function_exists('laravel_queueworker')) {
 
 
 #
-# Include a css with timestamp to handle (cache vs update) issues. ################################
+# (Print or return) a css with timestamp to handle (cache vs update) issues. ######################
 #
-if (!function_exists('include_css')) {
-   function include_css($href_rel2public) {
+if (!function_exists('print_css')) {
+   function print_css($href_rel2public) {
       $realpath = __DIR__ . '/../public' . $href_rel2public;
       $timestamp = 0;
       if (file_exists($realpath)) $timestamp = filemtime($realpath);
@@ -111,18 +111,36 @@ if (!function_exists('include_css')) {
       echo "<link rel='stylesheet' type='text/css' href='$href_rel2public?t=$timestamp' />";
    }
 }
+if (!function_exists('return_css')) {
+   function return_css($href_rel2public) {
+      $realpath = __DIR__ . '/../public' . $href_rel2public;
+      $timestamp = 0;
+      if (file_exists($realpath)) $timestamp = filemtime($realpath);
+      
+      return "<link rel='stylesheet' type='text/css' href='$href_rel2public?t=$timestamp' />";
+   }
+}
 
 
 #
-# Include a js with timestamp to handle (cache vs update) issues. #################################
+# (Print or return) a js with timestamp to handle (cache vs update) issues. #######################
 #
-if (!function_exists('include_jscript')) {
-   function include_jscript($href_rel2public) {
+if (!function_exists('print_jscript')) {
+   function print_jscript($href_rel2public) {
       $realpath = __DIR__ . '/../public' . $href_rel2public;
       $timestamp = 0;
       if (file_exists($realpath)) $timestamp = filemtime($realpath);
       
       echo "<script type='text/javascript' src='$href_rel2public?t=$timestamp'></script>";
+   }
+}
+if (!function_exists('return_jscript')) {
+   function return_jscript($href_rel2public) {
+      $realpath = __DIR__ . '/../public' . $href_rel2public;
+      $timestamp = 0;
+      if (file_exists($realpath)) $timestamp = filemtime($realpath);
+      
+      return "<script type='text/javascript' src='$href_rel2public?t=$timestamp'></script>";
    }
 }
 

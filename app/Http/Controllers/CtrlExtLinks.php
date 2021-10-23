@@ -109,6 +109,16 @@ class CtrlExtLinks extends Controller
       $data['page_name'] = "emailverificaiton";
       $data['page_type'] = "extraportal";
       
+      $data['add_css'] = [
+         return_css("/css/portal/extraportal-custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
+         return_jscript("/js/portal/extraportal-scripts.js")
+      ];
+
       echo view('portal.asset-header', $data);
       echo view('portal.page-extraportal-emailverify', $data);
       echo view('portal.asset-footer', $data);
@@ -173,6 +183,16 @@ class CtrlExtLinks extends Controller
       $data['head_description'] = "Patho•Log - Reset Password";
       $data['page_name'] = "createpw";
       $data['page_type'] = "extraportal";
+
+      $data['add_css'] = [
+         return_css("/css/portal/extraportal-custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
+         return_jscript("/js/portal/extraportal-scripts.js")
+      ];
 
       echo view('portal.asset-header', $data);
       echo view('portal.page-extraportal-createpw', $data);

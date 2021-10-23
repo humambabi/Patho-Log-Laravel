@@ -22,16 +22,14 @@
    <link rel="manifest" href="/site.webmanifest" />
 
    <!-- Styles -->
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap" />
-   {{ include_css("/vendor/fontawesome-free/css/all.min.css") }}
-   {{ include_css("/css/portal/adminlte.css") }}
-   @if ($page_type == "extraportal")
-      {{ include_css("/css/portal/extraportal-custom.css") }}
-   @endif
-   @if ($page_type == "portal")
-      {{ include_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css") }}
-      {{ include_css("/css/portal/custom.css") }}
-   @endif
+   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap' />
+   {{ print_css("/vendor/fontawesome-free/css/all.min.css") }}
+   {{ print_css("/css/portal/adminlte.css") }}
+   @php
+   for ($iC = 0; $iC < count($add_css); $iC++) {
+      echo $add_css[$iC] . "\r\n" . "   "; # Not a '\t' because we are using 3 spaces in this source file!
+   }
+   @endphp
 
    <!-- CSRF protection -->
    <meta name="csrf-token" content="{{ csrf_token() }}">

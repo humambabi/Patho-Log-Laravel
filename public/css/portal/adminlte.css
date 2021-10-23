@@ -33,6 +33,7 @@
   --danger: #f64e60;
   --light: #f3f6f9;
   --dark: #181c32;
+  --gray-disabled: #ccc;
   
   --palette-turquoise: #00bfd8;
   --palette-turquoise-transparent: rgba(0, 191, 216, .75);

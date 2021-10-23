@@ -1,0 +1,51 @@
+/*
+Patho•Log - New Report
+*/
+
+/*
+Stepper *****************************************
+*/
+#stepper-container {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   color: var(--gray-disabled); /* Default color for icons & text */
+}
+
+/* Default */
+#stepper-container .step {
+   display: flex;
+   flex-direction: row;
+}
+#stepper-container .step i {
+   margin-right: .25rem;
+}
+#stepper-container .step span {
+   margin: 0;
+   font-size: .8rem;
+   line-height: 1.2;
+}
+#stepper-container .nextsteparrow {
+   line-height: .5;
+   margin: 5px .7rem 0 .7rem;
+}
+
+/* Done */
+#stepper-container .step.done i {
+   color: var(--palette-turquoise);
+}
+#stepper-container .step.done span {
+   color: #000;
+}
+
+/* Current */
+#stepper-container .step.current i {
+   color: var(--palette-purple);
+}
+#stepper-container .step.current span {
+   color: #000;
+   font-weight: bold;
+}
+
+
