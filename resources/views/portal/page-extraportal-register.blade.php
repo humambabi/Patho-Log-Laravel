@@ -11,7 +11,7 @@
          <p class="login-box-msg">Register a new account</p>
          <form id="form_register">
             <div class="input-group mb-3">
-               <input type="text" name="username" class="form-control" placeholder="Name" maxlength="{{ config('consts.USERNAME_MAXLENGTH') }}" />
+               <input type="text" name="username" class="form-control" placeholder="Name" maxlength="{{ USERNAME_MAXLENGTH }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-user"></span>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="input-group mb-3">
-               <input type="email" name="email" class="form-control" placeholder="Email" maxlength="{{ config('consts.EMAIL_MAXLENGTH') }}" />
+               <input type="email" name="email" class="form-control" placeholder="Email" maxlength="{{ EMAIL_MAXLENGTH }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-envelope"></span>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="input-group mb-3">
-               <input type="password" name="password" class="form-control" placeholder="Password" maxlength="{{ config('consts.PASSWORD_MAXLENGTH') }}" />
+               <input type="password" name="password" class="form-control" placeholder="Password" maxlength="{{ PASSWORD_MAXLENGTH }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-lock"></span>
@@ -38,7 +38,7 @@
             </div>
 
             <div class="input-group mb-3">
-               <input type="password" name="confirm_password" class="form-control" placeholder="Retype password" maxlength="{{ config('consts.PASSWORD_MAXLENGTH') }}" />
+               <input type="password" name="confirm_password" class="form-control" placeholder="Retype password" maxlength="{{ PASSWORD_MAXLENGTH }}" />
                <div class="input-group-append">
                   <div class="input-group-text">
                      <span class="fas fa-lock"></span>
@@ -71,9 +71,14 @@
             <a href="#" class="btn btn-block btn-primary">
                <i class="fab fa-facebook mr-2"></i> Sign up using Facebook
             </a>
+
+            <div id="loginGoogle" class="mt-1"></div>
+            <!--
             <a href="#" class="btn btn-block btn-danger">
                <i class="fab fa-google mr-2"></i> Sign up using Google
             </a>
+            -->
+
          </div><!-- /.social-auth-links -->
 
          <p class="text-center mb-0">

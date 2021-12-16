@@ -34,7 +34,7 @@ Route::get('/forgotpw',                               [CtrlPortal::class, "Forgo
 
 Route::get('/default',                                [CtrlPortal::class, "Default"]);
 Route::get('/dashboard',                              [CtrlPortal::class, "Dashboard"])         ->name("dashboard");
-Route::get('/newreport',                              [CtrlPortal::class, "NewReport"])         ->name("newreport");
+Route::get('/newreport/{step?}',                      [CtrlPortal::class, "NewReport"])         ->name("newreport");
 Route::get('/savedreports',                           [CtrlPortal::class, "SavedReports"]);
 Route::get('/findreports',                            [CtrlPortal::class, "FindReports"]);
 Route::get('/backup',                                 [CtrlPortal::class, "Backup"]);

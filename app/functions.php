@@ -161,12 +161,12 @@ if (!function_exists('add_userlogin_record')) {
       if (array_key_exists($user_ip, $objIPAddr)) {
          # A login with an already-saved IP
          $objIPAddr["$user_ip"]['count']++;
-         $objIPAddr["$user_ip"]['lastlogin'] = gmdate(config('consts.DB_DATETIME_FMT'));
+         $objIPAddr["$user_ip"]['lastlogin'] = gmdate(DB_DATETIME_FMT);
       } else {
          # A login from a new IP
          $newData = [
             'count'     => $firstCount, # New registration user still hasn't login yet (0), or logged in previously but this is a new ip (1)
-            'lastlogin' => gmdate(config('consts.DB_DATETIME_FMT'))
+            'lastlogin' => gmdate(DB_DATETIME_FMT)
          ];
 
          $objIPAddr["$user_ip"] = $newData;
@@ -182,7 +182,7 @@ if (!function_exists('add_userlogin_record')) {
    #
    if (!function_exists('create_random_userpicurl')) {
       function create_random_userpicurl() {
-         $picfolder = public_path(config('consts.PATH_USER_PREDEFINEDPICTURES')); # No "/" at the end
+         $picfolder = public_path(PATH_USER_PREDEFINEDPICTURES); # No "/" at the end
          $fileListTemp = scandir($picfolder);
          $fileList = array();
 
@@ -196,7 +196,7 @@ if (!function_exists('add_userlogin_record')) {
          if (count($fileList) < 1) return "";
          
          # It MUST be a url usable DIRECTLY by <img src="">
-         return '/' . config('consts.PATH_USER_PREDEFINEDPICTURES') . '/' . $fileList[random_int(0, count($fileList) - 1)];
+         return '/' . PATH_USER_PREDEFINEDPICTURES . '/' . $fileList[random_int(0, count($fileList) - 1)];
       }
    }
 }

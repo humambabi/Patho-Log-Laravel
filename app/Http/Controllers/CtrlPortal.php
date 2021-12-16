@@ -146,13 +146,14 @@ class CtrlPortal extends Controller
 
 
    # New Report ###################################################################################
-   public function NewReport() {
+   public function NewReport($Step = S01_TEMPLATE) {
       # *CAN* be loaded even if the user is not logged-in
       $data['head_title'] = "New Report - " . config('app.name');
       $data['head_description'] = config('app.name') . " - Create a new report";
       $data['page_name'] = "newreport";
       $data['page_type'] = "portal";
 
+      # Decide which css & js to load
       $data['add_css'] = [
          return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
          return_css("/css/portal/custom.css"),
@@ -170,9 +171,16 @@ class CtrlPortal extends Controller
       array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
       array_push($data['add_js'], return_jscript("/js/portal/newreport.js"));
 
+      # View the needed step
       echo view('portal.asset-header', $data);
       echo view('portal.asset-pagenavs', $data);
-      echo view('portal.page-newreport');
+
+      switch ($Step) {
+         case S01_TEMPLATE: {
+            echo view('portal.page-newreport'    ,$data);
+         }
+      }
+
       echo view('portal.asset-footer', $data);
    }
 }

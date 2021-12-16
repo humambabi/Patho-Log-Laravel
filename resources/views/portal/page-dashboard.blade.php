@@ -3,7 +3,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
          <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row mb-2 mt-3">
                <div class="col-sm-12">
                   <h1 class="m-0 text-center">Dashboard</h1>
                </div><!-- /.col -->

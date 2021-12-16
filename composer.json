@@ -28,6 +28,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
+            "app/consts.php",
             "app/functions.php"
         ]
     },

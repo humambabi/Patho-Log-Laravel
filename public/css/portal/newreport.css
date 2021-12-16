@@ -48,4 +48,92 @@ Stepper *****************************************
    font-weight: bold;
 }
 
+/* "One Step" stepper mode */
+#stepper-onestep {
+   width: 100%;
+   align-items: center;
+}
 
+#onestep-title {
+   font-size: .8rem;
+   line-height: 1;
+   font-weight: bold;
+}
+
+#onestep-dots {
+   font-size: .3rem;
+   line-height: 1;
+   margin-top: .4rem;
+   color: var(--gray-disabled);
+}
+#onestep-dots i {
+   margin: 0 .1rem 0 .1rem;
+}
+
+/* Report Template */
+#templates-container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.tplitem-container {
+   position: relative;
+   width: 16rem;
+   height: 9rem;
+   background-color: #fff;
+   overflow: hidden;
+   box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
+   border-radius: .3rem;
+   border: 1px solid #f7f7f7;
+   transition: all .3s ease;
+   display: flex;
+   flex-direction: row;
+   cursor: pointer;
+   margin: .5rem;
+}
+
+.tplitem-backribbon {
+   position: absolute;
+   left: -5rem;
+   top: -5.5rem;
+   width: 15rem;
+   height: 15rem;
+   background-color: var(--palette-blue-white);
+   transform: rotate(-60deg);
+   opacity: .5;
+}
+
+.tplitem-previmg {
+   margin: .5rem;
+   z-index: 1;
+}
+
+.tplitem-ctl {
+   margin: .5rem .5rem .5rem 0;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   z-index: 1;
+}
+
+.tplitem-ctl-desc-title {
+   font-size: 1rem;
+   font-weight: bold;
+   text-align: center;
+}
+
+.tplitem-ctl-desc-text {
+   font-size: .85rem;
+}
+
+.tplitem-ctl-btn {
+   padding: 0 1.5rem 0 1.5rem;
+}
+
+.tplitem-ctl-btn button {
+   font-weight: bold;
+   font-size: 1rem;
+   line-height: 1;
+}

@@ -41,32 +41,32 @@
    <script type="text/javascript">
       const PAGE_TYPE = @php echo "\"" . $page_type . "\""; @endphp;
       const PAGE_NAME = @php echo "\"" . $page_name . "\""; @endphp;
-      const USERNAME_MINLENGTH = {{ config('consts.USERNAME_MINLENGTH') }};
-      const USERNAME_MAXLENGTH = {{ config('consts.USERNAME_MAXLENGTH') }};
-      const EMAIL_MAXLENGTH = {{ config('consts.EMAIL_MAXLENGTH') }};
-      const PASSWORD_MINLENGTH = {{ config('consts.PASSWORD_MINLENGTH') }};
-      const PASSWORD_MAXLENGTH = {{ config('consts.PASSWORD_MAXLENGTH') }};
+      const USERNAME_MINLENGTH = {{ USERNAME_MINLENGTH }};
+      const USERNAME_MAXLENGTH = {{ USERNAME_MAXLENGTH }};
+      const EMAIL_MAXLENGTH = {{ EMAIL_MAXLENGTH }};
+      const PASSWORD_MINLENGTH = {{ PASSWORD_MINLENGTH }};
+      const PASSWORD_MAXLENGTH = {{ PASSWORD_MAXLENGTH }};
       const GOOGLERECAPTCHA3_SITEKEY = "{{ env('GOOGLERECAPTCHA3_SITEKEY') }}";
-      const GR_ACTION_ACCOUNTREGISTER = "{{ config('consts.GR_ACTION_ACCOUNTREGISTER') }}";
-      const GR_ACTION_RESETPASSWORD = "{{ config('consts.GR_ACTION_RESETPASSWORD') }}";
-      const ERR_NOERROR = {{ config('consts.ERR_NOERROR') }};
-      const ERR_UNEXPECTED = {{ config('consts.ERR_UNEXPECTED') }};
-      const ERR_WITHMSG = {{ config('consts.ERR_WITHMSG') }};
-      const ERR_WITHMSG_USERNAME = {{ config('consts.ERR_WITHMSG_USERNAME') }};
-      const ERR_WITHMSG_EMAIL = {{ config('consts.ERR_WITHMSG_EMAIL') }};
-      const ERR_WITHMSG_PASSWORD = {{ config('consts.ERR_WITHMSG_PASSWORD') }};
-      const ERR_WITHMSG_TERMS = {{ config('consts.ERR_WITHMSG_TERMS') }};
-      const MSG_USERNAME_REQUIRED = "{{ config('consts.MSG_USERNAME_REQUIRED') }}";
-      const MSG_USERNAME_BETWEEN = @php echo "\"" . sprintf(config('consts.MSG_USERNAME_BETWEEN_FMT'), config('consts.USERNAME_MINLENGTH'), config('consts.USERNAME_MAXLENGTH')) . "\""; @endphp;
-      const MSG_EMAIL_REQUIRED = "{{ config('consts.MSG_EMAIL_REQUIRED') }}";
-      const MSG_EMAIL_VALIDEMAILADDR = "{{ config('consts.MSG_EMAIL_VALIDEMAILADDR') }}";
-      const MSG_EMAIL_MAXLEN = @php echo "\"" . sprintf(config('consts.MSG_EMAIL_MAXLEN_FMT'), config('consts.EMAIL_MAXLENGTH')) . "\""; @endphp;
-      const MSG_PASSWORD_REQUIRED = "{{ config('consts.MSG_PASSWORD_REQUIRED') }}";
-      const MSG_PASSWORD_MINLEN = @php echo "\"" . sprintf(config('consts.MSG_PASSWORD_MINLEN_FMT'), config('consts.PASSWORD_MINLENGTH')) . "\""; @endphp;
-      const MSG_PASSWORD_MAXLEN = @php echo "\"" . sprintf(config('consts.MSG_PASSWORD_MAXLEN_FMT'), config('consts.PASSWORD_MAXLENGTH')) . "\""; @endphp;
-      const MSG_PASSWORDCONFIRM_REQUIRED = "{{ config('consts.MSG_PASSWORDCONFIRM_REQUIRED') }}";
-      const MSG_PASSWORDCONFIRM_EQUAL = "{{ config('consts.MSG_PASSWORDCONFIRM_EQUAL') }}";
-      const MSG_TERMSPRIVACY_ACCEPT = "{{ config('consts.MSG_TERMSPRIVACY_ACCEPT') }}";
+      const GR_ACTION_ACCOUNTREGISTER = "{{ GR_ACTION_ACCOUNTREGISTER }}";
+      const GR_ACTION_RESETPASSWORD = "{{ GR_ACTION_RESETPASSWORD }}";
+      const ERR_NOERROR = {{ ERR_NOERROR }};
+      const ERR_UNEXPECTED = {{ ERR_UNEXPECTED }};
+      const ERR_WITHMSG = {{ ERR_WITHMSG }};
+      const ERR_WITHMSG_USERNAME = {{ ERR_WITHMSG_USERNAME }};
+      const ERR_WITHMSG_EMAIL = {{ ERR_WITHMSG_EMAIL }};
+      const ERR_WITHMSG_PASSWORD = {{ ERR_WITHMSG_PASSWORD }};
+      const ERR_WITHMSG_TERMS = {{ ERR_WITHMSG_TERMS }};
+      const MSG_USERNAME_REQUIRED = "{{ MSG_USERNAME_REQUIRED }}";
+      const MSG_USERNAME_BETWEEN = @php echo "\"" . sprintf(MSG_USERNAME_BETWEEN_FMT, USERNAME_MINLENGTH, USERNAME_MAXLENGTH) . "\""; @endphp;
+      const MSG_EMAIL_REQUIRED = "{{ MSG_EMAIL_REQUIRED }}";
+      const MSG_EMAIL_VALIDEMAILADDR = "{{ MSG_EMAIL_VALIDEMAILADDR }}";
+      const MSG_EMAIL_MAXLEN = @php echo "\"" . sprintf(MSG_EMAIL_MAXLEN_FMT, EMAIL_MAXLENGTH) . "\""; @endphp;
+      const MSG_PASSWORD_REQUIRED = "{{ MSG_PASSWORD_REQUIRED }}";
+      const MSG_PASSWORD_MINLEN = @php echo "\"" . sprintf(MSG_PASSWORD_MINLEN_FMT, PASSWORD_MINLENGTH) . "\""; @endphp;
+      const MSG_PASSWORD_MAXLEN = @php echo "\"" . sprintf(MSG_PASSWORD_MAXLEN_FMT, PASSWORD_MAXLENGTH) . "\""; @endphp;
+      const MSG_PASSWORDCONFIRM_REQUIRED = "{{ MSG_PASSWORDCONFIRM_REQUIRED }}";
+      const MSG_PASSWORDCONFIRM_EQUAL = "{{ MSG_PASSWORDCONFIRM_EQUAL }}";
+      const MSG_TERMSPRIVACY_ACCEPT = "{{ MSG_TERMSPRIVACY_ACCEPT }}";
       const SOCIALLOGIN_GOOGLE_CLIENT_ID = "{{ env('SOCIALLOGIN_GOOGLE_CLIENT_ID') }}";
    </script>
 
@@ -84,7 +84,7 @@
 
    if (env('APP_ENV', 'production') != 'production') Log::warning("--------------------------------------------------");
    if (Auth::check()) $authenticated = true;
-   if (!empty($_COOKIE[config('consts.COOKIE_AUTOLOGIN')])) $cookieexpired = false;
+   if (!empty($_COOKIE[COOKIE_AUTOLOGIN])) $cookieexpired = false;
 
    if (env('APP_ENV', 'production') != 'production') Log::warning("DetectAutoLogin: \$auth:" . ($authenticated ? "yes" : "no") . ", \$expired:" . ($cookieexpired ? "yes" : "no"));
 
@@ -98,7 +98,7 @@
          $modUser->update(['ipaddrs_obj' => $strJSON]);
 
          # Don't set an expiry time (0) -> cookie expire when browser is closed.
-         setcookie(config('consts.COOKIE_AUTOLOGIN'), "1");
+         setcookie(COOKIE_AUTOLOGIN, "1");
       }
    }
 

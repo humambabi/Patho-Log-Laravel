@@ -5,7 +5,7 @@
          <div class="container-fluid">
             <div class="row mb-2 mt-3">
                <div class="col-sm-12">
-                  <h1 class="m-0 text-center">Creating a new report</h1>
+                  <h1 class="m-0 text-center">Create a new report</h1>
                </div><!-- /.col -->
             </div><!-- /.row -->
          </div><!-- /.container-fluid -->
@@ -47,16 +47,64 @@
                               <i class="far fa-circle"></i><span>Finish</span>
                            </div>
                         </div><!-- /#stepper-container -->
-                        <div id="stepper-onestep" class="d-flex d-md-none">
-                           <div style="display: flex;">s</div>
+                        <div id="stepper-onestep" class="d-flex d-md-none flex-column">
+                           <div id="onestep-title">Loading</div>
+                           <div id="onestep-dots"></div>
                         </div><!-- /#stepper-onestep -->
                      </div><!-- /.card-header -->
 
                      <div class="card-body">
-                        Start creating your amazing application!
+                        
+                        <div class="container-fluid">
+                           <h5><strong>Select a template for your new report:</strong></h5>
+                           <h6 class="mb-4">The template theme, logo, and fields will be applied to the report.</h6>
+
+                           <div id="templates-container">
+                              <div class="tplitem-container">
+                                 <div class="tplitem-backribbon"></div>
+                                 <div class="tplitem-previmg">
+                                    <img alt="General Report" src="/img/portal/templates/general/preview-thumbnail.jpg" width="auto" height="100%" />
+                                 </div>
+                                 <div class="tplitem-ctl">
+                                    <div class="tplitem-ctl-desc">
+                                       <div class="tplitem-ctl-desc-title">General Report</div>
+                                       <div class="tplitem-ctl-desc-text">
+                                          A general biopsy report, with all the standard sections.
+                                       </div>
+                                    </div>
+                                    <div class="tplitem-ctl-btn">
+                                       <button type="button" class="btn btn-turquoise btn-block">Select</button>
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class="tplitem-container">
+                                 <div class="tplitem-backribbon"></div>
+                                 <div class="tplitem-previmg">
+                                    <img alt="General Report" src="/img/portal/templates/papsmear/preview-thumbnail.jpg" width="auto" height="100%" />
+                                 </div>
+                                 <div class="tplitem-ctl">
+                                    <div class="tplitem-ctl-desc">
+                                       <div class="tplitem-ctl-desc-title">Pap Smear</div>
+                                       <div class="tplitem-ctl-desc-text">
+                                          A Cytology report, with cell categories and final diagnosis.
+                                       </div>
+                                    </div>
+                                    <div class="tplitem-ctl-btn">
+                                       <button type="button" class="btn btn-turquoise btn-block">Select</button>
+                                    </div>
+                                 </div>
+                              </div>
+
+                           </div>
+
+
+                        </div>
+                        
                      </div><!-- /.card-body -->
+
                      <div class="card-footer">
-                        Footer
+                        Do you want to customize the templates? Click Here
                      </div><!-- /.card-footer-->
                   </div><!-- /.card -->
 

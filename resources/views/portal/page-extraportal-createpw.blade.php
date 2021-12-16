@@ -18,7 +18,7 @@
             <p class="text-center">An <strong>unexpected error</strong> has occurred!</p>
             <p class="text-center">
                Please, send us an email and let us know what happened:&nbsp;
-               <a href="mailto:{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}">{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}</a>.
+               <a href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}">{{ PATHOLOG_EMAIL_SUPPORT }}</a>.
             </p>
             <p class="text-center mb-0">
                <a href="/dashboard">Return to Patho&bull;Log</a>
@@ -35,7 +35,7 @@
             </p>
             <p class="text-center">
                If you need help, please, leave us an email at:&nbsp;
-               <a href="mailto:{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}">{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}</a>.
+               <a href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}">{{ PATHOLOG_EMAIL_SUPPORT }}</a>.
             </p>
             <p class="text-center mb-0">
                <a href="/dashboard">Return to Patho&bull;Log</a>
@@ -63,7 +63,7 @@
             </ol>
             <p class="text-center">
                If you need help, please, leave us an email at:&nbsp;
-               <a href="mailto:{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}">{{ config('consts.PATHOLOG_EMAIL_SUPPORT') }}</a>.
+               <a href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}">{{ PATHOLOG_EMAIL_SUPPORT }}</a>.
             </p>
             <p class="text-center mb-0">
                <a href="/dashboard">Return to Patho&bull;Log</a>
@@ -74,7 +74,7 @@
 
             <form id="form_createpw">
                <div class="input-group mb-3">
-                  <input type="password" name="password" class="form-control" placeholder="Password" maxlength="{{ config('consts.PASSWORD_MAXLENGTH') }}" />
+                  <input type="password" name="password" class="form-control" placeholder="Password" maxlength="{{ PASSWORD_MAXLENGTH }}" />
                   <div class="input-group-append">
                      <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -83,7 +83,7 @@
                </div>
 
                <div class="input-group mb-3">
-                  <input type="password" name="confirm_password" class="form-control" placeholder="Retype password" maxlength="{{ config('consts.PASSWORD_MAXLENGTH') }}" />
+                  <input type="password" name="confirm_password" class="form-control" placeholder="Retype password" maxlength="{{ PASSWORD_MAXLENGTH }}" />
                   <div class="input-group-append">
                      <div class="input-group-text">
                         <span class="fas fa-lock"></span>

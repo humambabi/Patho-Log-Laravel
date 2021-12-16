@@ -50,10 +50,10 @@ class CtrlExtLinks extends Controller
          # Check for activation code expiry
          $expired = TRUE;
          $deadline = strtotime(strval($modUser->vercode_datetime) . " +0000 + " .
-            strval(config('consts.EMAILVERIFICATIONCODE_VALIDITY_MINUTES')) . " minutes");
+            strval(EMAILVERIFICATIONCODE_VALIDITY_MINUTES) . " minutes");
          $remaining = $deadline - time(); # time() is timezone independent (=UTC) (in seconds)
          if ($remaining >= 0) $expired = FALSE; # Not expired yet (when there are positive number of seconds remaining)
-         if ($remaining > (config('consts.EMAILVERIFICATIONCODE_VALIDITY_MINUTES') * 60)) { # (convert minutes to seconds)
+         if ($remaining > (EMAILVERIFICATIONCODE_VALIDITY_MINUTES * 60)) { # (convert minutes to seconds)
             # Remaining MUST not exceed the valid period itself - that would be a programming error!
             $data['case'] = "error";
             break;
@@ -95,7 +95,7 @@ class CtrlExtLinks extends Controller
             Auth::logout();
             request()->session()->invalidate();
             request()->session()->regenerateToken();
-            Cookie::expire(config('consts.COOKIE_AUTOLOGIN')); # Needs test!
+            Cookie::expire(COOKIE_AUTOLOGIN); # Needs test!
             # Even if removing cookie doesn't work here, we are signing the user out, and when they sign in again
             # the db.ip will be updated and a new cookie will be set.
 
@@ -156,10 +156,10 @@ class CtrlExtLinks extends Controller
          # Check for activation code expiry
          $expired = TRUE;
          $deadline = strtotime(strval($modUser->rpwcode_datetime) . " +0000 + " .
-            strval(config('consts.PASSWORDRESETCODE_VALIDITY_MINUTES')) . " minutes");
+            strval(PASSWORDRESETCODE_VALIDITY_MINUTES) . " minutes");
          $remaining = $deadline - time(); # time() is timezone independent (=UTC) (in seconds)
          if ($remaining >= 0) $expired = FALSE; # Not expired yet (when there are positive number of seconds remaining)
-         if ($remaining > (config('consts.PASSWORDRESETCODE_VALIDITY_MINUTES') * 60)) { # (convert minutes to seconds)
+         if ($remaining > (PASSWORDRESETCODE_VALIDITY_MINUTES * 60)) { # (convert minutes to seconds)
             # Remaining MUST not exceed the valid period itself - that would be a programming error!
             $data['case'] = "error";
             break;
