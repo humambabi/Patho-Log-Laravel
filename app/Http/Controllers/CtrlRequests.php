@@ -51,7 +51,7 @@ class CtrlRequests extends Controller
       $Validated = $Validator->validated();
 
       # Check Google reCAPTCHA v3
-      if (reCAPTCHAv3Check($Validated['gr_token'], config("consts.GR_ACTION_ACCOUNTREGISTER"), $request->ip()) != TRUE) {
+      if (reCAPTCHAv3Check($Validated['gr_token'], GR_ACTION_ACCOUNTREGISTER, $request->ip()) != TRUE) {
          return response()->json(['retcode' => ERR_WITHMSG, 'errmsg' => MSG_RECAPTCHA_FAILED]);
       }
 
@@ -189,7 +189,7 @@ class CtrlRequests extends Controller
       $Validated = $Validator->validated();
 
       # Check Google reCAPTCHA v3
-      if (reCAPTCHAv3Check($Validated['gr_token'], config("consts.GR_ACTION_RESETPASSWORD"), $request->ip()) != TRUE) {
+      if (reCAPTCHAv3Check($Validated['gr_token'], GR_ACTION_RESETPASSWORD, $request->ip()) != TRUE) {
          return response()->json(['retcode' => ERR_WITHMSG, 'errmsg' => MSG_RECAPTCHA_FAILED]);
       }
 

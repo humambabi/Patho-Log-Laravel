@@ -36,9 +36,9 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'mail.patho-log.com'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'host' => env('MAIL_HOST', 'mx.patho-log.com'),
+            'port' => env('MAIL_PORT', 25),
+            'encryption' => env('MAIL_ENCRYPTION', null),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
@@ -83,6 +83,11 @@ return [
     |
     */
 
+    /*
+    This is actually not used. Just keep it as a failsafe backup.
+    Not used, in order to support more than just one mail address and sender name (if and when needed).
+    See /app/consts.php.
+    */
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'support@patho-log.com'),
         'name' => env('MAIL_FROM_NAME', 'Patho•Log'),

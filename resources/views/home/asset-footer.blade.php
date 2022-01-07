@@ -22,7 +22,7 @@
 							</li>
 							<li class="media">
 								<i class="fas fa-square"></i>
-								<div class="media-body">Contact our support: <a class="turquoise" href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}">{{ PATHOLOG_EMAIL_SUPPORT }}</a>.</div>
+								<div class="media-body">Contact our support: <a class="turquoise" href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.</div>
 							</li>
 						</ul>
 					</div>
@@ -38,7 +38,7 @@
 							</a>
 						</span>
 						<span class="fa-stack">
-							<a href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}" class="trans" title="Contact us via email">
+							<a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}" class="trans" title="Contact us via email">
 								<i class="fas fa-circle fa-stack-2x"></i>
 								<i class="far fa-envelope fa-stack-1x"></i>
 								.

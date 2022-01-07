@@ -16,7 +16,7 @@ please click on the following link (or copy and paste it into your browser's add
 (This link is valid only for a limited period of time)
 
 If you have any difficulties activating your account or signing in, don't hesitate to
-contact our support team by sending an email to: {{ PATHOLOG_EMAIL_SUPPORT }}
+contact our support team by sending an email to: {{ EMAIL_SUPPORT_ADDRESS }}
 
 Thank you, and have a great day!
 Patho•Log Team

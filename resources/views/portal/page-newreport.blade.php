@@ -17,6 +17,8 @@
             <div class="row">
                <div class="col-lg-12">
                   <div class="card">
+
+                     <!-- Stepper (full-width and compact) -->
                      <div class="card-header d-flex flex-row justify-content-center">
                         <div id="stepper-container" class="d-none d-md-flex">
                            <div class="step">
@@ -52,14 +54,15 @@
                            <div id="onestep-dots"></div>
                         </div><!-- /#stepper-onestep -->
                      </div><!-- /.card-header -->
+                     <!-- /Stepper -->
 
                      <div class="card-body">
-                        
                         <div class="container-fluid">
                            <h5><strong>Select a template for your new report:</strong></h5>
                            <h6 class="mb-4">The template theme, logo, and fields will be applied to the report.</h6>
 
                            <div id="templates-container">
+
                               <div class="tplitem-container">
                                  <div class="tplitem-backribbon"></div>
                                  <div class="tplitem-previmg">
@@ -96,7 +99,7 @@
                                  </div>
                               </div>
 
-                           </div>
+                           </div><!-- /#templates-container -->
 
 
                         </div>

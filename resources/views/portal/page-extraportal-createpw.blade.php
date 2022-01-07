@@ -18,7 +18,7 @@
             <p class="text-center">An <strong>unexpected error</strong> has occurred!</p>
             <p class="text-center">
                Please, send us an email and let us know what happened:&nbsp;
-               <a href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}">{{ PATHOLOG_EMAIL_SUPPORT }}</a>.
+               <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.
             </p>
             <p class="text-center mb-0">
                <a href="/dashboard">Return to Patho&bull;Log</a>
@@ -35,7 +35,7 @@
             </p>
             <p class="text-center">
                If you need help, please, leave us an email at:&nbsp;
-               <a href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}">{{ PATHOLOG_EMAIL_SUPPORT }}</a>.
+               <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.
             </p>
             <p class="text-center mb-0">
                <a href="/dashboard">Return to Patho&bull;Log</a>
@@ -63,7 +63,7 @@
             </ol>
             <p class="text-center">
                If you need help, please, leave us an email at:&nbsp;
-               <a href="mailto:{{ PATHOLOG_EMAIL_SUPPORT }}">{{ PATHOLOG_EMAIL_SUPPORT }}</a>.
+               <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.
             </p>
             <p class="text-center mb-0">
                <a href="/dashboard">Return to Patho&bull;Log</a>
