@@ -1,0 +1,50 @@
+/* General table styles */
+table, tr, th, td {
+   border-collapse: collapse;
+}
+
+table.fullwidth, table.fullwidth tr {
+   width: 100%;
+}
+
+/* DEBUG */
+table.borders, table.borders tr, table.borders th, table.borders td {
+   border: 1px solid gray;
+}
+
+hr {
+   color: #a6a6a6;
+}
+
+table#patient_info {
+   font-size: 13px;
+   line-height: 19px;
+}
+
+table#patient_info td:nth-child(1) { width: 103px;} /* 1st Col Label */
+table#patient_info td:nth-child(3), table#patient_info td:nth-child(4) {
+   width: 125px;
+   text-align: right;
+}
+
+h1#report_title {
+   text-align: center;
+   font-size: 25px;
+   margin-bottom: 27px;
+}
+
+h3 {
+   margin-top: 0;
+   font-size: 17px;
+   font-weight: bold;
+   text-decoration: underline;
+   margin-bottom: 5px;
+}
+
+p {
+   margin-top: 0;
+   margin-bottom: 8px;
+   text-align: justify;
+}
+
+

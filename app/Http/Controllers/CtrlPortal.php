@@ -29,6 +29,7 @@ class CtrlPortal extends Controller
       $data['add_js'] = [
          return_jscript("/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js"),
          return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
          '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
          '<script src="https://www.google.com/recaptcha/api.js?render=' . env('GOOGLERECAPTCHA3_SITEKEY') . '"></script>',
          '<script src="https://accounts.google.com/gsi/client" async defer></script>',
@@ -60,6 +61,7 @@ class CtrlPortal extends Controller
       $data['add_js'] = [
          return_jscript("/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js"),
          return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
          '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
          '<script src="https://accounts.google.com/gsi/client" async defer></script>',
          return_jscript("/js/portal/social-login.js"),
@@ -84,6 +86,7 @@ class CtrlPortal extends Controller
       $data['add_js'] = [
          return_jscript("/vendor/jquery-validation-1.19.3/dist/jquery.validate.min.js"),
          return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
          '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
          '<script src="https://www.google.com/recaptcha/api.js?render=' . env('GOOGLERECAPTCHA3_SITEKEY') . '"></script>',
          return_jscript("/js/portal/extraportal-scripts.js")
@@ -114,11 +117,9 @@ class CtrlPortal extends Controller
       
    # Dashboard ####################################################################################
    public function Dashboard() {
-      # Make sure user is *AUTHENTICATED*, otherwise, redirect to the newreport page
-      # (if user got here while they are not authenticated, they must have typed the url manually!)
-      if (!Auth::check()) return redirect()->route('newreport');
+      # If the user is logged-in (authenticated), show the actual page contents,
+      # otherwise, show "You need to log-in" interface.
 
-      # Can be loaded even if the user is not logged-in
       $data['head_title'] = "Dashboard - " . config('app.name');
       $data['head_description'] = config('app.name') . " - Main dashboard";
       $data['page_name'] = "dashboard";
@@ -130,6 +131,7 @@ class CtrlPortal extends Controller
       $data['add_js'] = [
          return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
          return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
          '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
       ];
       if (!Auth::check()) {
@@ -138,15 +140,21 @@ class CtrlPortal extends Controller
       }
       array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
 
+   
       echo view('portal.asset-header', $data);
       echo view('portal.asset-pagenavs', $data);
-      echo view('portal.page-dashboard');
+      if (empty(Auth::check())) {
+         $data['page_title'] = "Dashboard";
+         echo view('portal.page-need2login', $data);
+      } else {
+         echo view('portal.page-dashboard');
+      }
       echo view('portal.asset-footer', $data);
    }
 
 
    # New Report ###################################################################################
-   public function NewReport($Step = S01_TEMPLATE) {
+   public function NewReport() {
       # *CAN* be loaded even if the user is not logged-in
       $data['head_title'] = "New Report - " . config('app.name');
       $data['head_description'] = config('app.name') . " - Create a new report";
@@ -162,6 +170,7 @@ class CtrlPortal extends Controller
       $data['add_js'] = [
          return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
          return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
          '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
       ];
       if (!Auth::check()) {
@@ -174,13 +183,261 @@ class CtrlPortal extends Controller
       # View the needed step
       echo view('portal.asset-header', $data);
       echo view('portal.asset-pagenavs', $data);
+      echo view('portal.page-newreport');
+      echo view('portal.asset-footer', $data);
+   }
 
-      switch ($Step) {
-         case S01_TEMPLATE: {
-            echo view('portal.page-newreport'    ,$data);
-         }
+
+   # Saved Reports ################################################################################
+   public function SavedReports() {
+      # If the user is logged-in (authenticated), show the actual page contents,
+      # otherwise, show "You need to log-in" interface.
+
+      $data['head_title'] = "Saved reports - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - Saved Reports";
+      $data['page_name'] = "savedreports";
+      $data['page_type'] = "portal";
+      $data['add_css'] = [
+         return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
+         return_css("/css/portal/custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+      ];
+      if (!Auth::check()) {
+         array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
+         array_push($data['add_js'], return_jscript("/js/portal/social-login.js"));
       }
+      array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
 
+   
+      echo view('portal.asset-header', $data);
+      echo view('portal.asset-pagenavs', $data);
+      if (empty(Auth::check())) {
+         $data['page_title'] = "Saved Reports";
+         echo view('portal.page-need2login', $data);
+      } else {
+         echo view('portal.page-savedreports');
+      }
+      echo view('portal.asset-footer', $data);
+   }
+
+
+   # Maintainance - Backup ########################################################################
+   public function Backup() {
+      # If the user is logged-in (authenticated), show the actual page contents,
+      # otherwise, show "You need to log-in" interface.
+
+      $data['head_title'] = "Backup reports - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - Backup Reports";
+      $data['page_name'] = "backup";
+      $data['page_type'] = "portal";
+      $data['add_css'] = [
+         return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
+         return_css("/css/portal/custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+      ];
+      if (!Auth::check()) {
+         array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
+         array_push($data['add_js'], return_jscript("/js/portal/social-login.js"));
+      }
+      array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
+
+   
+      echo view('portal.asset-header', $data);
+      echo view('portal.asset-pagenavs', $data);
+      if (empty(Auth::check())) {
+         $data['page_title'] = "Backup Reports";
+         echo view('portal.page-need2login', $data);
+      } else {
+         echo view('portal.page-backup');
+      }
+      echo view('portal.asset-footer', $data);
+   }
+
+
+   # Maintainance - Restore #######################################################################
+   public function Restore() {
+      # If the user is logged-in (authenticated), show the actual page contents,
+      # otherwise, show "You need to log-in" interface.
+
+      $data['head_title'] = "Restore reports - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - Restore Reports";
+      $data['page_name'] = "restore";
+      $data['page_type'] = "portal";
+      $data['add_css'] = [
+         return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
+         return_css("/css/portal/custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+      ];
+      if (!Auth::check()) {
+         array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
+         array_push($data['add_js'], return_jscript("/js/portal/social-login.js"));
+      }
+      array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
+
+   
+      echo view('portal.asset-header', $data);
+      echo view('portal.asset-pagenavs', $data);
+      if (empty(Auth::check())) {
+         $data['page_title'] = "Restore Reports";
+         echo view('portal.page-need2login', $data);
+      } else {
+         echo view('portal.page-restore');
+      }
+      echo view('portal.asset-footer', $data);
+   }
+
+
+   # Templates ####################################################################################
+   public function Templates() {
+      # If the user is logged-in (authenticated), show the actual page contents,
+      # otherwise, show "You need to log-in" interface.
+
+      $data['head_title'] = "Templates - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - Templates";
+      $data['page_name'] = "templates";
+      $data['page_type'] = "portal";
+      $data['add_css'] = [
+         return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
+         return_css("/css/portal/custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+      ];
+      if (!Auth::check()) {
+         array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
+         array_push($data['add_js'], return_jscript("/js/portal/social-login.js"));
+      }
+      array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
+
+   
+      echo view('portal.asset-header', $data);
+      echo view('portal.asset-pagenavs', $data);
+      if (empty(Auth::check())) {
+         $data['page_title'] = "Templates";
+         echo view('portal.page-need2login', $data);
+      } else {
+         echo view('portal.page-templates');
+      }
+      echo view('portal.asset-footer', $data);
+   }
+
+
+   # How To #######################################################################################
+   public function HowTo() {
+      # Always shown (signed-in or guest visitors)
+
+      $data['head_title'] = "How To - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - How To";
+      $data['page_name'] = "howto";
+      $data['page_type'] = "portal";
+      $data['add_css'] = [
+         return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
+         return_css("/css/portal/custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+      ];
+      if (!Auth::check()) { # Show the social login plugin even if login is not mandatory
+         array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
+         array_push($data['add_js'], return_jscript("/js/portal/social-login.js"));
+      }
+      array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
+
+   
+      echo view('portal.asset-header', $data);
+      echo view('portal.asset-pagenavs', $data);
+      echo view('portal.page-howto');
+      echo view('portal.asset-footer', $data);
+   }
+
+
+   # HowTo ########################################################################################
+   public function Contact() {
+      # Always shown (signed-in or guest visitors)
+
+      $data['head_title'] = "Contact us - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - Contact us";
+      $data['page_name'] = "contact";
+      $data['page_type'] = "portal";
+      $data['add_css'] = [
+         return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
+         return_css("/css/portal/custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+      ];
+      if (!Auth::check()) { # Show the social login plugin even if login is not mandatory
+         array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
+         array_push($data['add_js'], return_jscript("/js/portal/social-login.js"));
+      }
+      array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
+
+   
+      echo view('portal.asset-header', $data);
+      echo view('portal.asset-pagenavs', $data);
+      echo view('portal.page-contact');
+      echo view('portal.asset-footer', $data);
+   }
+
+
+   # My Account ###################################################################################
+   public function MyAccount() {
+      # If the user is logged-in (authenticated), show the actual page contents,
+      # otherwise, show "You need to log-in" interface (user must have goten here manually!).
+
+      $data['head_title'] = "My Account - " . config('app.name');
+      $data['head_description'] = config('app.name') . " - My Account";
+      $data['page_name'] = "myaccount";
+      $data['page_type'] = "portal";
+      $data['add_css'] = [
+         return_css("/vendor/OverlayScrollbars-1.13.1/css/OverlayScrollbars.min.css"),
+         return_css("/css/portal/custom.css")
+      ];
+      $data['add_js'] = [
+         return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
+         return_jscript("/js/portal/adminlte.js"),
+         /* SweetAlert is needed for sign-in errors */
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+      ];
+      if (!Auth::check()) {
+         array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
+         array_push($data['add_js'], return_jscript("/js/portal/social-login.js"));
+      }
+      array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
+
+   
+      echo view('portal.asset-header', $data);
+      echo view('portal.asset-pagenavs', $data);
+      if (empty(Auth::check())) {
+         $data['page_title'] = "My Account";
+         echo view('portal.page-need2login', $data);
+      } else {
+         echo view('portal.page-myaccount');
+      }
       echo view('portal.asset-footer', $data);
    }
 }

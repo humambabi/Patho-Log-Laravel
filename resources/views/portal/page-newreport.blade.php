@@ -59,8 +59,9 @@
                      <div class="card-body">
                         <div class="container-fluid">
                            <h5><strong>Select a template for your new report:</strong></h5>
-                           <h6 class="mb-4">The template theme, logo, and fields will be applied to the report.</h6>
+                           <h6 class="mb-4">The selected template theme, logo, and fields will be applied to the report.</h6>
 
+                           <!-- Template item container -->
                            <div id="templates-container">
 
                               <div class="tplitem-container">
@@ -99,15 +100,15 @@
                                  </div>
                               </div>
 
-                           </div><!-- /#templates-container -->
-
+                           </div>
+                           <!-- / Template item container -->
 
                         </div>
                         
                      </div><!-- /.card-body -->
 
                      <div class="card-footer">
-                        Do you want to customize the templates? Click Here
+                        Want to customize the templates? <a href="{{ url('/') }}/templates">Click Here</a>
                      </div><!-- /.card-footer-->
                   </div><!-- /.card -->
 

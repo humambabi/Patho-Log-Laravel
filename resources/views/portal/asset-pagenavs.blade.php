@@ -46,7 +46,7 @@
                      <p>{{ Auth::user()['name'] }}</p>
                   </div>
 
-                  <a href="#" class="dropdown-item text-center border-top">My Account</a>
+                  <a href="{{ url('/') }}/myaccount" class="dropdown-item text-center border-top">My Account</a>
                   <button type="button" id="btnSignOut" class="dropdown-item text-center border-top rounded-bottom">Sign Out</button>
                </div>
             </li>
@@ -92,18 +92,14 @@
                <li class="nav-item">
                   <a href="{{ url('/') }}/dashboard" class="nav-link{{ ($page_name == 'dashboard') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-tachometer-alt"></i>
-                     <p>
-                        Dashboard
-                     </p>
+                     <p>Dashboard</p>
                   </a>
                </li>
 
                <li class="nav-item">
                   <a href="{{ url('/') }}/newreport" class="nav-link{{ ($page_name == 'newreport') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-edit"></i>
-                     <p>
-                        New Report
-                     </p>
+                     <p>New Report</p>
                   </a>
                </li>
 
@@ -113,22 +109,11 @@
                <li class="nav-item">
                   <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-th-list"></i>
-                     <p>
-                        Saved Reports
-                     </p>
-                  </a>
-               </li>
-               
-               <li class="nav-item">
-                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
-                     <i class="nav-icon fas fa-search"></i>
-                     <p>
-                        Find Reports
-                     </p>
+                     <p>Saved Reports</p>
                   </a>
                </li>
 
-               <li class="nav-item">
+               <li class="nav-item{{ in_array($page_name, ['backup', 'restore']) ?  ' menu-open' : '' }}">
                   <a href="#" class="nav-link">
                      <i class="nav-icon fas fa-database"></i>
                      <p>
@@ -139,13 +124,13 @@
 
                   <ul class="nav nav-treeview">
                      <li class="nav-item">
-                        <a href="pages/charts/chartjs.html" class="nav-link">
+                        <a href="{{ url('/') }}/backup" class="nav-link{{ ($page_name == 'backup') ? ' active' : '' }}">
                            <i class="far fa-circle nav-icon"></i>
                            <p>Backup</p>
                         </a>
                      </li>
                      <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="{{ url('/') }}/restore" class="nav-link{{ ($page_name == 'restore') ? ' active' : '' }}">
                            <i class="far fa-circle nav-icon"></i>
                            <p>Restore</p>
                         </a>
@@ -157,11 +142,9 @@
                <li class="nav-header">Tools</li>
 
                <li class="nav-item">
-                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/templates" class="nav-link{{ ($page_name == 'templates') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-copy"></i>
-                     <p>
-                        Templates
-                     </p>
+                     <p>Templates</p>
                   </a>
                </li>
 
@@ -169,20 +152,16 @@
                <li class="nav-header">Help</li>
 
                <li class="nav-item">
-                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/howto" class="nav-link{{ ($page_name == 'howto') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-question-circle"></i>
-                     <p>
-                        How to...
-                     </p>
+                     <p>How to...</p>
                   </a>
                </li>
 
                <li class="nav-item">
-                  <a href="{{ url('/') }}/savedreports" class="nav-link{{ ($page_name == 'savedreports') ? ' active' : '' }}">
+                  <a href="{{ url('/') }}/contact" class="nav-link{{ ($page_name == 'contact') ? ' active' : '' }}">
                      <i class="nav-icon fas fa-envelope-open-text"></i>
-                     <p>
-                        Contact us
-                     </p>
+                     <p>Contact us</p>
                   </a>
                </li>
             </ul>

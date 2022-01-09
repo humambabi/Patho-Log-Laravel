@@ -1,0 +1,17 @@
+{
+   "template_name": "General Biopsy",
+   "template_description": "A general biopsy report, with all the standard sections.",
+   "page": {
+      "format": "A4",
+      "margin": {
+         "top": 13,
+         "left": 15,
+         "right": 15,
+         "bottom": 13
+      }
+   },
+   "components": {
+      "css": "style.css",
+      "html": "body.html"
+   }
+}

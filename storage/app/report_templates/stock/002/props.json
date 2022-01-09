@@ -1,0 +1,17 @@
+{
+   "template_name": "Pap Smear",
+   "template_description": "A Cytology report, with cell categories and final diagnosis.",
+   "page": {
+      "format": "A4",
+      "margin": {
+         "top": 13,
+         "left": 15,
+         "right": 15,
+         "bottom": 13
+      }
+   },
+   "components": {
+      "css": "style.css",
+      "html": "body.html"
+   }
+}

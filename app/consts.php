@@ -57,7 +57,3 @@ define('PATH_USER_PREDEFINEDPICTURES',                      "img/portal/user_pic
 
 # Guest account
 define('GUEST_USERNAME',                                    "Dr. Guest");
-
-# Steps of Creating a new report
-define('S01_TEMPLATE',                                      "template");
-define('S02_PATIENT',                                       "patient");

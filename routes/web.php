@@ -20,7 +20,7 @@ use App\Http\Controllers\CtrlExtLinks;
 
 /*
 Web Pages ***************************************
-Search for route names using "route('xxx')
+- Search for route names using "route('xxx')
 */
 
 # Home-related pages
@@ -34,14 +34,13 @@ Route::get('/forgotpw',                               [CtrlPortal::class, "Forgo
 
 Route::get('/default',                                [CtrlPortal::class, "Default"]);
 Route::get('/dashboard',                              [CtrlPortal::class, "Dashboard"])         ->name("dashboard");
-Route::get('/newreport/{step?}',                      [CtrlPortal::class, "NewReport"])         ->name("newreport");
+Route::get('/newreport',                              [CtrlPortal::class, "NewReport"])         ->name("newreport");
 Route::get('/savedreports',                           [CtrlPortal::class, "SavedReports"]);
-Route::get('/findreports',                            [CtrlPortal::class, "FindReports"]);
 Route::get('/backup',                                 [CtrlPortal::class, "Backup"]);
 Route::get('/restore',                                [CtrlPortal::class, "Restore"]);
 Route::get('/templates',                              [CtrlPortal::class, "Templates"]);
 Route::get('/howto',                                  [CtrlPortal::class, "HowTo"]);
-Route::get('/contactus',                              [CtrlPortal::class, "ContactUs"]);
+Route::get('/contact',                                [CtrlPortal::class, "Contact"]);
 Route::get('/myaccount',                              [CtrlPortal::class, "MyAccount"]);
 
 

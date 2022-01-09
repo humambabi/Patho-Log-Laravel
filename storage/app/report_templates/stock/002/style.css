@@ -1,0 +1,101 @@
+/* General table styles */
+table, tr, th, td {
+   border-collapse: collapse;
+}
+
+table.fullwidth, table.fullwidth tr {
+   width: 100%;
+}
+
+/* DEBUG */
+table.borders, table.borders tr, table.borders th, table.borders td, tr.borders td{
+   border: 1px solid gray;
+}
+
+hr {
+   color: #a6a6a6;
+}
+
+table#patient_info {
+   font-size: 13px;
+   line-height: 19px;
+}
+
+table#patient_info td:nth-child(1) { width: 103px;} /* 1st Col Label */
+table#patient_info td:nth-child(3), table#patient_info td:nth-child(4) {
+   width: 125px;
+   text-align: right;
+}
+
+h1#report_title {
+   text-align: center;
+   font-size: 19px;
+   margin-bottom: 27px;
+}
+
+h3, div.section_title {
+   margin-top: 0;
+   font-size: 17px;
+   font-weight: bold;
+   text-decoration: underline;
+   margin-bottom: 5px;
+}
+
+span.section_value {
+   margin-top: 0;
+   font-size: 17px;
+   font-weight: bold;
+   text-decoration: none;
+   margin-bottom: 5px;
+}
+
+p {
+   margin-top: 0;
+   margin-bottom: 8px;
+   text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+table#pap_table {
+   font-size: 14px;
+   line-height: 19px;
+}
+
+table#pap_table td.section_head {
+   text-align: center;
+   background-color: #c7c7c7;
+   font-size: 16px;
+   font-weight: bold;
+   padding-left: 0;
+}
+
+table#pap_table td.atypical_value {
+   text-align: center;
+   background-color: #fff;
+   padding-left: 0;
+   font-weight: normal;
+}
+
+table#pap_table td:nth-child(1), table#pap_table td:nth-child(4) { /* 'title' columns */
+   width: 30%;
+   background-color: #e9e9e9;
+   font-weight: bold;
+   padding-left: 7px;
+}
+
+table#pap_table td:nth-child(2), table#pap_table td:nth-child(5) { /* 'value' columns */
+   width: 19%;
+   padding-left: 7px;
+}
+
+table#pap_table td:nth-child(3) { /* Vertical separator */
+   width: 2%;
+   border: none;
+}
