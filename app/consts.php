@@ -57,3 +57,19 @@ define('PATH_USER_PREDEFINEDPICTURES',                      "img/portal/user_pic
 
 # Guest account
 define('GUEST_USERNAME',                                    "Dr. Guest");
+
+# Templates' "properties" definitions
+define('TEMPLATE_STORAGE_DIRNAME',                          "report_templates");
+
+define('TEMPLATE_PROPS_FILENAME',                           "props.json");
+define('TEMPLATE_PDF_FILENAME',                             "preview.pdf");
+define('TEMPLATE_THUMBNAIL_FILENAME',                       "thumbnail.jpg");
+
+define('TEMPLATEPROPS_TEMPLATE_NAME',                       "template_name");
+define('TEMPLATEPROPS_TEMPLATE_DESC',                       "template_description");
+define('TEMPLATEPROPS_PAGE',                                "page");
+define('TEMPLATEPROPS_PAGEFORMAT',                          "format");
+define('TEMPLATEPROPS_PAGEMARGIN',                          "margin");
+define('TEMPLATEPROPS_COMPONENTS',                          "components");
+define('TEMPLATEPROPS_STYLE',                               "css");
+define('TEMPLATEPROPS_BODY',                                "html");

@@ -5,6 +5,8 @@ use App\Http\Controllers\CtrlHome;
 use App\Http\Controllers\CtrlPortal;
 use App\Http\Controllers\CtrlRequests;
 use App\Http\Controllers\CtrlExtLinks;
+use App\Http\Controllers\CtrlResources;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,7 @@ Route::get('/contact',                                [CtrlPortal::class, "Conta
 Route::get('/myaccount',                              [CtrlPortal::class, "MyAccount"]);
 
 
+
 /*
 Requests ****************************************
 */
@@ -59,6 +62,16 @@ Route::post('reqNewPW',                               [CtrlRequests::class, "req
 Route::post('reqSocialRegLogIn',                      [CtrlRequests::class, "reqSocialRegisterOrSignIn"]);
 
 
+
+/*
+Resources ***************************************
+*/
+
+# Template-related resources
+Route::get('resTemplateThumbnail/{tplID}',            [CtrlResources::class, "TemplateThumbnail"]);
+
+
+
 /*
 External links **********************************
 */
@@ -68,6 +81,7 @@ Route::get('/emailverification/{email}/{code}',       [CtrlExtLinks::class, "Ema
 
 # Password reset
 Route::get('/passwordreset/{email}/{code}',           [CtrlExtLinks::class, "CreatePassword"]);
+
 
 
 /*

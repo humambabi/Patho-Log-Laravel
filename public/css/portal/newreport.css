@@ -147,3 +147,8 @@ Report Templates ********************************
    font-size: 1rem;
    line-height: 1;
 }
+.tplitem-ctl-btn button:hover {
+   color: #fff;
+   background-color: var(--palette-turquoise-depressed);
+   border-color: var(--palette-turquoise-depressed);
+}

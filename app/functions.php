@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage; # Needed for template_create_thumbnail()
 
 
 #
@@ -199,4 +200,69 @@ if (!function_exists('add_userlogin_record')) {
          return '/' . PATH_USER_PREDEFINEDPICTURES . '/' . $fileList[random_int(0, count($fileList) - 1)];
       }
    }
+
+
+   #
+   # Create a template's thumbnail image
+   #
+   if (!function_exists('template_create_thumbnail')) {
+      function template_create_thumbnail($tpl_id) {
+         /*
+         Must be *synchronous*
+         */
+         $tplStorageDir = TEMPLATE_STORAGE_DIRNAME . "/" . $tpl_id . "/"; # Ends with a backslash
+         $tplAbsDir = Storage::disk('local')->path($tplStorageDir);
+
+         if (Storage::disk('local')->missing($tplStorageDir . TEMPLATE_PDF_FILENAME)) {
+            # Load the template
+            $template = json_decode(Storage::disk('local')->get($tplStorageDir . TEMPLATE_PROPS_FILENAME), true);
+
+            # Create a PDF object, setting its properties
+            $mpdf = new \Mpdf\Mpdf([
+               'mode'               => 'utf-8',
+               'autoScriptToLang'   => TRUE,
+               'autoLangToFont'     => TRUE,
+               'format'             => $template[TEMPLATEPROPS_PAGE][TEMPLATEPROPS_PAGEFORMAT],
+               'margin_top'         => $template[TEMPLATEPROPS_PAGE][TEMPLATEPROPS_PAGEMARGIN]["top"],
+               'margin_left'        => $template[TEMPLATEPROPS_PAGE][TEMPLATEPROPS_PAGEMARGIN]["left"],
+               'margin_right'       => $template[TEMPLATEPROPS_PAGE][TEMPLATEPROPS_PAGEMARGIN]["right"],
+               'margin_bottom'      => $template[TEMPLATEPROPS_PAGE][TEMPLATEPROPS_PAGEMARGIN]["bottom"],
+               'margin_header'      => 0,
+               'margin_footer'      => 0
+            ]);
+
+            # Set document properties
+            $mpdf->SetBasePath(substr($tplAbsDir, 0, strlen($tplAbsDir) - 1));
+            $mpdf->SetCreator("Patho•Log");
+
+            # Set components (html and styles)
+            if (!empty($template[TEMPLATEPROPS_COMPONENTS][TEMPLATEPROPS_STYLE])) {
+               $css = Storage::disk('local')->get($tplStorageDir . $template[TEMPLATEPROPS_COMPONENTS][TEMPLATEPROPS_STYLE]);
+               $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
+            }
+            if (!empty($template[TEMPLATEPROPS_COMPONENTS][TEMPLATEPROPS_BODY])) {
+               $html = Storage::disk('local')->get($tplStorageDir . $template[TEMPLATEPROPS_COMPONENTS][TEMPLATEPROPS_BODY]);
+               $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+            }
+
+            # Output the pdf file (synchronously)
+            $mpdf->Output(Storage::disk('local')->path($tplStorageDir . TEMPLATE_PDF_FILENAME), \Mpdf\Output\Destination::FILE);
+         }
+
+         # Convert the pdf file to a jpg image (again, synchronously)
+         if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+            # Windows
+            $strCmd = '"gswin64c.exe" -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 ' .
+               '-dAlignToPixels=0 -dGridFitTT=2 "-sDEVICE=jpeg" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r72x72" ' .
+               '-dPrinted=false "-sOutputFile=' . $tplAbsDir . TEMPLATE_THUMBNAIL_FILENAME . '" ' .
+               '"-f' . $tplAbsDir . TEMPLATE_PDF_FILENAME . '"';
+            exec($strCmd);
+         } else {
+            # Linux
+
+         }
+      }
+   }
+
+
 }

@@ -60,51 +60,8 @@
                         <div class="container-fluid">
                            <h5><strong>Select a template for your new report:</strong></h5>
                            <h6 class="mb-4">The selected template theme, logo, and fields will be applied to the report.</h6>
-
-                           <!-- Template item container -->
-                           <div id="templates-container">
-
-                              <div class="tplitem-container">
-                                 <div class="tplitem-backribbon"></div>
-                                 <div class="tplitem-previmg">
-                                    <img alt="General Report" src="/img/portal/templates/general/preview-thumbnail.jpg" width="auto" height="100%" />
-                                 </div>
-                                 <div class="tplitem-ctl">
-                                    <div class="tplitem-ctl-desc">
-                                       <div class="tplitem-ctl-desc-title">General Report</div>
-                                       <div class="tplitem-ctl-desc-text">
-                                          A general biopsy report, with all the standard sections.
-                                       </div>
-                                    </div>
-                                    <div class="tplitem-ctl-btn">
-                                       <button type="button" class="btn btn-turquoise btn-block">Select</button>
-                                    </div>
-                                 </div>
-                              </div>
-
-                              <div class="tplitem-container">
-                                 <div class="tplitem-backribbon"></div>
-                                 <div class="tplitem-previmg">
-                                    <img alt="General Report" src="/img/portal/templates/papsmear/preview-thumbnail.jpg" width="auto" height="100%" />
-                                 </div>
-                                 <div class="tplitem-ctl">
-                                    <div class="tplitem-ctl-desc">
-                                       <div class="tplitem-ctl-desc-title">Pap Smear</div>
-                                       <div class="tplitem-ctl-desc-text">
-                                          A Cytology report, with cell categories and final diagnosis.
-                                       </div>
-                                    </div>
-                                    <div class="tplitem-ctl-btn">
-                                       <button type="button" class="btn btn-turquoise btn-block">Select</button>
-                                    </div>
-                                 </div>
-                              </div>
-
-                           </div>
-                           <!-- / Template item container -->
-
+                           <div id="templates-container">{!! $templates_html !!}</div>
                         </div>
-                        
                      </div><!-- /.card-body -->
 
                      <div class="card-footer">

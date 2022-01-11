@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage; # Needed for NewReport() to get available templates
 
 class CtrlPortal extends Controller
 {
@@ -180,10 +180,43 @@ class CtrlPortal extends Controller
       array_push($data['add_js'], return_jscript("/js/portal/portal-main.js"));
       array_push($data['add_js'], return_jscript("/js/portal/newreport.js"));
 
+      # Create an html list of available templates
+      $tplFolders = Storage::disk('local')->directories(TEMPLATE_STORAGE_DIRNAME);
+      if (count($tplFolders) < 1) {
+         # No templates was found (error)
+         $data['templates_html'] = '<p><strong>No Templates Found!</strong></p>';
+      } else {
+         $data['templates_html'] = '';
+         foreach ($tplFolders as $tplFolder) {
+            $tpl_props = json_decode(Storage::disk('local')->get($tplFolder . '/' . TEMPLATE_PROPS_FILENAME), true);
+            $tpl_title = $tpl_props[TEMPLATEPROPS_TEMPLATE_NAME];
+            $tpl_desc = $tpl_props[TEMPLATEPROPS_TEMPLATE_DESC];
+            $tpl_imgpath = "/resTemplateThumbnail" . "/" . substr($tplFolder, -3); # IMPORTANT: Assuming folders' name length is 3!
+
+            $html =  '<div class="tplitem-container">' .
+                        '<div class="tplitem-backribbon"></div>' .
+                           '<div class="tplitem-previmg">' .
+                              '<img alt="' . $tpl_title . '" src="' . $tpl_imgpath . '" width="auto" height="100%" />' .
+                           '</div>' .
+                           '<div class="tplitem-ctl">' .
+                              '<div class="tplitem-ctl-desc">' .
+                                 '<div class="tplitem-ctl-desc-title">' . $tpl_title . '</div>' .
+                              '<div class="tplitem-ctl-desc-text">' . $tpl_desc . '</div>' .
+                           '</div>' .
+                           '<div class="tplitem-ctl-btn">' .
+                              '<button type="button" class="btn btn-turquoise btn-block">Select</button>' .
+                           '</div>' .
+                        '</div>' .
+                     '</div>';
+
+            $data['templates_html'] .= $html;
+         }
+      }
+
       # View the needed step
       echo view('portal.asset-header', $data);
       echo view('portal.asset-pagenavs', $data);
-      echo view('portal.page-newreport');
+      echo view('portal.page-newreport', $data);
       echo view('portal.asset-footer', $data);
    }
 
