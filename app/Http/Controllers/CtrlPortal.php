@@ -171,7 +171,8 @@ class CtrlPortal extends Controller
          return_jscript("/vendor/OverlayScrollbars-1.13.1/js/jquery.overlayScrollbars.min.js"),
          return_jscript("/js/portal/adminlte.js"),
          /* SweetAlert is needed for sign-in errors */
-         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>'
+         '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
+         '<script src="/vendor/lazysizes/lazysizes.min.js" async=""></script>'
       ];
       if (!Auth::check()) {
          array_push($data['add_js'], '<script src="https://accounts.google.com/gsi/client" async defer></script>');
@@ -196,7 +197,7 @@ class CtrlPortal extends Controller
             $html =  '<div class="tplitem-container">' .
                         '<div class="tplitem-backribbon"></div>' .
                            '<div class="tplitem-previmg">' .
-                              '<img alt="' . $tpl_title . '" src="' . $tpl_imgpath . '" width="auto" height="100%" />' .
+                              '<img alt="' . $tpl_title . '" src="/img/portal/templates/tpl_loader.gif" width="auto" height="100%" class="lazyload" data-src="' . $tpl_imgpath . '"/>' .
                            '</div>' .
                            '<div class="tplitem-ctl">' .
                               '<div class="tplitem-ctl-desc">' .

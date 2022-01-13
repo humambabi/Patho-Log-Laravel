@@ -252,17 +252,19 @@ if (!function_exists('add_userlogin_record')) {
          # Convert the pdf file to a jpg image (again, synchronously)
          if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
             # Windows
-            $strCmd = '"gswin64c.exe" -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 ' .
-               '-dAlignToPixels=0 -dGridFitTT=2 "-sDEVICE=jpeg" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r72x72" ' .
-               '-dPrinted=false "-sOutputFile=' . $tplAbsDir . TEMPLATE_THUMBNAIL_FILENAME . '" ' .
-               '"-f' . $tplAbsDir . TEMPLATE_PDF_FILENAME . '"';
-            exec($strCmd);
+            $strCmd = '"gswin64c.exe" ';
          } else {
             # Linux
-
+            $strCmd = 'gs ';
          }
+         
+         $strCmd .= '-q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 ' .
+            '-dGridFitTT=2 "-sDEVICE=jpeg" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r72x72" -dPrinted=false ' .
+            '"-sOutputFile=' . $tplAbsDir . TEMPLATE_THUMBNAIL_FILENAME . '" "-f' . $tplAbsDir . TEMPLATE_PDF_FILENAME . '"';
+         exec($strCmd);
       }
    }
+
 
 
 }

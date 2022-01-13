@@ -65,7 +65,7 @@
                      </div><!-- /.card-body -->
 
                      <div class="card-footer">
-                        Want to customize the templates? <a href="{{ url('/') }}/templates">Click Here</a>
+                        <a href="{{ url('/') }}/templates">Customize the templates</a>
                      </div><!-- /.card-footer-->
                   </div><!-- /.card -->
 
