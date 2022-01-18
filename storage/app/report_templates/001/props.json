@@ -13,5 +13,102 @@
    "components": {
       "css": "style.css",
       "html": "body.html"
-   }
+   },
+   "fields": [
+      {
+         "class": "step_patient",
+         "type": "PLAINTEXT",
+         "label": "Patient name",
+         "idname": "patient_name",
+         "placeholder": "Full name including first, middle, last, or localized name",
+         "const": "CONST_PATIENTNAME",
+         "data": "Patient First, Middle, Last, Localized Name",
+         "maxstrlen": 150
+      },
+      {
+         "class": "step_patient",
+         "type": "OPTION",
+         "label": "Gender",
+         "orientation": "row",
+         "label-width": "5rem",
+         "options": [{"label": "♂ Male", "id": "gender_male"}, {"label": "♀ Female", "id": "gender_female"}],
+         "name": "patient_gender",
+         "const": "CONST_PATIENTGENDER",
+         "data": "♀️ Female",
+         "width": "75%",
+         "min-w": "10.5rem",
+         "max-w": "13rem"
+      },
+      {
+         "class": "step_patient",
+         "type": "NUMBER",
+         "label": "Age",
+         "orientation": "row",
+         "label-width": "5rem",
+         "idname": "patient_age",
+         "placeholder": "Patient's age",
+         "minmax": [1, 999],
+         "addOptions": ["Years", "Months", "Weeks", "Days"],
+         "addid": "patient_age_unit",
+         "sep-width": "9%",
+         "defOptionIdx": 0,
+         "const": "CONST_PATIENTAGE",
+         "data": "60 Years",
+         "width": "75%",
+         "min-w": "10.5rem",
+         "max-w": "18rem"
+      },
+      {
+         "class": "step_patient",
+         "type": "PLAINTEXT",
+         "label": "MRN (Medical Record Number)",
+         "idname": "patient_mrn",
+         "placeholder": "1234-ABC",
+         "const": "CONST_PATIENTMRN",
+         "data": "#123-ABC",
+         "maxstrlen": 50
+      },
+      {
+         "class": "step_patient",
+         "type": "PLAINTEXT",
+         "label": "Referred By",
+         "idname": "referredby",
+         "placeholder": "Dr. Surgeon who referred the patient",
+         "const": "CONST_REFERREDBY",
+         "data": "Dr. Surgeon Doctor Name",
+         "maxstrlen": 150
+      },
+
+
+
+
+      {
+         "class": "step_additional",
+         "label": "Location of issue",
+         "const": "CONST_ISSUELOCATION",
+         "data": "City"
+      },
+      {
+         "class": "step_additional",
+         "label": "Date of issue",
+         "const": "CONST_ISSUEDATE",
+         "data": "January 1, 2000"
+      },
+
+
+      
+      {
+         "class": "customization",
+         "label": "Report Header Section",
+         "const": "CONST_HEADER_HTMLTABLE",
+         "data": "<tr><td style='width:min-content;'><img src='./logo.png' height='87'/></td><td style='padding-left:15px;line-height:25px;'><strong style='font-size:23px;'>Pathology Laboratory</strong><br/><strong style='font-size:13px;'>Laboratory address, Street, Postal Code, District, City, Country.</strong><br/><strong>Dr. Pathologist Doctor Name</strong></td></tr>"
+      },
+      {
+         "class": "customization",
+         "label": "Main Report Title",
+         "const": "CONST_MAINTITLE",
+         "data": "PATHOLOGY REPORT"
+      }
+   ]
+
 }

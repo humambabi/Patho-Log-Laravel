@@ -110,3 +110,10 @@ User menu
    background-color: var(--palette-turquoise-depressed);
    border-color: var(--palette-turquoise-depressed);
 }
+
+/*
+General components
+*/
+.btn-sm i {
+   font-size: .75rem;
+}

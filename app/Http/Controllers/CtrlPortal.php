@@ -38,7 +38,7 @@ class CtrlPortal extends Controller
       ];
 
       echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-register');
+      echo view('portal.extraportal-register');
       echo view('portal.asset-footer', $data);
    }
 
@@ -69,7 +69,7 @@ class CtrlPortal extends Controller
       ];
 
       echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-login');
+      echo view('portal.extraportal-login');
       echo view('portal.asset-footer', $data);
    }
 
@@ -93,7 +93,7 @@ class CtrlPortal extends Controller
       ];
 
       echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-forgotpw');
+      echo view('portal.extraportal-forgotpw');
       echo view('portal.asset-footer', $data);
    }
 
@@ -192,9 +192,10 @@ class CtrlPortal extends Controller
             $tpl_props = json_decode(Storage::disk('local')->get($tplFolder . '/' . TEMPLATE_PROPS_FILENAME), true);
             $tpl_title = $tpl_props[TEMPLATEPROPS_TEMPLATE_NAME];
             $tpl_desc = $tpl_props[TEMPLATEPROPS_TEMPLATE_DESC];
-            $tpl_imgpath = "/resTemplateThumbnail" . "/" . substr($tplFolder, -3); # IMPORTANT: Assuming folders' name length is 3!
+            $tpl_id = substr($tplFolder, -3); # IMPORTANT: Assuming folders' name length is 3!
+            $tpl_imgpath = "/resTemplateThumbnail" . "/" . $tpl_id;
 
-            $html =  '<div class="tplitem-container">' .
+            $html =  '<div class="tplitem-container" id="' . $tpl_id . '">' .
                         '<div class="tplitem-backribbon"></div>' .
                            '<div class="tplitem-previmg">' .
                               '<img alt="' . $tpl_title . '" src="/img/portal/templates/tpl_loader.gif" width="auto" height="100%" class="lazyload" data-src="' . $tpl_imgpath . '"/>' .

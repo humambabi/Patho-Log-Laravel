@@ -61,6 +61,9 @@ Route::post('reqNewPW',                               [CtrlRequests::class, "req
 # Social requests (could be portal or extra-portal)
 Route::post('reqSocialRegLogIn',                      [CtrlRequests::class, "reqSocialRegisterOrSignIn"]);
 
+# Template steps requests
+Route::post('reqTplStepFields',                       [CtrlRequests::class, "reqTplStepFields"]);
+
 
 
 /*

@@ -152,3 +152,64 @@ Report Templates ********************************
    background-color: var(--palette-turquoise-depressed);
    border-color: var(--palette-turquoise-depressed);
 }
+
+
+/*
+Center loader in steps containers ***************
+*/
+#step-loader-container {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+}
+
+
+/*
+Card footer *************************************
+*/
+.card-footer::after {
+   display: none;
+   content: unset;
+}
+
+.wizbtn {
+   width: 65%;
+   max-width: 6.5rem;
+   font-weight: bold;
+}
+
+.card-footer .btn-turquoise:hover {
+   color: #fff;
+   background-color: var(--palette-turquoise-depressed);
+   border-color: var(--palette-turquoise-depressed);
+}
+
+.card-footer button i {
+   font-size: .8rem;
+}
+
+
+/*
+Report Preview **********************************
+*/
+#rep_pvw_container {
+   flex-direction: column;
+}
+
+#rep_pvw_container div {
+   text-align: center;
+}
+
+#rep_pvw_title {
+   font-size: .9rem;
+   font-weight: bold;
+   font-style: italic;
+}
+
+#rep_pvw {
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}

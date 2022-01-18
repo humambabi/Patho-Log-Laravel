@@ -56,17 +56,47 @@
                      </div><!-- /.card-header -->
                      <!-- /Stepper -->
 
-                     <div class="card-body">
-                        <div class="container-fluid">
-                           <h5><strong>Select a template for your new report:</strong></h5>
-                           <h6 class="mb-4">The selected template theme, logo, and fields will be applied to the report.</h6>
-                           <div id="templates-container">{!! $templates_html !!}</div>
-                        </div>
-                     </div><!-- /.card-body -->
+                     <!-- STEP: template (1) -->
+                     <div id="step-template">
+                        <div class="card-body" style="min-height: 53vh;">
+                           <div class="px-0">
+                              <h5><strong>Select a template for your new report:</strong></h5>
+                              <h6 class="mb-4">The selected template theme, logo, and fields will be applied to the report.</h6>
+                              <div id="templates-container">{!! $templates_html !!}</div>
+                           </div>
+                        </div><!-- /.card-body -->
+                        <div class="card-footer">
+                           <a href="{{ url('/') }}/templates">Customize the templates</a>
+                        </div><!-- /.card-footer-->
+                     </div>
 
-                     <div class="card-footer">
-                        <a href="{{ url('/') }}/templates">Customize the templates</a>
-                     </div><!-- /.card-footer-->
+                     <!-- STEP: patient (2) -->
+                     <div id="step-patient" class="d-none">
+                        <div class="card-body d-flex flex-row" style="min-height: 53vh;">
+                           <div class="col-12 col-md-8 col-xl-6 px-0 pr-md-4">
+                              <h5><strong>Enter the patient's information:</strong></h5>
+                              <div id="patient-container">
+                                 <div id="step-loader-container"><img alt="Loading" src="/img/portal/templates/tpl_loader.gif" width="auto" height="126"/></div>
+                              </div>
+                           </div>
+                           <div class="d-none d-md-flex col-md-4 col-xl-6 px-0" id="rep_pvw_container">
+                              <div id="rep_pvw_title">Preview</div>
+                              <div id="rep_pvw">
+                                 <img alt="Loading preview" src="/img/portal/templates/tpl_loader.gif" width="auto" height="126"/>
+                              </div>
+                              <div><button type="button" class="btn btn-sm btn-default"><i class="fas fa-search"></i>&nbsp;Big Preview</button></div>
+                           </div>
+                        </div><!-- /.card-body -->
+                        <div class="card-footer d-flex flex-row justify-content-between justify-content-md-end">
+                           <button type="button" class="btn btn-sm btn-default d-md-none"><i class="far fa-eye"></i></button>
+                           <div class="d-flex flex-row justify-content-end" style="width:81%;">
+                              <button type="button" class="btn btn-default wizbtn"><i class="fas fa-undo"></i>&nbsp;&nbsp;&nbsp;Back</button>
+                              <div style="height:100%;width:5%;max-width:1rem;"></div>
+                              <button type="button" class="btn btn-turquoise wizbtn">Next&nbsp;&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></button>
+                           <div>
+                        </div><!-- /.card-footer-->
+                     </div>
+
                   </div><!-- /.card -->
 
                </div><!-- /.col-md-6 -->

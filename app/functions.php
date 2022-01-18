@@ -68,9 +68,9 @@ if (!function_exists('reCAPTCHAv3Check')) {
 #
 if (!function_exists('laravel_queueworker')) {
    function laravel_queueworker() {
-      # In Windows, the background process shows a window, and this is good because we can see php's debug
-      # info there (also warning or errors). In Linux server, write output to log instead.
-      # Note that in Windows, you need to have php.exe in your system environment settings.
+      # In Windows, the background process shows a window, and this is good because we can see php's
+      # debug info there (also warning or errors). In Linux server, write output to log instead.
+      # NOTE: In Windows, you need to have php.exe in your system environment settings.
 
       # Start a new queue worker
       if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
@@ -203,6 +203,34 @@ if (!function_exists('add_userlogin_record')) {
 
 
    #
+   # returns an array of template fields belonging to a specific template step
+   #
+   if (!function_exists('get_template_step_fields')) {
+      function get_template_step_fields($fields, $stepname) {
+         $stepfields = [];
+
+         foreach ($fields as $field) {
+            if ($field["class"] == "step_" . $stepname) array_push($stepfields, $field);
+         }
+
+         return $stepfields;
+      }
+   }
+
+
+   #
+   # Compile template's html (html passed as a reference to a string)
+   #
+   if (!function_exists('template_compile_html')) {
+      function template_compile_html(&$html, $fields) {
+         foreach ($fields as $field) {
+            $html = str_replace($field["const"], $field["data"], $html);
+         }
+      }
+   }
+
+
+   #
    # Create a template's thumbnail image
    #
    if (!function_exists('template_create_thumbnail')) {
@@ -242,6 +270,7 @@ if (!function_exists('add_userlogin_record')) {
             }
             if (!empty($template[TEMPLATEPROPS_COMPONENTS][TEMPLATEPROPS_BODY])) {
                $html = Storage::disk('local')->get($tplStorageDir . $template[TEMPLATEPROPS_COMPONENTS][TEMPLATEPROPS_BODY]);
+               template_compile_html($html, $template[TEMPLATEPROPS_FIELDS]);
                $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
             }
 
@@ -265,6 +294,116 @@ if (!function_exists('add_userlogin_record')) {
       }
    }
 
+
+   #
+   # Create an HTML script representing a template step
+   #
+   if (!function_exists('create_templatestep_html')) {
+      function create_templatestep_html($stepFields) {
+         $html =
+               '<form><br/>';
+
+         foreach ($stepFields as $field) {
+            if ($field["type"] == "PLAINTEXT") { # ------------------------------------------------
+               $inputTag = '<input type="text" class="form-control"';
+               if (!empty($field["idname"])) $inputTag .= ' id="' . $field["idname"] . '" name="' . $field["idname"] . '"';
+               if (!empty($field["placeholder"])) $inputTag .= ' placeholder="' . $field["placeholder"] . '"';
+               if (!empty($field["maxstrlen"])) $inputTag .= ' maxlength="' . $field["maxstrlen"] . '"';
+               $inputTag .= ' required>';
+
+               $html .=
+                  '<div class="form-group">' .
+                     '<label for="' . $field["idname"] . '">' . $field["label"] . ':</label>' .
+                     $inputTag .
+                  '</div>';
+            } else
+            if ($field["type"] == "OPTION") { # ---------------------------------------------------
+               $grpClass = 'form-group';
+               $cntStyle = "";
+               if (!empty($field["width"])) $cntStyle .= 'width:' . $field["width"] . ';';
+               if (!empty($field["min-w"])) $cntStyle .= 'min-width:' . $field["min-w"] . ';';
+               if (!empty($field["max-w"])) $cntStyle .= 'max-width:' . $field["max-w"] . ';';
+               if (!empty($field["orientation"])) {
+                  if ($field["orientation"] == "row") {
+                     $grpClass .= ' d-flex flex-row align-items-baseline';
+                     $cntStyle .= 'display:flex;flex-direction:row;align-items:center;justify-content:space-between;';
+                  }
+               }
+               $styleLbl = "";
+               if (!empty($field["label-width"])) $styleLbl .= 'width:' . $field["label-width"] . ';';
+
+               $html .=
+                  '<div class="' . $grpClass . '">' .
+                     '<label' . (strlen($styleLbl) > 0 ? ' style="' . $styleLbl . '"' : '') . '>' . $field["label"] . ':</label>' .
+                     '<div' . (strlen($cntStyle) > 0 ? ' style="' . $cntStyle . '"' : '') . '>';
+               for ($iC = 0; $iC < count($field["options"]); $iC++) {
+                  $html .=
+                        '<div class="custom-control custom-radio">' .
+                           '<input class="custom-control-input" type="radio" id="' . $field["options"][$iC]["id"] . '" name="' . $field["name"] . '">' .
+                           '<label for="' . $field["options"][$iC]["id"] . '" class="custom-control-label">' . $field["options"][$iC]["label"] . '</label>' .
+                        '</div>';
+               }
+               $html .=
+                     '</div>' .
+                  '</div>';
+            } else
+            if ($field["type"] == "NUMBER") { # ---------------------------------------------------
+               $grpClass = 'form-group';
+               $cntStyle = "";
+               if (!empty($field["width"])) $cntStyle .= 'width:' . $field["width"] . ';';
+               if (!empty($field["min-w"])) $cntStyle .= 'min-width:' . $field["min-w"] . ';';
+               if (!empty($field["max-w"])) $cntStyle .= 'max-width:' . $field["max-w"] . ';';
+               if (!empty($field["orientation"])) {
+                  if ($field["orientation"] == "row") {
+                     $grpClass .= ' d-flex flex-row align-items-baseline';
+                     $cntStyle .= 'display:flex;flex-direction:row;align-items:center;justify-content:space-between;';
+                  }
+               }
+               $styleLbl = "";
+               if (!empty($field["label-width"])) $styleLbl .= 'width:' . $field["label-width"] . ';';
+               $inputTag = '<input type="number" class="form-control"';
+               if (!empty($field["idname"])) $inputTag .= ' id="' . $field["idname"] . '" name="' . $field["idname"] . '"';
+               if (!empty($field["placeholder"])) $inputTag .= ' placeholder="' . $field["placeholder"] . '"';
+               if (!empty($field["minmax"])) $inputTag .= ' min="' . $field["minmax"][0] . '" max="' . $field["minmax"][1] . '"';
+               $inputTag .= ' required>';
+
+               $html .=
+                  '<div class="' . $grpClass . '">' .
+                     '<label' . (empty($field["idname"]) ? '' : ' for="' . $field["idname"] . '"') . (strlen($styleLbl) > 0 ? ' style="' . $styleLbl . '"' : '') . '>' . $field["label"] . ':</label>' .
+                     '<div' . (strlen($cntStyle) > 0 ? ' style="' . $cntStyle . '"' : '') . '>' .
+                        $inputTag;
+
+               if (!empty($field["sep-width"])) {
+                  $html .=
+                        '<div style="height:100%;width:' . $field["sep-width"] . ';"></div>';
+               }
+
+               if (!empty($field["addOptions"])) {
+                  $html .=
+                        '<select class="form-control" id="' . $field["addid"] . '">';
+                  for ($iC = 0; $iC < count($field["addOptions"]); $iC++) {
+                     $html .=
+                           '<option' . (empty($field["defOptionIdx"]) ? '' : (intval($field["defOptionIdx"]) != $iC ? '' : ' selected')) . '>' . $field["addOptions"][$iC] . '</option>';
+                  }
+
+                  $html .=
+                        '</select>';
+               }
+
+               $html .=
+                     '</div>' .
+                  '</div>';
+            }
+         }
+         
+         $html .=
+               '</form>';
+         return $html;
+
+         // Also return an autofucus (specific to step)
+         // cannot do this here because the DOM is already ready before the Ajax request
+      }
+   }
 
 
 }

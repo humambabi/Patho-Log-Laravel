@@ -4,7 +4,11 @@ Patho•Log - New Report
 
 'use strict';
 var stepperCurrentStepIndex = 0;
+var g_oReportData = new Object;
 
+/*
+Create the 'OneStep' stepper intended for mobile phones
+*/
 function initOneStepStepperDots() {
    var stepsCount = $("#stepper-container .step").length, innerHtml = "", iC;
 
@@ -15,6 +19,9 @@ function initOneStepStepperDots() {
    $("#onestep-dots").html(innerHtml);
 }
 
+/*
+Set the stepper's step icon according to the current step
+*/
 function setStepperCurrentStep() {
    $("#stepper-container .step").each(function(index) {
       if (index < stepperCurrentStepIndex) {
@@ -42,8 +49,58 @@ function setStepperCurrentStep() {
    });
 }
 
+/*
+Go to NEXT step
+*/
+function gotoNextStep() {
+   stepperCurrentStepIndex++;
+   setStepperCurrentStep();
+}
+function gotoStepPatient() {
+   $("div#step-template").addClass("d-none");
+   $("div#step-patient").removeClass("d-none");
+   gotoNextStep();
+
+   // Get the needed steps fro the template from the server
+   $.ajax({
+      url: "/reqTplStepFields",
+      data: {
+         _token: $('meta[name="csrf-token"]').attr('content'), // Laravel's CSRF Setup
+         tpl_id: g_oReportData.templateId,
+         stp_name: "patient"
+      }
+   })
+   .done(function (response) {
+      if ((!(typeof(response) === "object")) || (response.retcode != ERR_NOERROR)) {
+         console.log(response);
+         Swal.fire({
+            title: "Error!",
+            html: "<p>Sorry!</p><p>An unknown server error occurred!</p><p>Please, try again later.</p>",
+            icon: "error"
+         });
+         return;
+      }
+
+      //console.log(response);
+
+      // Update the step html
+      $("div#patient-container").html(response.stepHtml);
+   });
+}
+
+
 
 (function ($) { // When the document is ready...
    initOneStepStepperDots();
    setStepperCurrentStep();
+
+   $(".tplitem-container").click(function() {
+      g_oReportData.templateId = this.id;
+      gotoStepPatient();
+   });
 })(jQuery);
+
+
+/*
+When you get the Age field value, it should be Abs (meaning, > 0)
+*/

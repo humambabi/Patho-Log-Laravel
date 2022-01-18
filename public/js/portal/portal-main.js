@@ -35,8 +35,8 @@ $.ajaxSetup({
 
 // When the document is ready...
 (function ($) {
-  // User menu: Sign Out
-  $('#btnSignOut').click(function() {
-    $.ajax({url: "/reqSignOut"}).done(function () { location.href = "/login"; });
-  });
+   // User menu: Sign Out
+   $('#btnSignOut').click(function() {
+      $.ajax({url: "/reqSignOut"}).done(function () { location.href = "/login"; });
+   });
 })(jQuery);

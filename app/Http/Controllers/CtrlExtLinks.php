@@ -120,7 +120,7 @@ class CtrlExtLinks extends Controller
       ];
 
       echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-emailverify', $data);
+      echo view('portal.extraportal-emailverify', $data);
       echo view('portal.asset-footer', $data);
    }
 
@@ -195,7 +195,7 @@ class CtrlExtLinks extends Controller
       ];
 
       echo view('portal.asset-header', $data);
-      echo view('portal.page-extraportal-createpw', $data);
+      echo view('portal.extraportal-createpw', $data);
       echo view('portal.asset-footer', $data);
    }
 }

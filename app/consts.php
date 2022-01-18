@@ -73,3 +73,4 @@ define('TEMPLATEPROPS_PAGEMARGIN',                          "margin");
 define('TEMPLATEPROPS_COMPONENTS',                          "components");
 define('TEMPLATEPROPS_STYLE',                               "css");
 define('TEMPLATEPROPS_BODY',                                "html");
+define('TEMPLATEPROPS_FIELDS',                              "fields");

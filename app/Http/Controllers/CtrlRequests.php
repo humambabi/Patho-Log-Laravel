@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;         # Needed for reqTplStepFields() request
 use Illuminate\Support\Facades\Validator;
 
 
@@ -276,6 +277,7 @@ class CtrlRequests extends Controller
       ])->withoutCookie(COOKIE_AUTOLOGIN); # Remove cookies (see reqSignOut)
    }
 
+
    ################################################################################################
    public function reqSocialRegisterOrSignIn(Request $request) {
       # Expected parameters by the Ajax request:
@@ -364,4 +366,44 @@ class CtrlRequests extends Controller
       # Not a valid social type has been passed, or any other error happened
       return response()->json(['retcode' => ERR_WITHMSG, 'errmsg' => "Invalid data received!"]);
    }
+
+
+   ################################################################################################
+   public function reqTplStepFields(Request $request) {
+      # Create a manual validator to prevent returning 422 html error
+      $Validator = Validator::make($request->all(), [
+         'tpl_id'  => ['bail', 'required', 'max:50'],
+         'stp_name'  => ['bail', 'required', 'max:50']
+      ]);
+      
+      # Return error message gracefully
+      if ($Validator->fails()) {
+         $errors = $Validator->errors();
+
+         if (!empty($errors->first('tpl_id'))) {
+            return response()->json(['retcode' => ERR_UNEXPECTED, 'errmsg' => $errors->first('tpl_id')]);
+         }
+         if (!empty($errors->first('stp_name'))) {
+            return response()->json(['retcode' => ERR_UNEXPECTED, 'errmsg' => $errors->first('stp_name')]);
+         }
+      }
+
+      # Check and load the template properties script
+      # (Should be here to handle bad parameter passed to the Ajax request)
+      $Validated = $Validator->validated();
+      $tplDir = TEMPLATE_STORAGE_DIRNAME . "/" . $Validated["tpl_id"] . "/";
+      if (Storage::disk('local')->missing($tplDir . TEMPLATE_PROPS_FILENAME)) {
+         return response()->json(['retcode' => ERR_UNEXPECTED, 'errmsg' => $errors->first('tpl_id')]);
+      }
+      $tpl_props = json_decode(Storage::disk('local')->get($tplDir . TEMPLATE_PROPS_FILENAME), true);
+      $stepFields = get_template_step_fields($tpl_props[TEMPLATEPROPS_FIELDS], $Validated["stp_name"]);
+      if (count($stepFields) < 1) { # Error: Step name is invalid!
+         return response()->json(['retcode' => ERR_UNEXPECTED, 'errmsg' => $errors->first('stp_name')]);
+      }
+
+      $html = create_templatestep_html($stepFields);
+      return response()->json(['retcode' => ERR_NOERROR, 'stepHtml' => $html]);
+   }
+
+
 }
