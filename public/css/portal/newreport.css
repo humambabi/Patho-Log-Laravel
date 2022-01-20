@@ -201,9 +201,11 @@ Report Preview **********************************
 }
 
 #rep_pvw_title {
-   font-size: .9rem;
-   font-weight: bold;
+   font-size: .8rem;
+   font-weight: normal;
    font-style: italic;
+   color: #999;
+   margin-bottom: .25rem;
 }
 
 #rep_pvw {
@@ -212,4 +214,10 @@ Report Preview **********************************
    flex-direction: column;
    justify-content: center;
    align-items: center;
+}
+
+#rep_pvw img:not(#rep_pvw_loader) {
+   max-height: 47vh;
+   max-width: 100%;
+   box-shadow: 0px 1px 5px 0px #bbb;
 }

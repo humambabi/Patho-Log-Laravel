@@ -101,7 +101,7 @@
          "class": "customization",
          "label": "Report Header Section",
          "const": "CONST_HEADER_HTMLTABLE",
-         "data": "<tr><td style='width:min-content;'><img src='./logo.png' height='87'/></td><td style='padding-left:15px;line-height:25px;'><strong style='font-size:23px;'>Pathology Laboratory</strong><br/><strong style='font-size:13px;'>Laboratory address, Street, Postal Code, District, City, Country.</strong><br/><strong>Dr. Pathologist Doctor Name</strong></td></tr>"
+         "data": "<tr><td style='width:min-content;'><img src='./001/logo.png' height='87'/></td><td style='padding-left:15px;line-height:25px;'><strong style='font-size:23px;'>Pathology Laboratory</strong><br/><strong style='font-size:13px;'>Laboratory address, Street, Postal Code, District, City, Country.</strong><br/><strong>Dr. Pathologist Doctor Name</strong></td></tr>"
       },
       {
          "class": "customization",

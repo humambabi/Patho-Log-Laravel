@@ -60,10 +60,15 @@ define('GUEST_USERNAME',                                    "Dr. Guest");
 
 # Templates' "properties" definitions
 define('TEMPLATE_STORAGE_DIRNAME',                          "report_templates");
+define('PREVIEW_STORAGE_DIRNAME',                           "report_previews");
 
 define('TEMPLATE_PROPS_FILENAME',                           "props.json");
-define('TEMPLATE_PDF_FILENAME',                             "preview.pdf");
+define('TEMPLATE_PDF_FILENAME',                             "preview.pdf"); // thumbnail (change after adjusting papsmear)
 define('TEMPLATE_THUMBNAIL_FILENAME',                       "thumbnail.jpg");
+
+define('TEMPLATE_TEMP_MAXTIMEOUT_DAYS',                     1);
+define('TEMPLATE_TEMPPDF_FILENAME',                         "rep_%s.pdf");
+define('TEMPLATE_TEMPJPG_FILENAME',                         "rep_%s.jpg");
 
 define('TEMPLATEPROPS_TEMPLATE_NAME',                       "template_name");
 define('TEMPLATEPROPS_TEMPLATE_DESC',                       "template_description");
@@ -74,3 +79,5 @@ define('TEMPLATEPROPS_COMPONENTS',                          "components");
 define('TEMPLATEPROPS_STYLE',                               "css");
 define('TEMPLATEPROPS_BODY',                                "html");
 define('TEMPLATEPROPS_FIELDS',                              "fields");
+
+define('TEMPLATE_USERDATA_TPLID',                           "templateId");

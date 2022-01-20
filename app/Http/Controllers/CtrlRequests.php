@@ -406,4 +406,35 @@ class CtrlRequests extends Controller
    }
 
 
+   ################################################################################################
+   public function reqTplGetPreview(Request $request) {
+      # Create a manual validator to prevent returning 422 html error
+      $Validator = Validator::make($request->all(), [
+         'userData'  => ['nullable']
+      ]);
+
+      # Return error message gracefully
+      if ($Validator->fails()) {
+         $errors = $Validator->errors();
+
+         if (!empty($errors->first('userData'))) {
+            return response()->json(['retcode' => ERR_UNEXPECTED, 'errmsg' => $errors->first('userData')]);
+         }
+      }
+
+      $userData = $Validator->validated()['userData'];
+
+      # Another kind of validation: Check JSON members
+      if (empty($userData[TEMPLATE_USERDATA_TPLID])) {
+         return response()->json(['retcode' => ERR_UNEXPECTED, 'errmsg' => "Bad data received!"]);
+      }
+
+      $imgId = $request->session()->getId();
+      template_create_preview($userData, $imgId); # This call should create a new report preview pdf & jpg, and clean up the folder
+
+      return response()->json([
+         'retcode' => ERR_NOERROR,
+         'pvwImg' => '<img alt="Report Preview" src="/resReportPreview/' . $imgId . '" />'
+      ]);
+   }
 }

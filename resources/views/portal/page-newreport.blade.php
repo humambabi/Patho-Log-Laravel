@@ -56,35 +56,39 @@
                      </div><!-- /.card-header -->
                      <!-- /Stepper -->
 
-                     <!-- STEP: template (1) -->
+                     <!--
+                        STEP: template (1) -------------------------------
+                     -->
                      <div id="step-template">
                         <div class="card-body" style="min-height: 53vh;">
                            <div class="px-0">
-                              <h5><strong>Select a template for your new report:</strong></h5>
+                              <h4><strong>Select a template for your new report:</strong></h4>
                               <h6 class="mb-4">The selected template theme, logo, and fields will be applied to the report.</h6>
                               <div id="templates-container">{!! $templates_html !!}</div>
                            </div>
-                        </div><!-- /.card-body -->
+                        </div>
                         <div class="card-footer">
                            <a href="{{ url('/') }}/templates">Customize the templates</a>
-                        </div><!-- /.card-footer-->
+                        </div>
                      </div>
 
-                     <!-- STEP: patient (2) -->
+                     <!--
+                        STEP: patient (2) --------------------------------
+                     -->
                      <div id="step-patient" class="d-none">
                         <div class="card-body d-flex flex-row" style="min-height: 53vh;">
                            <div class="col-12 col-md-8 col-xl-6 px-0 pr-md-4">
-                              <h5><strong>Enter the patient's information:</strong></h5>
+                              <h4><strong>Enter the patient's information:</strong></h4>
                               <div id="patient-container">
                                  <div id="step-loader-container"><img alt="Loading" src="/img/portal/templates/tpl_loader.gif" width="auto" height="126"/></div>
                               </div>
                            </div>
                            <div class="d-none d-md-flex col-md-4 col-xl-6 px-0" id="rep_pvw_container">
-                              <div id="rep_pvw_title">Preview</div>
+                              <div id="rep_pvw_title">Report Preview</div>
                               <div id="rep_pvw">
-                                 <img alt="Loading preview" src="/img/portal/templates/tpl_loader.gif" width="auto" height="126"/>
+                                 <img id="rep_pvw_loader" alt="Loading preview" src="/img/portal/templates/tpl_loader.gif" width="auto" height="126"/>
                               </div>
-                              <div><button type="button" class="btn btn-sm btn-default"><i class="fas fa-search"></i>&nbsp;Big Preview</button></div>
+                              <div class="mt-2"><button type="button" class="btn btn-sm btn-default"><i class="fas fa-search"></i>&nbsp;Big Preview</button></div>
                            </div>
                         </div><!-- /.card-body -->
                         <div class="card-footer d-flex flex-row justify-content-between justify-content-md-end">
@@ -96,6 +100,8 @@
                            <div>
                         </div><!-- /.card-footer-->
                      </div>
+
+
 
                   </div><!-- /.card -->
 
