@@ -3,14 +3,13 @@ Patho•Log - New Report
 */
 
 'use strict';
-var stepperCurrentStepIndex = 0;
+const TIMEOUT_REPPREV_REFRESH = 2500;
 
-/* Members:
-templateId
-fields
-
-*/
+var g_stepperCurrentStepIndex = 0;
 var g_oReportData = new Object;
+var g_RepPrev_TimerId = null;
+
+
 
 /*
 Create the 'OneStep' stepper intended for mobile phones *******************************************
@@ -30,29 +29,40 @@ Set the stepper's step icon according to the current step **********************
 */
 function setStepperCurrentStep() {
    $("#stepper-container .step").each(function(index) {
-      if (index < stepperCurrentStepIndex) {
+      if (index < g_stepperCurrentStepIndex) {
          $(this).removeClass("current").addClass("done");
          $(this).find("i").removeClass("far fa-circle fa-dot-circle").addClass("fas fa-check-circle");
       }
-      if (index == stepperCurrentStepIndex) {
+      if (index == g_stepperCurrentStepIndex) {
          $(this).removeClass("done").addClass("current");
          $(this).find("i").removeClass("far fa-check-circle fa-circle").addClass("fas fa-dot-circle");
       }
-      if (index > stepperCurrentStepIndex) {
+      if (index > g_stepperCurrentStepIndex) {
          $(this).removeClass("done current");
          $(this).find("i").removeClass("fas fa-check-circle fa-dot-circle").addClass("far fa-circle");
       }
    });
    
-   var onestepTitle = "Step (" + (stepperCurrentStepIndex + 1) + "/" + $("#onestep-dots i").length + "): ";
-   onestepTitle += ($("#stepper-container .step")[stepperCurrentStepIndex]).querySelector("span").innerText;
+   var onestepTitle = "Step (" + (g_stepperCurrentStepIndex + 1) + "/" + $("#onestep-dots i").length + "): ";
+   onestepTitle += ($("#stepper-container .step")[g_stepperCurrentStepIndex]).querySelector("span").innerText;
    $("#onestep-title").text(onestepTitle);
 
    $("#onestep-dots i").each(function(index) {
-      if (index < stepperCurrentStepIndex) $(this).css("color", "var(--palette-turquoise)");
-      if (index == stepperCurrentStepIndex) $(this).css("color", "var(--palette-purple)");
-      if (index > stepperCurrentStepIndex) $(this).css("color", "var(--gray-disabled)");
+      if (index < g_stepperCurrentStepIndex) $(this).css("color", "var(--palette-turquoise)");
+      if (index == g_stepperCurrentStepIndex) $(this).css("color", "var(--palette-purple)");
+      if (index > g_stepperCurrentStepIndex) $(this).css("color", "var(--gray-disabled)");
    });
+}
+
+
+/*
+Reset userData (only for empty fields) ************************************************************
+*/
+function userData_Reset() {
+   if (g_oReportData.hasOwnProperty("fields") == false) g_oReportData.fields = {}; // Later we need to add members to it.
+
+   if (g_oReportData.fields.hasOwnProperty("CONST_PATIENTNAME") == false) g_oReportData.fields.CONST_PATIENTNAME = "---";
+
 }
 
 
@@ -65,7 +75,8 @@ function getReportPreview() {
       data: {
          _token: $('meta[name="csrf-token"]').attr('content'), // Laravel's CSRF Setup
          userData: g_oReportData
-      }
+      },
+      cache: false // Mostly will not work!
    })
    .done(function (response) {
       if ((!(typeof(response) === "object")) || (response.retcode != ERR_NOERROR)) {
@@ -87,10 +98,40 @@ function getReportPreview() {
 
 
 /*
+Reset report preview timer ************************************************************************
+*/
+function repPrevTimer_Reset() {
+   if (g_RepPrev_TimerId) clearTimeout(g_RepPrev_TimerId);
+
+   g_RepPrev_TimerId = setTimeout(function() {
+      g_RepPrev_TimerId = null;
+
+      // create a semi-transparent overlay over the report, with a loader inside
+      // send an ajax request to get a new preview
+      getReportPreview();
+      // don't forget: inside the ajax .done handler, remove the overlay with the loader (replace them)
+
+   }, TIMEOUT_REPPREV_REFRESH);
+}
+
+
+/*
+Set the event handler for a field *****************************************************************
+*/
+function setFieldEvent(fieldId, tplField) {
+   $("#" + fieldId).keyup(function() {
+///////verify field data
+      g_oReportData.fields[tplField] = this.value;
+      repPrevTimer_Reset();
+   });
+}
+
+
+/*
 Go to NEXT step(s) ********************************************************************************
 */
 function gotoNextStep() {
-   stepperCurrentStepIndex++;
+   g_stepperCurrentStepIndex++;
    setStepperCurrentStep();
 }
 function gotoStepPatient() {
@@ -118,12 +159,30 @@ function gotoStepPatient() {
          return;
       }
 
-      //console.log(response);
+//      console.log(response);
 
       // Update the step html
       $("div#patient-container").html(response.stepHtml);
 
-      // After finishing this ajax, send a new ajax for the preview
+      // Update event mapping
+      for (var iC = 0; iC < response.actFields.length; iC++) {
+         var oneField = response.actFields[iC];
+         switch (oneField.type) {
+            case 'TEXTBOX':
+               setFieldEvent(oneField.id, oneField.tplField);
+               break;
+         }
+
+//         console.log(response.actFields[iC]);
+      }
+
+      // After showing the step fields, adjust the global userData and set step fields' UI contents
+      if (g_oReportData.fields.hasOwnProperty("CONST_PATIENTNAME")) /* and not "---" */{
+         
+         // set text.text = field
+      }
+
+      // After showing the step fields, and updating the userData, send a new ajax to get the report preview.
       getReportPreview();
    });
 }
@@ -136,7 +195,7 @@ function gotoStepPatient() {
 
    $(".tplitem-container").click(function() {
       g_oReportData.templateId = this.id;
-      g_oReportData.fields = []; // Keep it even if not used in Patient step. Later we need to add members to it.
+      userData_Reset();
       gotoStepPatient();
    });
 })(jQuery);
@@ -146,4 +205,5 @@ function gotoStepPatient() {
 When you get the Age field value, it should be Abs (meaning, > 0)
 On mobile, no need for the ajax: reportpreview
 Don't let the user refresh the page without a warning!
+report previews -> queue
 */

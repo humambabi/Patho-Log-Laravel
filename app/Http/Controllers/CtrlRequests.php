@@ -402,7 +402,12 @@ class CtrlRequests extends Controller
       }
 
       $html = create_templatestep_html($stepFields);
-      return response()->json(['retcode' => ERR_NOERROR, 'stepHtml' => $html]);
+      $actFields = [
+         ["id" => "patient_name",   "type" => "TEXTBOX", "tplField" => "CONST_PATIENTNAME"],
+         ["id" => "gender_male",    "type" => "OPTION",  "tplField" => "CONST_PATIENTGENDER"],
+         ["id" => "gender_female",  "type" => "OPTION",  "tplField" => "CONST_PATIENTGENDER"]
+      ];
+      return response()->json(['retcode' => ERR_NOERROR, 'stepHtml' => $html, 'actFields' => $actFields]);
    }
 
 
@@ -432,9 +437,11 @@ class CtrlRequests extends Controller
       $imgId = $request->session()->getId();
       template_create_preview($userData, $imgId); # This call should create a new report preview pdf & jpg, and clean up the folder
 
+      // Adding a 'ts' parameter after the image 'src' attribute prevents the browser from loading the same
+      // image from its cache (given that the new src is the same as the old one!)
       return response()->json([
          'retcode' => ERR_NOERROR,
-         'pvwImg' => '<img alt="Report Preview" src="/resReportPreview/' . $imgId . '" />'
+         'pvwImg' => '<img alt="Report Preview" src="/resReportPreview/' . $imgId . '?ts=' . time() . '" />'
       ]);
    }
 }
