@@ -4,6 +4,7 @@
    <meta charset="utf-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta name="csrf-token" content="{{ csrf_token() }}">
    
    <!-- SEO Meta Tags -->
    <meta name="description" content="{{ $head_description }}" />
@@ -31,9 +32,6 @@
    }
    @endphp
 
-   <!-- CSRF protection -->
-   <meta name="csrf-token" content="{{ csrf_token() }}">
-
    <!-- Only one important script -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    
@@ -46,7 +44,7 @@
       const EMAIL_MAXLENGTH = {{ EMAIL_MAXLENGTH }};
       const PASSWORD_MINLENGTH = {{ PASSWORD_MINLENGTH }};
       const PASSWORD_MAXLENGTH = {{ PASSWORD_MAXLENGTH }};
-      const GOOGLERECAPTCHA3_SITEKEY = "{{ env('GOOGLERECAPTCHA3_SITEKEY') }}";
+      const GOOGLERECAPTCHA3_SITEKEY = "{{ config('app.GreCAPTCHAv3_SiteKey') }}";
       const GR_ACTION_ACCOUNTREGISTER = "{{ GR_ACTION_ACCOUNTREGISTER }}";
       const GR_ACTION_RESETPASSWORD = "{{ GR_ACTION_RESETPASSWORD }}";
       const ERR_NOERROR = {{ ERR_NOERROR }};
@@ -67,11 +65,16 @@
       const MSG_PASSWORDCONFIRM_REQUIRED = "{{ MSG_PASSWORDCONFIRM_REQUIRED }}";
       const MSG_PASSWORDCONFIRM_EQUAL = "{{ MSG_PASSWORDCONFIRM_EQUAL }}";
       const MSG_TERMSPRIVACY_ACCEPT = "{{ MSG_TERMSPRIVACY_ACCEPT }}";
-      const SOCIALLOGIN_GOOGLE_CLIENT_ID = "{{ env('SOCIALLOGIN_GOOGLE_CLIENT_ID') }}";
+      const SOCIALLOGIN_GOOGLE_CLIENT_ID = "{{ config('app.SocialLogin_Google_ClientID') }}";
    </script>
 
-   <!-- gtag/g.analytics - same as the comingsoon page -->
-   <!-- -->
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7S4S8DXKS1"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js',new Date());gtag('config','G-7S4S8DXKS1');
+   </script>
 </head>
 @php
    #
@@ -82,14 +85,17 @@
    #
    $authenticated = false; $cookieexpired = true;
 
-   if (env('APP_ENV', 'production') != 'production') Log::warning("--------------------------------------------------");
-   if (Auth::check()) $authenticated = true;
+   if (config('app.env') != 'production') Log::warning("--------------------------------------------------");
+   if (Auth::check()) {
+      request()->session()->regenerate();
+      $authenticated = true;
+   }
    if (!empty($_COOKIE[COOKIE_AUTOLOGIN])) $cookieexpired = false;
 
-   if (env('APP_ENV', 'production') != 'production') Log::warning("DetectAutoLogin: \$auth:" . ($authenticated ? "yes" : "no") . ", \$expired:" . ($cookieexpired ? "yes" : "no"));
+   if (config('app.env') != 'production') Log::warning("DetectAutoLogin: \$auth:" . ($authenticated ? "yes" : "no") . ", \$expired:" . ($cookieexpired ? "yes" : "no"));
 
    if ($authenticated && $cookieexpired) {
-      if (env('APP_ENV', 'production') != 'production') Log::warning("Setting 'auto_login' cookie, and DB->IPStats...");
+      if (config('app.env') != 'production') Log::warning("Setting 'auto_login' cookie, and DB->IPStats...");
 
       $modUser = \App\Models\User::where('email', Auth::user()['email'])->first();
       if (!empty($modUser)) {

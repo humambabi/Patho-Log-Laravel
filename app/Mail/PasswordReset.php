@@ -39,7 +39,7 @@ class PasswordReset extends Mailable implements ShouldQueue
    #
    public function build()
    {
-      return $this->from(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_SENDERNAME)
+      return $this->from(config('mail.from.address'), config('mail.from.name'))
                   ->subject("✳ Request to reset your password")
                   ->view('emails.passwordreset')
                   ->text('emails.passwordreset_plain');

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage; # Needed for NewReport() to get available templates
 
+
 class CtrlPortal extends Controller
 {
    /*
@@ -31,7 +32,7 @@ class CtrlPortal extends Controller
          return_jscript("/js/portal/adminlte.js"),
          /* SweetAlert is needed for sign-in errors */
          '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
-         '<script src="https://www.google.com/recaptcha/api.js?render=' . env('GOOGLERECAPTCHA3_SITEKEY') . '"></script>',
+         '<script src="https://www.google.com/recaptcha/api.js?render=' . config('app.GreCAPTCHAv3_SiteKey') . '"></script>',
          '<script src="https://accounts.google.com/gsi/client" async defer></script>',
          return_jscript("/js/portal/social-login.js"),
          return_jscript("/js/portal/extraportal-scripts.js")
@@ -50,8 +51,8 @@ class CtrlPortal extends Controller
       if (Auth::check()) return redirect()->route('dashboard');
 
       # Only if user is not authenticated
-      $data['head_title'] = "Login - Patho•Log";
-      $data['head_description'] = "Patho•Log - Login";
+      $data['head_title'] = "Login | Patho•Log";
+      $data['head_description'] = "Patho•Log - Login to the system";
       $data['page_name'] = "login";
       $data['page_type'] = "extraportal";
 
@@ -88,7 +89,7 @@ class CtrlPortal extends Controller
          return_jscript("/js/portal/adminlte.js"),
          /* SweetAlert is needed for sign-in errors */
          '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js" integrity="sha256-dOvlmZEDY4iFbZBwD8WWLNMbYhevyx6lzTpfVdo0asA=" crossorigin="anonymous"></script>',
-         '<script src="https://www.google.com/recaptcha/api.js?render=' . env('GOOGLERECAPTCHA3_SITEKEY') . '"></script>',
+         '<script src="https://www.google.com/recaptcha/api.js?render=' . config('app.GreCAPTCHAv3_SiteKey') . '"></script>',
          return_jscript("/js/portal/extraportal-scripts.js")
       ];
 
@@ -195,10 +196,11 @@ class CtrlPortal extends Controller
             $tpl_id = substr($tplFolder, -3); # IMPORTANT: Assuming folders' name length is 3!
             $tpl_imgpath = "/resTemplateThumbnail" . "/" . $tpl_id;
 
+            # Note: <img> (loader.gif)'s width has been set to "90" instead of "auto" to workaround Firefox browser bug!
             $html =  '<div class="tplitem-container" id="' . $tpl_id . '">' .
                         '<div class="tplitem-backribbon"></div>' .
                            '<div class="tplitem-previmg">' .
-                              '<img alt="' . $tpl_title . '" src="/img/portal/templates/tpl_loader.gif" width="auto" height="100%" class="lazyload" data-src="' . $tpl_imgpath . '"/>' .
+                              '<img alt="' . $tpl_title . '" src="/img/portal/templates/tpl_loader.gif" width="90" height="100%" class="lazyload" data-src="' . $tpl_imgpath . '"/>' .
                            '</div>' .
                            '<div class="tplitem-ctl">' .
                               '<div class="tplitem-ctl-desc">' .

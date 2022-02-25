@@ -14,15 +14,15 @@
 						<ul class="list-unstyled li-space-lg">
 							<li class="media">
 								<i class="fas fa-square"></i>
-								<div class="media-body">Read our <a class="turquoise" href="{{ url('/') }}/terms-conditions">Terms & Conditions</a>, <a class="turquoise" href="privacy-policy.html">Privacy Policy</a>.</div>
+								<div class="media-body"><a class="turquoise" href="{{ url('/') }}/terms-conditions">Terms and Conditions</a>, <a class="turquoise" href="{{ url('/') }}/privacy-policy">Privacy Policy</a>.</div>
 							</li>
 							<li class="media">
 								<i class="fas fa-square"></i>
-								<div class="media-body">Visit our <a class="turquoise" href="#your-link">Frequently asked questions</a> page.</div>
+								<div class="media-body">Read our <a class="turquoise" href="{{ url('/') }}/frequently-asked-questions">Frequently Asked Questions</a>.</div>
 							</li>
 							<li class="media">
 								<i class="fas fa-square"></i>
-								<div class="media-body">Contact our support: <a class="turquoise" href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.</div>
+								<div class="media-body">Contact us: <a class="turquoise" href="mailto:{{ config('mail.from.address') }}">{{ config('mail.from.address') }}</a>.</div>
 							</li>
 						</ul>
 					</div>
@@ -38,7 +38,7 @@
 							</a>
 						</span>
 						<span class="fa-stack">
-							<a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}" class="trans" title="Contact us via email">
+							<a href="mailto:{{ config('mail.from.address') }}" class="trans" title="Contact us via email">
 								<i class="fas fa-circle fa-stack-2x"></i>
 								<i class="far fa-envelope fa-stack-1x"></i>
 								.
@@ -71,8 +71,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> <!-- Bootstrap framework -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha512-ahmSZKApTDNd3gVuqL5TQ3MBTj8tL5p2tYV05Xxzcfu6/ecvt1A0j6tfudSGBVuteSoTRMqMljbfdU0g2eDNUA==" crossorigin="anonymous"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
 	<script src="/vendor/swiper-4.4.6/dist/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
-	<script src="/vendor/magnific-popup-1.1.0/dist/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.8/validator.min.js" integrity="sha512-tRBNdBCA7T90XrFn6MgPvUe7+HqU5Le7zfKIDaDJb8b2Cf5nbzJR2aTN6KIwPUpFLLx8kvOd7AkDnfDaqrLsmQ==" crossorigin="anonymous"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
 	<script src="/js/home/scripts.js"></script> <!-- Custom scripts -->
 </body>
 </html>

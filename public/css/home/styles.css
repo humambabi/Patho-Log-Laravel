@@ -135,6 +135,11 @@ a.white {
 	color: #00bfd8;
 }
 
+.btn-link.turquoise:hover {
+   color: #00a7bd;
+   text-decoration: unset;
+}
+
 .btn-solid-reg {
 	display: inline-block;
 	padding: 1.1875rem 2.125rem 1.1875rem 2.125rem;
@@ -1915,7 +1920,7 @@ a:hover.back-to-top {
 		width: 695px;
 		height: 165%;
 		position: absolute;
-		top: -275px;
+		top: -57%;
 		right: -125px;
 		background:linear-gradient(90deg, #00bfd8, #0178fa);
 		transform: rotate(-30deg);

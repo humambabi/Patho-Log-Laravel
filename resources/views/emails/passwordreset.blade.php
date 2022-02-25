@@ -32,7 +32,7 @@
       <tr><td style="padding: 0 21px;">
          <p>
             If you have any difficulties signing in, don't hesitate to&nbsp;
-            <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">contact our support</a>.
+            <a href="mailto:{{ config('mail.from.address') }}">contact our support</a>.
          </p>
          <p>Thank you, and have a great day!</p>
          <br/>
@@ -45,7 +45,7 @@
       </td></tr>
       <tr><td style="text-align: center;">
          <div style="font-size: 11px;">
-            Patho&bull;Log &copy; {{ date('Y') }} - <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">Contact us</a>.
+            Patho&bull;Log &copy; {{ date('Y') }} - <a href="mailto:{{ config('mail.from.address') }}">Contact us</a>.
          </div>
          <br/><br/>
       </td></tr>

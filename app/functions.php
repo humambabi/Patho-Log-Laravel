@@ -82,7 +82,7 @@ if (!function_exists('reCAPTCHAv3Check')) {
 
       # Send request to Google
       $url = "https://www.google.com/recaptcha/api/siteverify";
-      $data = array("secret" => env('GOOGLERECAPTCHA3_SECRETKEY'), "response" => $recaptchaToken, "remoteip" => $ip);
+      $data = array("secret" => config('app.GreCAPTCHAv3_SecretKey'), "response" => $recaptchaToken, "remoteip" => $ip);
       $options = array(
          "http" => [
             "header"	=> "Content-type: application/x-www-form-urlencoded\r\n",
@@ -95,7 +95,14 @@ if (!function_exists('reCAPTCHAv3Check')) {
       $responseKeys = json_decode($response, true);
       
       # Check the response: hostname
-      if (in_array($responseKeys["hostname"], ["local.patho-log.com", "localhost", "dev.patho-log.com", "patho-log.com", "78.188.71.116"]) == FALSE) {
+      if (in_array($responseKeys["hostname"], [
+            "local.patho-log.com",
+            "localhost",
+            "dev.patho-log.com",
+            "patho-log.com",
+            "www.patho-log.com",
+            "78.188.71.116"
+            ]) == FALSE) {
          $str = "functions.php: reCAPTCHAv3Check(): reCAPTCHA verification response hostname = ";
          $str .= "\"" . $responseKeys["hostname"] . "\"" . ", php.hostname = \"" . $_SERVER["HTTP_HOST"] . "\".";
          Log::warning($str);
@@ -250,25 +257,53 @@ if (!function_exists('add_userlogin_record')) {
    #
    # Generates a url for a random user picture (to be used in the database) #######################
    #
-   if (!function_exists('create_random_userpicurl')) {
-      function create_random_userpicurl() {
-         $picfolder = public_path(PATH_USER_PREDEFINEDPICTURES); # No "/" at the end
-         $fileListTemp = scandir($picfolder);
-         $fileList = array();
+   // if (!function_exists('create_random_userpicurl')) {
+   //    function create_random_userpicurl() {
+   //       $picfolder = public_path(PATH_USER_PREDEFINEDPICTURES); # No "/" at the end
+   //       $fileListTemp = scandir($picfolder);
+   //       $fileList = array();
 
-         if (count($fileListTemp) < 1) return "";
-         for ($iC = 0; $iC < count($fileListTemp); $iC++) {
-            if (strtoupper(substr($fileListTemp[$iC], 0, 7)) == "USERPIC") {
-               if (is_dir($picfolder . "/" . $fileListTemp[$iC]) == false) array_push($fileList, $fileListTemp[$iC]);
-            }
-         }
+   //       if (count($fileListTemp) < 1) return "";
+   //       for ($iC = 0; $iC < count($fileListTemp); $iC++) {
+   //          if (strtoupper(substr($fileListTemp[$iC], 0, 7)) == "USERPIC") {
+   //             if (is_dir($picfolder . "/" . $fileListTemp[$iC]) == false) array_push($fileList, $fileListTemp[$iC]);
+   //          }
+   //       }
 
-         if (count($fileList) < 1) return "";
+   //       if (count($fileList) < 1) return "";
          
-         # It MUST be a url usable DIRECTLY by <img src="">
-         return '/' . PATH_USER_PREDEFINEDPICTURES . '/' . $fileList[random_int(0, count($fileList) - 1)];
-      }
-   }
+   //       # It MUST be a url usable DIRECTLY by <img src="">
+   //       return '/' . PATH_USER_PREDEFINEDPICTURES . '/' . $fileList[random_int(0, count($fileList) - 1)];
+   //    }
+   // }
+
+
+   #
+   # Get a Grevatar for the email-registered user #################################################
+   #
+   // if (!function_exists('get_gravatar_userpicurl')) {
+   //    function get_gravatar_userpicurl($email) {
+   //       # @source https://gravatar.com/site/implement/images/php/
+   //       $s = 175; # Size in pixels, defaults to 175px [ 1 - 2048 ]
+   //       $d = 'mp'; # Default imageset to use [ 404 | mp | identicon | monsterid | wavatar ]
+   //       $r = 'g'; # Maximum rating (inclusive) [ g | pg | r | x ]
+   //       $img = false; # True to return a complete IMG tag False for just the URL
+   //       $atts = array(); # Optional, additional key/value attributes to include in the IMG tag
+
+   //       $url = 'https://www.gravatar.com/avatar/';
+   //       $url .= md5(strtolower(trim($email)));
+   //       $url .= "?s=$s&d=$d&r=$r";
+   //       if ($img) {
+   //          $url = '<img src="' . $url . '"';
+   //          foreach ($atts as $key => $val) {
+   //             $url .= ' ' . $key . '="' . $val . '"';
+   //          }
+   //          $url .= ' />';
+   //       }
+
+   //       return $url;
+   //    }
+   // }
 
 
    #
@@ -359,15 +394,10 @@ if (!function_exists('add_userlogin_record')) {
             # Linux
             $strCmd = 'gs ';
          }
-         
-         /*
-         $strCmd .= '-q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 ' .
-            '-dGridFitTT=2 "-sDEVICE=jpeg" -dTextAlphaBits=4 -dGraphicsAlphaBits=4 "-r72x72" -dPrinted=false ' .
-            '"-sOutputFile=' . $tplAbsDir . TEMPLATE_THUMBNAIL_FILENAME . '" "-f' . $tplAbsDir . TEMPLATE_PDF_FILENAME . '"';
-         */
 
-         // -dAlignToPixels=0 -dJPEGQ=85 -dMaxBitmap=500000000 -dGridFitTT=2 -dTextAlphaBits=4 -dGraphicsAlphaBits=4
-         // -r150x150
+         # Should send an image with a width (90 x 2 = 180px) because we have set the width to a fixed 90px to workaround
+         # Firefox bug (see CtrlPortal -> NewReport() method). BUT I haven't figure out how to set the image dimaention in
+         # GS (for JPG images)!
          $strCmd .= '-dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=15000000 -sDEVICE=jpeg -dJPEGQ=75 -dTextAlphaBits=1 ' .
             '-dGraphicsAlphaBits=1 -r72x72 -dPrinted=false ' .
             '"-sOutputFile=' . $tplAbsDir . TEMPLATE_THUMBNAIL_FILENAME . '" "-f' . $tplAbsDir . TEMPLATE_PDF_FILENAME . '"';

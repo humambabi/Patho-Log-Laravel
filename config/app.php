@@ -139,6 +139,17 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+   
+   /*
+   |--------------------------------------------------------------------------
+   | Secret codes
+   |--------------------------------------------------------------------------
+   */
+   'GreCAPTCHAv3_SiteKey' => env('GOOGLERECAPTCHA3_SITEKEY'),
+   'GreCAPTCHAv3_SecretKey' => env('GOOGLERECAPTCHA3_SECRETKEY'),
+   'SocialLogin_Google_ClientID' => env('SOCIALLOGIN_GOOGLE_CLIENT_ID'),
+   
+   
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

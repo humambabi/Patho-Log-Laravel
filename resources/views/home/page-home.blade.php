@@ -6,7 +6,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="text-container">
-							<h1><span class="turquoise">Authoring Pathology Reports</span> has never been faster and easier!</h1>
+							<h1><span class="turquoise">Creating Pathology Reports</span> has never been faster and easier!</h1>
 							<p class="p-large">Patho<span class="turquoise">&bull;</span>Log provides the fastest, easiest, and most secure way to author, customize, share, and archive your pathology reports.</p>
 							<a class="btn-solid-lg page-scroll" href="#features">LEARN MORE</a>
 						</div> <!-- end of text-container -->
@@ -179,7 +179,7 @@
 					<p>Privacy is important to us. No one can read your reports unless you share a special link with them, and optionally password-locked.</p>
 					<br/>
 					<br/>
-					<a href="#request" class="btn-solid-reg">FREQUENTLY ASKED QUESTIONS</a>
+					<a href="{{ url('/') }}/frequently-asked-questions" class="btn-solid-reg">FREQUENTLY ASKED QUESTIONS</a>
 					<br/><br/>
 				</div>
 			</div> <!-- end of row -->

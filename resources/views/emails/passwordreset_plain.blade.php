@@ -15,7 +15,7 @@ You will be redirected to Patho•Log website to create a new password:
 (This link is valid only for a limited period of time)
 
 If you have any difficulties signing in, don't hesitate to
-contact our support team by sending an email to: {{ EMAIL_SUPPORT_ADDRESS }}
+contact our support team by sending an email to: {{ config('mail.from.address') }}
 
 Thank you, and have a great day!
 Patho•Log Team

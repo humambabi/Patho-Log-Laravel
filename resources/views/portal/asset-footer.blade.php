@@ -5,7 +5,7 @@
             <strong>Copyright &copy; 2014-{{ date('Y') }} <a href="{{ url('/') }}"><span style="color: #00bfd8">Patho<span style="color: #bf60d8">&bull;</span>Log</span></a>.</strong> All rights reserved.
          </div>
          <div class="col-12 text-center mt-1 col-md-6 text-md-right mt-md-0">
-            <a href="#">Terms and Conditions</a> &bull; <a href="#">Privacy Policy</a>
+            <a target="_blank" href="{{ url('/') }}/terms-conditions">Terms and Conditions</a> &bull; <a target="_blank" href="{{ url('/') }}/privacy-policy">Privacy Policy</a>
          </div>
       </div>
    </footer>

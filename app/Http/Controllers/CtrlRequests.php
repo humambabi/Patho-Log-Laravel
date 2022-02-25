@@ -71,7 +71,7 @@ class CtrlRequests extends Controller
          'verification_code'  => $verification_code,
          'vercode_datetime'   => gmdate(DB_DATETIME_FMT),
          'ipaddrs_obj'        => add_userlogin_record("", $request->ip()),
-         'picture'            => create_random_userpicurl()
+         'picture'            => '/' . PATH_USER_PREDEFINEDPICTURES . '/default.png'
       ]);
       if (empty($modUser)) return response()->json(['retcode' => ERR_UNEXPECTED]);
 
@@ -292,7 +292,7 @@ class CtrlRequests extends Controller
             # socialResponse: (JWK- or PEM- encoded object) {clientId, credential, select_by}
 
             # Specify the CLIENT_ID of the app that accesses the backend
-            $ggl_client = new \Google_Client(['client_id' => env('SOCIALLOGIN_GOOGLE_CLIENT_ID')]);
+            $ggl_client = new \Google_Client(['client_id' => config('app.SocialLogin_Google_ClientID')]);
             if (empty($ggl_client)) break; # To return an error message
 
             $ggl_payload = $ggl_client->verifyIdToken($request->input('socialResponse.credential'));

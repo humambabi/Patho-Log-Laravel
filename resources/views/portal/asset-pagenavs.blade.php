@@ -24,8 +24,8 @@
       </ul>
 
       <!-- Topbar Logo -->
-      <ul class="navbar-nav d-sm-none d-flex align-items-center justify-content-center" style="width: 100%; padding-left: .35rem; margin-left: 1.3rem;">
-         <a href="{{ url('/') }}/dashboard">
+      <ul class="navbar-nav d-sm-none d-flex align-items-center justify-content-center" style="width: 61%; padding-left: .35rem; margin-left: 1.3rem;">
+         <a href="{{ url('/') }}/default">
             <img src="/img/logo/twopartslogo_text_black.png" alt="Logo-Text" width="109" height="37" />
          </a>
       </ul>
@@ -61,7 +61,7 @@
    <!-- Main Sidebar Container -->
    <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a class="brand-link d-flex align-items-center justify-content-center" href="{{ url('/') }}/dashboard">
+      <a class="brand-link d-flex align-items-center justify-content-center" href="{{ url('/') }}/default">
          <div class="sidebar-brand-icon">
             <img src="/img/logo/twopartslogo_icon.png" alt="Logo-Icon" width="37" height="37" class="img-circle elevation-3" />
          </div>

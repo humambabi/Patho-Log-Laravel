@@ -4,10 +4,6 @@
 # Patho•Log Constants
 #
 
-# Main Support email address
-define('EMAIL_SUPPORT_ADDRESS',                             env('MAIL_FROM_ADDRESS', 'support@patho-log.com'));
-define('EMAIL_SUPPORT_SENDERNAME',                          env('MAIL_FROM_NAME', 'Patho•Log'));
-
 # General app tools
 define('DB_DATETIME_FMT',                                   "Y-m-d H:i:s");
 
@@ -50,7 +46,7 @@ define('MSG_PASSWORD_MAXLEN_FMT',                           "Password cannot be 
 define('MSG_PASSWORDCONFIRM_REQUIRED',                      "Please re-type your password!");
 define('MSG_PASSWORDCONFIRM_EQUAL',                         "Passwords do not match!");
 define('MSG_TERMSPRIVACY_ACCEPT',                           "Please accept the terms to continue");
-define('MSG_RECAPTCHA_FAILED',                              "Google reCAPTCHA verificaiton failed!");
+define('MSG_RECAPTCHA_FAILED',                              "Google reCAPTCHA verification failed!");
 
 # Paths (these are embedded into code and hard to find if were not here)
 define('PATH_USER_PREDEFINEDPICTURES',                      "img/portal/user_pics"); # No "/" at the biginning or end

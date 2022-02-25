@@ -1,7 +1,7 @@
 <body class="hold-transition register-page">
 <div class="register-box mt-5">
    <div class="register-logo">
-      <a href="/dashboard">
+      <a href="{{ url('/') }}/default">
          <img alt="Patho&bull;Log" src="/img/logo/pl-logo.png" width="200" height="53" class="mb-3" />
       </a>
    </div><!-- /.register-logo -->
@@ -53,7 +53,7 @@
                         <input type="checkbox" name="terms" class="custom-control-input" id="terms" required />
                         <label class="custom-control-label" for="terms">
                            <div class="custom-checkbox-label">
-                              I agree to the <a href="#">terms and conditions</a>, and the <a href="#">privacy policy</a>.
+                              I agree to the <a target="_blank" href="{{ url('/') }}/terms-conditions">terms and conditions</a>, and the <a target="_blank" href="{{ url('/') }}/privacy-policy">privacy policy</a>.
                            </div>
                         </label>
                      </div>

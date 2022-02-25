@@ -41,7 +41,7 @@ class EmailVerify extends Mailable implements ShouldQueue
    #
    public function build()
    {
-      return $this->from(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_SENDERNAME)
+      return $this->from(config('mail.from.address'), config('mail.from.name'))
                   ->subject("📧 Verify your email address")
                   ->view('emails.emailverify')
                   ->text('emails.emailverify_plain');

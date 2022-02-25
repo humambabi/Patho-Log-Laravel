@@ -1,7 +1,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
    <div class="login-logo">
-      <a href="/dashboard">
+      <a href="{{ url('/') }}/default">
          <img alt="Patho&bull;Log" src="/img/logo/pl-logo.png" width="200" height="53" class="mb-3" />
       </a>
    </div><!-- /.login-logo -->

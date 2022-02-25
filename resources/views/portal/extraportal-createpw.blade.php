@@ -1,7 +1,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
    <div class="login-logo">
-      <a href="/dashboard">
+      <a href="{{ url('/') }}/default">
          <img alt="Patho&bull;Log" src="/img/logo/pl-logo.png" width="200" height="53" class="mb-3" />
       </a>
    </div><!-- /.login-logo -->
@@ -18,10 +18,10 @@
             <p class="text-center">An <strong>unexpected error</strong> has occurred!</p>
             <p class="text-center">
                Please, send us an email and let us know what happened:&nbsp;
-               <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.
+               <a href="mailto:{{ config('mail.from.address') }}">{{ config('mail.from.address') }}</a>.
             </p>
             <p class="text-center mb-0">
-               <a href="/dashboard">Return to Patho&bull;Log</a>
+               <a href="{{ url('/') }}/default">Return to Patho&bull;Log</a>
             </p>
          @elseif ($case == "wrong")
             <div class="row">
@@ -35,10 +35,10 @@
             </p>
             <p class="text-center">
                If you need help, please, leave us an email at:&nbsp;
-               <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.
+               <a href="mailto:{{ config('mail.from.address') }}">{{ config('mail.from.address') }}</a>.
             </p>
             <p class="text-center mb-0">
-               <a href="/dashboard">Return to Patho&bull;Log</a>
+               <a href="{{ url('/') }}/default">Return to Patho&bull;Log</a>
             </p>
          @elseif ($case == "expired")
             <div class="row">
@@ -63,10 +63,10 @@
             </ol>
             <p class="text-center">
                If you need help, please, leave us an email at:&nbsp;
-               <a href="mailto:{{ EMAIL_SUPPORT_ADDRESS }}">{{ EMAIL_SUPPORT_ADDRESS }}</a>.
+               <a href="mailto:{{ config('mail.from.address') }}">{{ config('mail.from.address') }}</a>.
             </p>
             <p class="text-center mb-0">
-               <a href="/dashboard">Return to Patho&bull;Log</a>
+               <a href="{{ url('/') }}/default">Return to Patho&bull;Log</a>
             </p>
          @elseif ($case == "createnew")
             <h4 class="text-center">Create a new password</h4>
